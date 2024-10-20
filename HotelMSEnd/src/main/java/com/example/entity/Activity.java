@@ -1,17 +1,17 @@
 package com.example.entity;
 /**
- * 功能：竞赛管理实体类
+ * 功能：房间实体类
  * 日期：2024/1/31 20:48
  */
 public class Activity {
 
     /** ID */
     private Integer id;
-    /** 竞赛名称 */
+    /** 房间名称 */
     private String name;
-    /** 竞赛简介 */
+    /** 房间简介 */
     private String descr;
-    /** 开始时间（报名） */
+    /** 房间预定时段开始时间 */
     private String applystart;
     /** 结束时间 */
     private String applyend;
@@ -19,11 +19,11 @@ public class Activity {
     private String start;
     /** 结束时间 */
     private String end;
-    /** 竞赛形式 */
+    /** 房型 */
     private String form;
-    /** 竞赛地址 */
+    /** 位置门牌号 */
     private String address;
-    /** 主办方 */
+    /** 酒店或房主名称 */
     private String host;
     /** 浏览量 */
     private Integer readCount;
