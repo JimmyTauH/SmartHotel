@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.HomePageMapper">
+
+    <insert id="add">
+        insert into homepage
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="synopsis != null">
+                synopsis,
+            </if>
+            <if test="cover != null">
+                cover,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="synopsis != null">
+                #{synopsis},
+            </if>
+            <if test="cover != null">
+                #{cover},
+            </if>
+        </trim>
+    </insert>
+    <update id="update">
+        update homepage
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="synopsis != null">
+                synopsis = #{synopsis},
+            </if>
+            <if test="cover != null">
+                cover = #{cover},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+    <select id="selectById" resultType="com.example.entity.HomePage">
+        select *
+        from homepage
+        where user_id = #{userId}
+    </select>
+</mapper>

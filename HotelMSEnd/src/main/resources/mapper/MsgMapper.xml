@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MsgMapper">
+    <insert id="add">
+        insert into circulars
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="title != null">title,</if>
+            <if test="time != null">time,</if>
+            <if test="content != null">content,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="time != null">#{time},</if>
+            <if test="content != null">#{content},</if>
+        </trim>
+    </insert>
+    <update id="updateById">
+        update circulars
+        <set>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="content != null">content = #{content},</if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from circulars where id = #{id}
+    </delete>
+
+    <select id="selectByUserId" resultType="com.example.entity.Circulars">
+        select circulars.*, user.username as username
+        from circulars
+        left join user
+        on circulars.user_id = user.id
+        where user_id = #{userId}
+        order by id desc
+    </select>
+    <select id="selectById" resultType="com.example.entity.Circulars">
+        select circulars.*, user.username as username
+        from circulars
+                 left join user
+                           on circulars.user_id = user.id
+        where circulars.id = #{id}
+        order by circulars.id desc
+    </select>
+    <select id="selectPage" resultType="com.example.entity.Circulars">
+        select circulars.*, user.username as username from circulars
+        left join user
+        on circulars.user_id = user.id
+        <where>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test=" title != null and title != ''">
+                and title like concat('%',#{title},'%')
+            </if>
+            <if test=" content != null and content != ''">
+                and content like concat('%',#{content},'%')
+            </if>
+        </where>
+        order by circulars.id desc
+    </select>
+    <select id="selectAll" resultType="com.example.entity.Circulars">
+        select circulars.*, user.username as username from circulars
+        left join user
+        on circulars.user_id = user.id
+        order by circulars.id desc
+    </select>
+</mapper>

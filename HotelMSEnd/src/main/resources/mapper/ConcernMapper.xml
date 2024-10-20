@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ConcernMapper">
+    <insert id="add">
+        insert into concern
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="creatorId != null">
+                creator_id,
+            </if>
+            <if test="time != null">
+                time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="creatorId != null">
+                #{creatorId},
+            </if>
+            <if test="time != null">
+                #{time}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        delete
+        from concern
+        where user_id = #{userId}
+          and creator_id = #{creatorId}
+    </delete>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*)
+        from concern
+        where creator_id = #{id}
+    </select>
+    <select id="selectIsConcern" resultType="java.lang.Integer">
+        select count(*)
+        from concern
+        where user_id = #{userId}
+          and creator_id = #{creatorId}
+    </select>
+    <select id="selectConcernList" resultType="com.example.entity.Concern">
+        select concern.*, user.avatar as avatar, user.name as userName
+        from concern
+                 left join user
+                           on user.id = concern.creator_id
+        where user_id = #{userId}
+    </select>
+
+</mapper>

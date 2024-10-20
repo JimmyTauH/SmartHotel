@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CertificationMapper">
+
+    <insert id="add">
+        insert into certification
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="name != null">name,</if>
+            <if test="avatar != null">avatar,</if>
+            <if test="phone != null">phone,</if>
+            <if test="cardNo != null">card_no,</if>
+            <if test="card1 != null">card1,</if>
+            <if test="card2 != null">card2,</if>
+            <if test="address != null">address,</if>
+            <if test="status != null">status,</if>
+            <if test="reason != null">reason,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="avatar != null">#{avatar},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="cardNo != null">#{cardNo},</if>
+            <if test="card1 != null">#{card1},</if>
+            <if test="card2 != null">#{card2},</if>
+            <if test="address != null">#{address},</if>
+            <if test="status != null">#{status},</if>
+            <if test="reason != null">#{reason},</if>
+        </trim>
+    </insert>
+    <update id="update">
+        update certification
+        <set>
+            <if test="userId != null">user_id=#{userId},</if>
+            <if test="name != null">name=#{name},</if>
+            <if test="avatar != null">avatar=#{avatar},</if>
+            <if test="phone != null">phone=#{phone},</if>
+            <if test="cardNo != null">card_no=#{cardNo},</if>
+            <if test="card1 != null">card1=#{card1},</if>
+            <if test="card2 != null">card2=#{card2},</if>
+            <if test="address != null">address=#{address},</if>
+            <if test="status != null">status=#{status},</if>
+            <if test="reason != null">reason=#{reason},</if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from certification where id = #{id}
+    </delete>
+    <delete id="deleteByUserId">
+        delete from certification where user_id = #{userId}
+    </delete>
+    <select id="selectById" resultType="com.example.entity.Certification">
+        select * from certification where id = #{ids}
+    </select>
+    <select id="selectAll" resultType="com.example.entity.Certification">
+        select * from certification
+        <where>
+            <if test="userId != null">and user_id = #{userId}</if>
+            <if test="name != null">and name like concat('%',#{name},'%')</if>
+            <if test="cardNo != null">and card_no like concat('%',#{cardNo},'%')</if>
+            <if test="phone != null">and phone like concat('%',#{phone},'%')</if>
+        </where>
+    </select>
+    <select id="selectByUserId" resultType="com.example.entity.Certification">
+        select * from certification
+        <where>
+            <if test="userId!= null">and user_id = #{userId}</if>
+        </where>
+    </select>
+</mapper>

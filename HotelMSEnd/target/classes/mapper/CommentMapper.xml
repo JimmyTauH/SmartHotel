@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CommentMapper">
+
+    <insert id="insert" parameterType="com.example.entity.Comment" useGeneratedKeys="true" keyProperty="id">
+        insert into comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="content != null">content,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="replyId != null">reply_id,</if>
+            <if test="pid != null">pid,</if>
+            <if test="rootId != null">root_id,</if>
+            <if test="time != null">time,</if>
+            <if test="fid != null">fid,</if>
+            <if test="module != null">module,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="content != null">#{content},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="replyId != null">#{replyId},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="rootId != null">#{rootId},</if>
+            <if test="time != null">#{time},</if>
+            <if test="fid != null">#{fid},</if>
+            <if test="module != null">#{module},</if>
+        </trim>
+    </insert>
+    <update id="updateById">
+        update comment
+        <set>
+            <if test="content != null">content=#{content},</if>
+            <if test="userId != null">user_id=#{userId},</if>
+            <if test="replyId != null">reply_id=#{replyId},</if>
+            <if test="pid != null">pid=#{pid},</if>
+            <if test="rootId != null">root_id=#{rootId},</if>
+            <if test="time != null">time=#{time},</if>
+            <if test="fid != null">fid=#{fid},</if>
+            <if test="module != null">module=#{module},</if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteById">
+        delete
+        from comment
+        where id = #{id}
+    </delete>
+    <delete id="deleteByFidAndModule">
+        delete
+        from comment
+        where fid = #{fid}
+        and module = #{module}
+    </delete>
+    <select id="selectById" resultType="com.example.entity.Comment">
+        select comment.*, user.username as userName, user.avatar as avatar
+        from comment
+                 left join user
+                           on user.id = comment.user_id
+        where comment.id = #{id}
+    </select>
+    <select id="selectAll" resultType="com.example.entity.Comment">
+        select c1.*,u1.username as userName, u1.avatar as avatar, u2.username as replyName
+        from comment c1
+        left join user u1
+        on u1.id = c1.user_id
+        /* 递归查询*/
+        /*自查，通过c1.pid=c2.id查出自己的回复，再通过c2.user_id=u2.id查出回复的用户*/
+        left join comment c2
+        on c1.pid = c2.id
+        left join user u2
+        on u2.id = c2.user_id
+        <where>
+            <if test="content != null">and c1.content like concat('%',#{content},'%')</if>
+            <if test="userId != null">and c1.user_id = #{userId}</if>
+            <if test="replyId != null">and c1.reply_id = #{replyId}</if>
+            <if test="userName != null">and u1.username like concat('%',#{userName},'%')</if>
+            <if test="fid != null">and c1.fid = #{fid}</if>
+            <if test="module != null">and c1.module = #{module}</if>
+            <if test="rootId != null">and c1.root_id = #{rootId}</if>
+        </where>
+        order by c1.id desc
+    </select>
+    <select id="selectForUser" resultType="com.example.entity.Comment">
+        select comment.*,user.username as userName, user.avatar as avatar
+        from comment
+        left join user
+        on user.id = comment.user_id
+        <where>
+            <if test="content != null">and content like concat('%',#{content},'%')</if>
+            <if test="userId != null">and user_id = #{userId}</if>
+            <if test="replyId != null">and reply_id = #{replyId}</if>
+            <if test="userName != null">and user.username like concat('%',#{userName},'%')</if>
+            <if test="fid != null">and fid = #{fid}</if>
+            <if test="module != null">and module = #{module}</if>
+            /*pid等于空的都是根评论*/
+            and pid is null
+        </where>
+    </select>
+</mapper>

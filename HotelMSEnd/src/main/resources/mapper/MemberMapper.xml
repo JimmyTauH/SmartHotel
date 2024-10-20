@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MemberMapper">
+
+    <insert id="add">
+        insert into member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="info != null">
+                info,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="welfareTitle != null">
+                welfare_title,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="integral != null">
+                integral,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="info != null">
+                #{info},
+            </if>
+            <if test="title != null">
+                #{title},
+            </if>
+            <if test="welfareTitle != null">
+                #{welfareTitle},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="integral != null">
+                #{integral},
+            </if>
+        </trim>
+    </insert>
+    <update id="update">
+        update member
+        <set>
+            <if test="info != null">
+                info = #{info},
+            </if>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="welfareTitle != null">
+                welfare_title = #{welfareTitle},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="integral != null">
+                integral = #{integral},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete">
+        delete from member where id = #{id}
+    </delete>
+    <select id="selectByUserId" resultType="com.example.entity.Member">
+        select * from member where user_id = #{user_id}
+    </select>
+    <select id="selectByMemberId" resultType="com.example.entity.Member">
+        select * from member where id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MemberWelfareMapper">
+
+    <insert id="insert">
+        insert into membership_benefits
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="memberId != null">member_id,</if>
+            <if test="title != null">title,</if>
+            <if test="content != null">content,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="memberId != null">#{memberId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="content != null">#{content},</if>
+        </trim>
+    </insert>
+    <update id="update">
+        update membership_benefits
+        <set>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="memberId != null">member_id = #{memberId},</if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete">
+        delete from membership_benefits where id = #{id}
+    </delete>
+    <select id="selectByUserId" resultType="com.example.entity.MemberWelfare">
+        select * from membership_benefits where user_id = #{userId}
+    </select>
+    <select id="selectByMemberId" resultType="com.example.entity.MemberWelfare">
+        select * from membership_benefits where member_id = #{memberId}
+    </select>
+    <select id="selectByMidAndUid" resultType="com.example.entity.MemberWelfare">
+        select * from membership_benefits where member_id = #{memberId} and user_id = #{userId}
+    </select>
+</mapper>
