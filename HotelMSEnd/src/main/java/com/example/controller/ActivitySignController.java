@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 功能：竞赛报名接口
+ * 功能：房间预订/取消预定接口
  * 日期：2024/2/27 20:50
  */
 @RestController
@@ -54,7 +54,7 @@ public class ActivitySignController {
 
 
     /**
-     * 用户删除已报名的竞赛
+     * 用户删除已预定的房间
      */
     @DeleteMapping("/delete/user/{activityId}/{userId}")
     public Result userDelete(@PathVariable Integer activityId, @PathVariable Integer userId) {
