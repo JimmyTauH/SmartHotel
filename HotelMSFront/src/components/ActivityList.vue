@@ -6,10 +6,8 @@
           <img :src="item.cover" style="width: 100%; height: 250px;border-radius: 5px" alt="">
           <div style="margin: 10px 0; font-weight: bold;width: 100%; height: 35px;font-size:15px;">{{ item.name }}</div>
           <div style="display: flex; align-items: center; justify-content: space-between;">
-            
-            <div><i class="el-icon-time" style="margin-right: 5px"></i>报名时间：{{ item.applystart }} - {{ item.applyend }}</div>
             <div v-if="!item.isApplyStart" style="color: gray; font-weight: bold;">
-              报名未开始
+              预定未开始
             </div>
             <div v-else-if="!item.isApplyEnd" class="countdown">
               <div class="countdown-block1">
@@ -17,26 +15,26 @@
               </div>
             </div>
             <div v-else style="color: gray; font-weight: bold;">
-              报名已结束
+              预定已结束
             </div>
           </div>
           <div style="display: flex; align-items: center; justify-content: space-between;">
-            <div><i class="el-icon-time" style="margin-right: 5px;margin-top: 10px;"></i>比赛时间：{{ item.start }} - {{ item.end }}</div>
+            <div><i class="el-icon-time" style="margin-right: 5px;margin-top: 10px;"></i>预定时段：{{ item.start }} - {{ item.end }}</div>
             <div v-if="!item.isStartActivity" class="countdown">
               <div class="countdown-block1">
                 <div class="countdown-value1">{{ item.remainingDays }}天 | {{ item.remainingHours }}小时</div>
               </div>
             </div>
             <div v-else-if="!item.isEndActivity" style="color: gray; font-weight: bold;">
-              比赛进行中
+              房间使用中
             </div>
             <div v-else style="color: gray; font-weight: bold;">
-              已结束
+              已退房
             </div>
           </div>
           <div style="text-align: right; margin-top: 10px;">
-<!--            <el-button type="primary" disabled v-if="item.isApplyEnd" key="报名已结束">报名已结束</el-button>-->
-<!--            <el-button type="primary" disabled v-else-if="item.isSign" key="已报名">已报名</el-button>-->
+<!--            <el-button type="primary" disabled v-if="item.isApplyEnd" key="房间已满">房间已满</el-button>-->
+<!--            <el-button type="primary" disabled v-else-if="item.isSign" key="已预定">已预定</el-button>-->
 <!--            <el-button type="primary" v-else key="查看详情" >查看详情</el-button>-->
             <el-button type="primary" key="查看详情" >查看详情</el-button>
           </div>
