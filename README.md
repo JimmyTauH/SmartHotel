@@ -27,7 +27,8 @@ mysql -u lighthouse -h lighthouse -p
 
 
 ### 说明：
+这是四用户的基本软件骨架。原本两用户的版本在Tag: TwoUser下。
 
 该骨架未合并最新的LuoYang&GeYang的修改，也未合并其他任何人的修改。
 
-该骨架可以下载直接运行。
+该版本可以下载直接运行。
