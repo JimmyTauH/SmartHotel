@@ -39,7 +39,7 @@
         <el-table-column prop="userName" label="发布人"></el-table-column>
         <el-table-column prop="date" label="发布日期"></el-table-column>
         <el-table-column prop="readCount" label="浏览量"></el-table-column>
-        <el-table-column label="帖子内容">
+        <el-table-column label="酒店简介">
           <template v-slot="scope">
             <div>
               <el-button @click="handleBlogContent(scope.row.content)">查看内容</el-button>
@@ -68,7 +68,7 @@
     </div>
 
 
-    <el-dialog title="房型信息" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="酒店信息" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
         <el-form-item label="标题" prop="title">
           <el-input v-model="form.title" placeholder="标题"></el-input>
@@ -111,7 +111,7 @@
       </div>
     </el-dialog>
 
-    <el-dialog title="帖子内容" :visible.sync="fromVisible1" width="60%" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="酒店简介" :visible.sync="fromVisible1" width="60%" :close-on-click-modal="false" destroy-on-close>
       <div class="w-e-text">
         <div v-html="content"></div>
       </div>

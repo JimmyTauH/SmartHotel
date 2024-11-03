@@ -2,9 +2,9 @@
   <div>
     <div style="display: flex; margin: 10px 0">
       <div style="width: 100%;margin-bottom: 10px;" class="card">
-        <div style="margin-bottom: 30px; font-size: 20px; font-weight: bold">具体公告细节</div>
+        <div style="margin-bottom: 30px; font-size: 20px; font-weight: bold">酒店公告细节</div>
         <div >
-          <el-timeline  reverse slot="reference">
+          <!-- <el-timeline  reverse slot="reference">
             <el-timeline-item v-for="item in notices" :key="item.id" :timestamp="item.time">
               <el-popover
                   placement="right"
@@ -14,7 +14,15 @@
                 <span slot="reference">{{ item.title }}</span>
               </el-popover>
             </el-timeline-item>
-          </el-timeline>
+          </el-timeline> -->
+
+          <el-timeline reverse slot="reference">
+              <el-timeline-item v-for="item in notices" :key="item.id" :timestamp="item.time">
+                <el-popover placement="right" width="200" trigger="hover" :content="item.content">
+                  <span slot="reference">{{ item.content }}</span>
+                </el-popover>
+              </el-timeline-item>
+            </el-timeline>
         </div>
       </div>
     </div>

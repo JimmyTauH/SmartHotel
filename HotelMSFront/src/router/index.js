@@ -14,7 +14,7 @@ const routes = [
     path: '/',
     name: 'Manager',
     component: () => import('../views/Manager.vue'),
-    redirect: '/home',  // 重定向到主页
+    redirect: '/front/home',  // 重定向到主页
     children: [
       { path: '403', name: 'NoAuth', meta: { name: '无权限' }, component: () => import('../views/manager/403') },
       { path: 'home', name: 'Home', meta: { name: '系统首页' }, component: () => import('../views/manager/Home') },
@@ -24,8 +24,8 @@ const routes = [
       { path: 'notice', name: 'Notice', meta: { name: '酒店公告' }, component: () => import('../views/manager/Notice') },
       { path: 'user', name: 'User', meta: { name: '用户信息' }, component: () => import('../views/manager/User') },
       { path: 'category', name: 'Category', meta: { name: '分类信息' }, component: () => import('../views/manager/Category') },
-      { path: 'blog', name: 'Blog', meta: { name: '房型信息' }, component: () => import('../views/manager/Blog') },
-      { path: 'activity', name: 'Activity', meta: { name: '酒店信息' }, component: () => import('../views/manager/Activity') },
+      { path: 'blog', name: 'Blog', meta: { name: '酒店信息' }, component: () => import('../views/manager/Blog') },
+      { path: 'activity', name: 'Activity', meta: { name: '房型信息' }, component: () => import('../views/manager/Activity') },
       { path: 'comment', name: 'Comment', meta: { name: '评论管理' }, component: () => import('../views/manager/Comment') },
       { path: 'activitySign', name: 'ActivitySign', meta: { name: '酒店入住' }, component: () => import('../views/manager/ActivitySign') },
       { path: 'certification', name: 'Certification', meta: { name: '会员认证' }, component: () => import('../views/manager/Certification.vue') },
@@ -40,7 +40,7 @@ const routes = [
     children: [
       { path: 'home', name: 'FrontHome', meta: { name: '系统首页' }, component: () => import('../views/front/Home.vue') },
       { path: 'person', name: 'Person', meta: { name: '个人信息' }, component: () => import('../views/front/Person') },
-      { path: 'activity', name: 'Activity', meta: { name: '热门房型' }, component: () => import('../views/front/Activity') },
+      { path: 'activity', name: 'Activity', meta: { name: '房型信息' }, component: () => import('../views/front/Activity') },
       { path: 'activityDetail', name: 'ActivityDetail', meta: { name: '酒店详情' }, component: () => import('../views/front/ActivityDetail') },
       { path: 'blogDetail', name: 'BlogDetail', meta: { name: '帖子详情' }, component: () => import('../views/front/BlogDetail') },
       { path: 'search', name: 'Search', meta: { name: '搜索' }, component: () => import('../views/front/Search') },
@@ -51,11 +51,36 @@ const routes = [
       { path: 'homePage', name: 'HomePage', meta: { name: '我的主页' }, component: () => import('../views/front/HomePage.vue') },
       { path: 'editHomePage', name: 'EditHomePage', meta: { name: '编辑主页' }, component: () => import('../views/front/EditHomePage.vue') },
       { path: 'exitMemberWelfare', name: 'ExitMemberWelfare', meta: { name: '编辑会员福利' }, component: () => import('../views/front/ExitMemberWelfare.vue') },
+      { path: 'serviceBooking', name: 'ServiceBooking', meta: { name: '服务预约申请' }, component: () => import('../views/front/ServiceBooking.vue') },
+
     ]
   },
   { path: '/login', name: 'Login', meta: { name: '登录' }, component: () => import('../views/Login.vue') },
   { path: '/register', name: 'Register', meta: { name: '注册' }, component: () => import('../views/Register.vue') },
+  // 前台路径
+  { 
+    path: '/recep', name: 'Recep', meta: { name: '前台'}, component: () => import('../views/Receptionist.vue'),
+    children: [
+      { path: 'home', name: 'Home', meta: { name: '前台首页' }, component: () => import('../views/recep/Home.vue') },
+      { path: 'ruzhu', name: 'ruzhu', meta: { name: '入住管理' }, component: () => import('../views/recep/Home.vue') },
+      { path: 'tuifang', name: 'tuifang', meta: { name: '退房管理' }, component: () => import('../views/recep/Home.vue') },
+      { path: 'houqin', name: 'houqin', meta: { name: '后勤管理' }, component: () => import('../views/recep/Home.vue') },
+      { path: 'kefu', name: 'kefu', meta: { name: '客服服务' }, component: () => import('../views/recep/Home.vue') },
+    ]
+  },
+  // 后勤路径
+  { 
+    path: '/server', name: 'Server', meta: { name: '后勤'}, component: () => import('../views/Server.vue'),
+    children: [
+      { path: 'home', name: 'Home', meta: { name: '后勤首页' }, component: () => import('../views/server/Home.vue') },
+      { path: 'work', name: 'Home', meta: { name: '顾客预约服务' }, component: () => import('../views/server/ServiceChecking.vue') },
+      { path: 'report', name: 'Home', meta: { name: '报告设施状态' }, component: () => import('../views/server/Home.vue') },
+      { path: 'logging', name: 'Home', meta: { name: '打扫日志' }, component: () => import('../views/server/Home.vue') },
+
+    ]
+  },
   { path: '*', name: 'NotFound', meta: { name: '无法访问' }, component: () => import('../views/404.vue') },
+  
 ]
 
 const router = new VueRouter({

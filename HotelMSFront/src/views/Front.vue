@@ -16,6 +16,7 @@
 						<el-menu-item index="/front/person">个人中心</el-menu-item>
 <!--						<el-menu-item index="/front/signIn">签到</el-menu-item>-->
 						<el-menu-item index="/front/Certification">会员认证</el-menu-item>
+            <el-menu-item index = "/front/ServiceBooking">服务预约</el-menu-item>
 						<el-menu-item index="/front/Circulars">
               系统通知
               <div class="notification-bell">
@@ -131,7 +132,7 @@ export default {
     // 退出登录
     logout() {
       localStorage.removeItem("xm-user");
-      this.$router.push("/login");
+      this.$router.push("/front/home");
     },
     fetchUnreadCount() {
       this.$request.get('/msg/getUnreadCount/' + this.user.id).then(res => {

@@ -45,8 +45,8 @@
             </template>
             <el-menu-item index="/notice">酒店公告</el-menu-item>
             <el-menu-item index="/category">酒店类型</el-menu-item>
-            <el-menu-item index="/blog">房型信息</el-menu-item>
-            <el-menu-item index="/activity">酒店信息</el-menu-item>
+            <el-menu-item index="/blog">酒店信息</el-menu-item>
+            <el-menu-item index="/activity">房型信息</el-menu-item>
             <el-menu-item index="/activitySign">酒店入住</el-menu-item>
             <el-menu-item index="/comment">评论管理</el-menu-item>
             <el-menu-item index="/certification">会员认证</el-menu-item>
@@ -97,7 +97,7 @@ export default {
     },
     logout() {
       localStorage.removeItem('xm-user')
-      this.$router.push('/login')
+      this.$router.push('/front/home')
     }
   }
 }

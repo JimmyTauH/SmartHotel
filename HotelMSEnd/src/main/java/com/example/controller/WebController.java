@@ -8,6 +8,8 @@ import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.service.AdminService;
 import com.example.service.UserService;
+import com.example.service.ServerService;
+import com.example.service.RecepService;
 import com.example.utils.ValideCodeUtils;
 import org.springframework.web.bind.annotation.*;
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +28,11 @@ public class WebController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private ServerService serverService;
+
+    @Resource
+    private RecepService recepService;
     @GetMapping("/")
     public Result hello() {
         return Result.success("访问成功");
@@ -44,6 +51,10 @@ public class WebController {
             account = adminService.login(account);
         }else if (RoleEnum.USER.name().equals(account.getRole())) {
             account = userService.login(account);
+        }else if (RoleEnum.SERVER.name().equals(account.getRole())) {
+            account = serverService.login(account);
+        }else if (RoleEnum.RECEP.name().equals(account.getRole())) {
+            account = recepService.login(account);
         }else {
             return Result.error(ResultCodeEnum.PARAM_ERROR);
         }
@@ -61,7 +72,11 @@ public class WebController {
         }
         if (RoleEnum.USER.name().equals(account.getRole())) {
             userService.register(account);
-        }else {
+        }else if (RoleEnum.SERVER.name().equals(account.getRole())) {
+            serverService.register(account);
+        }else if (RoleEnum.RECEP.name().equals(account.getRole())) {
+            recepService.register(account);
+        }else{
             return Result.error(ResultCodeEnum.PARAM_ERROR);
         }
         return Result.success();
@@ -77,6 +92,10 @@ public class WebController {
             adminService.updatePassword(account);
         }else if (RoleEnum.USER.name().equals(account.getRole())) {
             userService.updatePassword(account);
+        }else if (RoleEnum.RECEP.name().equals(account.getRole())) {
+            recepService.updatePassword(account);
+        }else if (RoleEnum.SERVER.name().equals(account.getRole())) {
+            serverService.updatePassword(account);
         }
         return Result.success();
     }

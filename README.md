@@ -1,15 +1,33 @@
+# 四用户版本代码骨架
+
 项目运行：
 前端：vscode打开或者你自己喜欢的前端编写工具；
 1：npm run serve即可
 2：如果1有问题先npm install ，再npm run serve，遇到项目图片有问题在管理端重新上传即可
 
 后端：
-1：先数据库新建数据库（我的name是hotelms），运行SQL文件，运行成功看到库里表出来即可；
-2：更改qpplication.yaml配置
-密码修改成自己数据库的登录密码；
-数据库名字url: jdbc:mysql://localhost:3306/hotelms? 我的数据库name是hotelms，你可以创建和我一样，如果不一样记得改成你自己的；
+1：确保使用正确的远程数据库配置文件。HotelMSEnd/target/classes/application.yml
 
-3：SpringbootApplication，启动项启动，项目第一次打开记得多刷新刷新maven把工程的配置都刷新好，有时候不是项目问题是还没准备好；
+​	两用户初始版本使用hotelms数据库，四用户版本使用hotelms4数据库。
 
-管理员账号：admin   admin
-正常账号：可以自己注册，也可以用我的登录： sanqi    sanqi
+3：在IDE中启动SpringbootApplication.java，启动项启动，项目第一次打开记得多刷新刷新maven把工程的配置都刷新好，有时候不是项目问题是还没准备好。
+
+
+
+登录使用：
+
+管理员账号：admin   admin （只允许后台添加）
+普通客户账号示例：sanqi    sanqi    （可以通过界面自行注册） 
+
+如果需要查看/修改数据库，可用mysql连接42.194.239.205:3306上的数据库,用户名为lighthouse【两用户是hotelms，四用户是hotelms4】，尽量不要修改别人的记录。【注意是mysql不是ssh!】
+
+mysql -u lighthouse -h lighthouse -p
+然后输入密码123456即可
+
+
+
+### 说明：
+
+该骨架未合并最新的LuoYang&GeYang的修改，也未合并其他任何人的修改。
+
+该骨架可以下载直接运行。

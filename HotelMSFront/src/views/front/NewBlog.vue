@@ -1,7 +1,7 @@
 <template>
   <div style="width: 50%; margin: 5px auto">
     <div class="card">
-      <div style="font-weight: bold;font-size: 24px;margin-bottom: 20px; text-align: center">发布/编辑帖子</div>
+      <div style="font-weight: bold;font-size: 24px;margin-bottom: 20px; text-align: center">发布/编辑酒店</div>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
         <el-form-item label="标题" prop="title">
           <el-input v-model="form.title" placeholder="标题"></el-input>
@@ -34,13 +34,14 @@
             <el-option v-for="item in filteredContestList" :key="item.id" :value="item.id" :label="item.name"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="标签" prop="tags">
+        <el-form-item label="房型具备" prop="tags">
           <el-select v-model="tagsArr" multiple filterable allow-create default-first-option style="width: 100%">
-            <el-option value="酒店发布"></el-option>
-            <el-option value="团队招募"></el-option>
-            <el-option value="信息分享"></el-option>
-            <el-option value="技术分享"></el-option>
-            <el-option value="杂谈"></el-option>
+            <el-option value="大床房"></el-option>
+            <el-option value="双床房"></el-option>
+            <el-option value="3-4人房"></el-option>
+            <el-option value="电竞游戏房"></el-option>
+            <el-option value="浪漫情侣房"></el-option>
+            <el-option value="温馨亲子房"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="内容" prop="content">

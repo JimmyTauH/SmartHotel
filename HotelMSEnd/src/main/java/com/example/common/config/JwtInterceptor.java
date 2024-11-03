@@ -12,6 +12,8 @@ import com.example.entity.Account;
 import com.example.exception.CustomException;
 import com.example.service.AdminService;
 import com.example.service.UserService;
+import com.example.service.RecepService;
+import com.example.service.ServerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -34,6 +36,14 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     @Resource
     private UserService userService;
+
+
+    //Newly added
+    @Resource
+    private RecepService recepService;
+
+    @Resource
+    private ServerService serverService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -58,6 +68,10 @@ public class JwtInterceptor implements HandlerInterceptor {
                 account = adminService.selectById(Integer.valueOf(userId));
             }else if (RoleEnum.USER.name().equals(role)){
                 account = userService.selectById(Integer.valueOf(userId));
+            }else if (RoleEnum.RECEP.name().equals(role)){
+                account = recepService.selectById(Integer.valueOf(userId));
+            }else if (RoleEnum.SERVER.name().equals(role)){
+                account = serverService.selectById(Integer.valueOf(userId));
             }
         } catch (Exception e) {
             throw new CustomException(ResultCodeEnum.TOKEN_CHECK_ERROR);

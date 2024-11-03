@@ -26,13 +26,13 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="applystart" label="报名开始时间"></el-table-column>
-        <el-table-column prop="applyend" label="报名结束时间"></el-table-column>
-        <el-table-column prop="start" label="比赛开始时间"></el-table-column>
-        <el-table-column prop="end" label="比赛结束时间"></el-table-column>
-        <el-table-column prop="form" label="酒店形式"></el-table-column>
+        <el-table-column prop="applystart" label="酒店入住时间"></el-table-column>
+        <el-table-column prop="applyend" label="酒店退房时间"></el-table-column>
+        <!-- <el-table-column prop="start" label="比赛开始时间"></el-table-column>
+        <el-table-column prop="end" label="比赛结束时间"></el-table-column> -->
+        <el-table-column prop="form" label="订房渠道"></el-table-column>
         <el-table-column prop="address" label="酒店地址" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="host" label="主办方"></el-table-column>
+        <!-- <el-table-column prop="host" label="主办方"></el-table-column> -->
         <el-table-column prop="readCount" label="浏览量"></el-table-column>
         <el-table-column label="酒店描述" width="150px">
           <template v-slot="scope">
@@ -80,7 +80,7 @@
             <el-button type="primary">上传封面</el-button>
           </el-upload>
         </el-form-item>
-        <el-form-item prop="applystart" label="报名开始时间">
+        <el-form-item prop="applystart" label="酒店入住时间">
           <el-date-picker
               v-model="form.applystart"
               type="date"
@@ -89,16 +89,16 @@
               format="yyyy-MM-dd"
           />
         </el-form-item>
-        <el-form-item prop="applyend" label="报名结束时间">
+        <el-form-item prop="applyend" label="酒店退房时间">
           <el-date-picker
               v-model="form.applyend"
               type="date"
-              placeholder="请选择报名结束时间"
+              placeholder="请选择酒店退房时间"
               value-format="yyyy-MM-dd"
               format="yyyy-MM-dd"
           />
         </el-form-item>
-        <el-form-item prop="start" label="酒店开始时间">
+        <!-- <el-form-item prop="start" label="酒店开始时间">
           <el-date-picker
               v-model="form.start"
               type="date"
@@ -114,21 +114,24 @@
               placeholder="请选择酒店结束时间"
               value-format="yyyy-MM-dd"
               format="yyyy-MM-dd"
-          />
-        </el-form-item>
-        <el-form-item label="酒店形式" prop="form">
+          /> -->
+        <!-- </el-form-item> -->
+        <el-form-item label="订房渠道" prop="form">
           <el-select style="width: 100%" v-model="form.form">
-            <el-option value="线上"></el-option>
-            <el-option value="线下"></el-option>
+            <el-option value="美团"></el-option>
+            <el-option value="携程"></el-option>
+            <el-option value="抖音"></el-option>
+            <el-option value="去哪儿旅行"></el-option>
+            <el-option value="其他"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item prop="address" label="酒店地址">
           <el-input v-model="form.address" placeholder="酒店地址"></el-input>
         </el-form-item>
-        <el-form-item prop="host" label="主办方">
+        <!-- <el-form-item prop="host" label="主办方">
           <el-input v-model="form.host" placeholder="主办方"></el-input>
-        </el-form-item>
-        <el-form-item prop="content" label="酒店内容">
+        </el-form-item> -->
+        <el-form-item prop="content" label="顾客留言备注">
           <div id="editor"></div>
         </el-form-item>
       </el-form>
@@ -138,7 +141,7 @@
       </div>
     </el-dialog>
 
-    <el-dialog title="酒店内容" :visible.sync="fromVisible1" width="70%" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="顾客留言备注" :visible.sync="fromVisible1" width="70%" :close-on-click-modal="false" destroy-on-close>
       <div class="w-e-text">
         <div v-html="content"></div>
       </div>
@@ -179,7 +182,7 @@ export default {
           {required: true, message: '请输入报名开始时间', trigger: 'blur'},
         ],
         applyend: [
-          {required: true, message: '请输入报名结束时间', trigger: 'blur'},
+          {required: true, message: '请输入酒店退房时间', trigger: 'blur'},
         ],
         start: [
           {required: true, message: '请输入酒店开始时间', trigger: 'blur'},

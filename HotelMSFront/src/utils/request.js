@@ -31,9 +31,9 @@ request.interceptors.response.use(
         if (typeof res === 'string') {
             res = res ? JSON.parse(res) : res
         }
-        if (res.code === '401') {
-            router.push('/login')
-        }
+        // if (res.code === '401') {
+        //     router.push('/front')
+        // }
         return res;
     },
     error => {

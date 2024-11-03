@@ -5,4 +5,11 @@ public enum RoleEnum {
     ADMIN,
     // 普通用户
     USER,
+
+    // 前台
+    RECEP,
+
+    // 后勤
+    SERVER,
+
 }

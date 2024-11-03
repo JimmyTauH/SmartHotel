@@ -41,7 +41,7 @@
       <div class="main-column" style="width: 100%;">
         <!--博客列表-->
         <div class="card blog-list">
-          <!-- <el-button type="primary" @click="addBlog" v-if="user.isCreator" class="button-new-post">发表新帖子</el-button> -->
+          <el-button type="primary" @click="addBlog" v-if="user.isCreator" class="button-new-post">发表新酒店</el-button>
           <!-- <el-button type="warning" @click="goToApply" v-if="!user.isCreator" class="button-apply">点此认证后使用发帖功能</el-button> -->
           <BlogList :categoryName="current"></BlogList>
           <Footer></Footer>
