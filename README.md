@@ -18,6 +18,8 @@
 
 管理员账号：admin   admin （只允许后台添加）
 普通客户账号示例：sanqi    sanqi    （可以通过界面自行注册） 
+前台账号： recep recep
+保洁账号： server1 123456
 
 如果需要查看/修改数据库，可用mysql连接42.194.239.205:3306上的数据库,用户名为lighthouse【两用户是hotelms，四用户是hotelms4】，尽量不要修改别人的记录。【注意是mysql不是ssh!】
 
