@@ -30,7 +30,9 @@ const routes = [
       { path: 'activitySign', name: 'ActivitySign', meta: { name: '酒店入住' }, component: () => import('../views/manager/ActivitySign') },
       { path: 'certification', name: 'Certification', meta: { name: '会员认证' }, component: () => import('../views/manager/Certification.vue') },
       { path: 'circulars', name: 'Circulars', meta: { name: '系统通知' }, component: () => import('../views/manager/Circulars.vue') },
-
+      { path: 'dailyreport', name: 'DailyReport', meta: { name: '日报表' }, component: () => import('../views/manager/DailyReport.vue') },
+      { path: 'weeklyreport', name: 'WeeklyReport', meta: { name: '周报表' }, component: () => import('../views/manager/WeeklyReport.vue') },
+      { path: 'monthlyreport', name: 'MonthlyReport', meta: { name: '月报表' }, component: () => import('../views/manager/MonthlyReport.vue') },
     ]
   },
   {
