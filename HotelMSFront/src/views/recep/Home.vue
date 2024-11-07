@@ -13,8 +13,8 @@
           <div class="user">
             <img :src="user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" />
             <div class="userinfo">
-              <p class="name" style="margin-left: -20px;margin-top: -6px;">HotelMS管理员</p>
-              <p class="access">admin</p>
+              <p class="name" style="margin-left: -20px;margin-top: -6px;">HotelM前台</p>
+              <p class="access">recep</p>
             </div>
           </div>
 
@@ -695,8 +695,8 @@ export default {
     this.user = JSON.parse(localStorage.getItem('xm-user') || '{}')   // 重新获取下用户的最新信息
   },
   goToPerson() {
-    if (this.user.role === 'ADMIN') {
-      this.$router.push('/adminPerson')
+    if (this.user.role === 'RECEP') {
+      this.$router.push('/recep/recepPerson')
     }
   },
   logout() {

@@ -97,7 +97,7 @@ public class ActivityService {
                 该函数将act对象的end属性转换为日期对象，并与当前日期进行比较，
                 如果end属性的日期早于当前日期，则将act对象的isEndActivity属性设置为true，否则设置为false。
              */
-        act.setIsEndActivity(DateUtil.parseDate(act.getEnd()).isBefore(new Date()));
+//        act.setIsEndActivity(DateUtil.parseDate(act.getEnd()).isBefore(new Date()));
         //查询用户是否报名竞赛
         ActivitySign activitySign = activitySignService.selectByActivityIdAndUserId(act.getId(), currentUser.getId());
         act.setIsSign(activitySign != null);

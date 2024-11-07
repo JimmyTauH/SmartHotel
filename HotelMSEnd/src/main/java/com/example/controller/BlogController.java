@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.common.Result;
+import com.example.entity.Activity;
 import com.example.entity.Blog;
 import com.example.service.BlogService;
 import com.github.pagehelper.PageInfo;
@@ -49,6 +50,13 @@ public class BlogController {
     public Result selectById(@PathVariable Integer id) {
         Blog blog = blogService.selectById(id);
         return Result.success(blog);
+    }
+
+
+    @GetMapping("/selectBytitle/{name}")
+    public Result selectBytitle(@PathVariable String title) {
+        List<Blog> blogs = blogService.selectBytitle(title);
+        return Result.success(blogs);
     }
     //查询所有
     @GetMapping("/selectAll")

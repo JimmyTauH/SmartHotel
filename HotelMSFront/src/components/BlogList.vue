@@ -20,7 +20,7 @@
       </div>
       
       <!-- 创作者、点赞量、观看量部分 -->
-      <div style="margin-top: 10px; font-size: 14px; color: #455873FF">
+      <div style="margin-top: 5px; font-size: 14px; color: #455873FF">
         <span style="margin-right: 20px">
           <i class="el-icon-user" style="margin-right: 5px"></i>{{ item.userName }}
         </span>
@@ -33,18 +33,18 @@
       </div>
       
       <!-- 删除和编辑操作 -->
-      <div v-if="showOpt" style="margin-top: 10px;">
-        <span style="color: red; cursor: pointer; margin-right: 10px" @click="del(item.id)">
-          <i class="el-icon-delete"></i>删除
-        </span>
-        <span style="color: #2a60c9; cursor: pointer" @click="editBlog(item.id)">
-          <i class="el-icon-edit"></i>编辑
-        </span>
-      </div>
-      
+        <!-- <div v-if="showOpt" style="margin-top: 10px;">
+          <span style="color: red; cursor: pointer; margin-right: 10px" @click="del(item.id)">
+            <i class="el-icon-delete"></i>删除
+          </span>
+          <span style="color: #2a60c9; cursor: pointer" @click="editBlog(item.id)">
+            <i class="el-icon-edit"></i>编辑
+          </span>
+        </div>
+        -->
       <!-- 标签部分 -->
-      <div style="margin-top: 10px;">
-        <el-tag v-for="tag in JSON.parse(item.tags || [])" :key="tag.id" type="primary" style="margin-right: 5px">
+      <div style="margin-top: 5px;margin-bottom: 10px;">
+        <el-tag v-for="tag in JSON.parse(item.tags || [])" :key="tag.id" type="primary" style="margin-right: 2px">
           {{ tag }}
         </el-tag>
       </div>

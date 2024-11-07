@@ -94,7 +94,8 @@ export default {
         return;
       }
       console.log(this.user.id);
-      this.$request.get(`/serviceBook/selectByUser/` + this.user.id)
+      //this.$request.get(`/serviceBook/selectByUser/` + this.user.id)
+      this.$request.get(`/serviceBook/selectAll`)
         .then(res => {
           this.services = res.data || [];
         })
@@ -105,6 +106,7 @@ export default {
     submitRequest() {
       this.$refs.formRef.validate().then(() => {
         // 确保 user.id 存在并传递给后端
+        this.form.state = 0;
         this.form.userId = this.user.id; // 确保用户ID传递给后端
         this.$request.post('/serviceBook/add/', this.form)
           .then(res => {

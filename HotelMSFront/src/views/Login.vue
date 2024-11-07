@@ -5,14 +5,14 @@
         <div class="inner-box">
           <div class="container">
             <div
-              style="width: 350px; padding: 20px 30px; background-color: white; border-radius: 5px; margin-left: 40px;">
+              style="width: 350px; padding: 20px 30px; background-color: white; border-radius: 5px;margin-left: 40px; ">
               <div class="logo1" style="margin-top: -20px;">
                 <img src="@/assets/imgs/pic4.png" alt="HotelMS">
                 <h4 style="margin-top: 5px;">HotelMS智能酒店平台</h4>
               </div>
 
-              <div class="heading" style="margin-top: 50px; margin-bottom: 20px;">
-                <h2 style="width: 350px; font-size: 28px; margin-bottom: 40px;">Welcome to HotelMS!</h2>
+              <div class="heading" style="margin-top: 50px;margin-bottom: 20px;">
+                <h2 style="width: 350px; font-size: 28px;margin-bottom: 40px;">Welcome to HotelMS! </h2>
               </div>
               <el-form :model="form" :rules="rules" ref="formRef">
                 <el-form-item prop="username">
@@ -26,12 +26,12 @@
                 <el-form-item prop="role">
                   <el-radio-group v-model="form.role">
                     <el-radio label="ADMIN">管理员</el-radio>
+                    <el-radio label="USER">用户</el-radio>
                     <el-radio label="RECEP">酒店前台</el-radio>
                     <el-radio label="SERVER">后勤人员</el-radio>
-                    <el-radio label="USER">用户</el-radio>
                   </el-radio-group>
                 </el-form-item>
-
+                
                 <el-form-item prop="code">
                   <div style="display: flex">
                     <el-input style="flex: 1" size="medium" v-model="code"></el-input>
@@ -53,7 +53,7 @@
 
             <div class="pics">
               <div class="images-wrapper">
-                <img src="@/assets/imgs/pic2.png" style="width: 100%; height: 100%;">
+                <img src="@/assets/imgs/pic2.png" style="width: 100%;height: 100%;">
               </div>
 
               <div class="text-slider">
@@ -132,19 +132,14 @@ export default {
               this.$message.success('登录成功')
               setTimeout(() => {
                 // 跳转主页
-                switch (res.data.role) {
-                  case 'ADMIN':
-                    location.href = '/home';
-                    break;
-                  case 'SERVER':
-                    location.href = '/server/home';
-                    break;
-                  case 'RECEP':
-                    location.href = '/recep/home';
-                    break;
-                  case 'USER':
-                    location.href = '/front/home';
-                    break;
+                if (res.data.role === 'ADMIN') {
+                  location.href = '/home'
+                }else if(res.data.role === 'USER'){
+                  location.href = '/front/home'
+                }else if(res.data.role === 'RECEP'){
+                  location.href = '/recep/home'
+                }else if(res.data.role === 'SERVER'){
+                  location.href = '/server/home'
                 }
               }, 500)
             } else {
@@ -161,7 +156,8 @@ export default {
 
 <style scoped>
 .container {
-  height: 80vh;
+
+  height: 60vh;
   overflow: hidden;
   background-size: 100%;
   display: flex;
@@ -192,6 +188,7 @@ main {
   background-color: #fff;
   border-radius: 3.3rem;
   box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
+
 }
 
 .inner-box {
@@ -231,6 +228,7 @@ main {
 }
 
 .logo1 {
+
   display: flex;
   align-items: center;
 }
@@ -238,6 +236,7 @@ main {
 .logo1 img {
   width: 40px;
   margin-right: 0.3rem;
+
 }
 
 .logo1 h4 {
@@ -248,6 +247,7 @@ main {
 }
 
 .heading h2 {
+
   width: 100%;
   margin-top: -40px;
   font-size: 2.1rem;
@@ -267,6 +267,7 @@ main {
   font-size: 0.95rem;
   margin-bottom: 2rem;
   transition: 0.3s;
+
 }
 
 .sign-btn:hover {

@@ -5,7 +5,7 @@
 <mapper namespace="com.example.mapper.ServiceBookMapper">
 
     <sql id="Base_Column_List">
-        id,title,content,time,user,hotel
+        id,title,content,time,user,hotel,room,state
     </sql>
 
     <select id="selectAll" resultType="com.example.entity.ServiceBook">
@@ -19,6 +19,9 @@
             <if test="time != null"> and time = #{time}</if>
             <if test="user != null"> and user = #{user}</if>
             <if test="hotel != null"> and hotel = #{hotel}</if>
+            <if test="room != null"> and room = #{room}</if>
+            <if test="state != null"> and state = #{state}</if>
+
         </where>
         order by id desc
     </select>
@@ -60,6 +63,8 @@
             <if test="time != null">time,</if>
             <if test="user != null">user,</if>
             <if test="hotel != null">hotel,</if>
+            <if test="room != null">room,</if>
+            <if test="state != null">state,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -68,6 +73,8 @@
             <if test="time != null">#{time},</if>
             <if test="user != null">#{user},</if>
             <if test="hotel != null">#{hotel},</if>
+            <if test="room != null">#{room},</if>
+            <if test="state != null">#{state},</if>
         </trim>
     </insert>
 
@@ -80,6 +87,8 @@
                 <if test="time != null">time = #{time},</if>
                 <if test="user != null">user = #{user},</if>
                 <if test="hotel != null">hotel = #{hotel},</if> <!-- 修正这里 -->
+                <if test="room != null">room = #{room},</if> <!-- 修正这里 -->
+                <if test="state != null">state = #{state},</if> <!-- 修正这里 -->
             </trim>
         </set>
         where id = #{id}

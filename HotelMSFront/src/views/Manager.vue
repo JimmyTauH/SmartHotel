@@ -34,7 +34,7 @@
     <div class="manager-main">
       <!--  侧边栏  -->
       <div class="manager-main-left">
-        <el-menu :default-openeds="['info', 'user','report']" router style="border: none" :default-active="$route.path">
+        <el-menu :default-openeds="['info', 'user']" router style="border: none" :default-active="$route.path">
           <el-menu-item index="/home" style="margin-top: 30px;">
             <i class="el-icon-s-home"></i>
             <span slot="title">系统首页</span>
@@ -59,15 +59,6 @@
             </template>
             <el-menu-item index="/admin">管理员信息</el-menu-item>
             <el-menu-item index="/user">用户信息</el-menu-item>
-          </el-submenu>
-
-          <el-submenu index="report">
-            <template slot="title">
-              <i class="el-icon-menu"></i><span>报表管理</span>
-            </template>
-            <el-menu-item index="/dailyreport">当日数据</el-menu-item>
-            <el-menu-item index="/weeklyreport">周报表</el-menu-item>
-            <el-menu-item index="/monthlyreport">月报表</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>

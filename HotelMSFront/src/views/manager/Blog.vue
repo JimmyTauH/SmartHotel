@@ -19,7 +19,10 @@
         <el-table-column prop="id" label="序号" width="80" align="center" sortable></el-table-column>
         <el-table-column prop="title" label="标题" show-overflow-tooltip></el-table-column>
         <el-table-column prop="descr" label="简介" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="address" label="酒店地址" show-overflow-tooltip></el-table-column>
+        
         <el-table-column prop="cover" label="封面">
+        
           <template v-slot="scope">
             <div style="display: flex; align-items: center">
               <el-image style="width: 50px;height: 50px;border-radius: 5px;" v-if="scope.row.cover"
@@ -73,9 +76,11 @@
         <el-form-item label="标题" prop="title">
           <el-input v-model="form.title" placeholder="标题"></el-input>
         </el-form-item>
+
         <el-form-item label="简介" prop="descr">
           <el-input type="textarea" v-model="form.descr" placeholder="简介"></el-input>
         </el-form-item>
+        
         <el-form-item label="封面" prop="cover">
           <el-upload
               :action="$baseUrl + '/files/upload'"
@@ -91,6 +96,12 @@
             <el-option v-for="item in categoryList" :key="item.id" :value="item.id" :label="item.name"></el-option>
           </el-select>
         </el-form-item>
+        
+
+        <el-form-item prop="address" label="酒店地址">
+          <el-input v-model="form.address" placeholder="酒店地址"></el-input>
+        </el-form-item>
+
         <el-form-item label="房型提供" prop="tags">
           <el-select v-model="tagsArr" multiple filterable allow-create default-first-option style="width: 100%">
             <el-option value="大床房"></el-option>
@@ -145,7 +156,6 @@ export default {
       pageNum: 1,   // 当前的页码
       pageSize: 10,  // 每页显示的个数
       total: 0,
-      title: null,
       fromVisible: false,
       fromVisible1: false,
       form: {},
@@ -257,7 +267,7 @@ export default {
         }
       }).then(res => {
         this.tableData = res.data?.list
-        this.total = res.data?.total
+        this.total = res.data?.tota
       })
       this.$request.get('/category/selectAll').then(res => {
         this.categoryList = res.data || []

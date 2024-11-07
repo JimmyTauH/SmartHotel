@@ -16,15 +16,13 @@ public class Activity {
     /** 结束时间 */
     private String applyend;
     /** 开始时间 */
-    private String start;
-    /** 结束时间 */
-    private String end;
-    /** 竞赛形式 */
     private String form;
-    /** 竞赛地址 */
-    private String address;
+
     /** 主办方 */
     private String host;
+
+    /** 房型数量 */
+    private Integer number;
     /** 浏览量 */
     private Integer readCount;
     /** 点赞量 */
@@ -39,11 +37,6 @@ public class Activity {
     //报名是否结束
     private Boolean isApplyEnd;
 
-    //竞赛是否开始
-    private Boolean isStartActivity;
-    //竞赛是否结束
-    private Boolean isEndActivity;
-
     //是否报名
     private Boolean isSign;
 
@@ -53,6 +46,8 @@ public class Activity {
     private Boolean isCollect;
     //用户ID
     private Integer userId;
+
+    private Integer hotelID;
 
     public Integer getUserId() {
         return userId;
@@ -114,18 +109,6 @@ public class Activity {
         isApplyEnd = applyEnd;
     }
 
-    public Boolean getIsStartActivity() { return isStartActivity;}
-
-    public void setIsStartActivity(Boolean startActivity) {
-        isStartActivity = startActivity;
-    }
-
-    public Boolean getIsEndActivity() { return isEndActivity;}
-
-    public void setIsEndActivity(Boolean endActivity) {
-        isEndActivity = endActivity;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -166,21 +149,6 @@ public class Activity {
         this.applyend = applyend;
     }
 
-    public String getStart() {
-        return start;
-    }
-
-    public void setStart(String start) {
-        this.start = start;
-    }
-
-    public String getEnd() {
-        return end;
-    }
-
-    public void setEnd(String end) {
-        this.end = end;
-    }
 
     public String getForm() {
         return form;
@@ -190,13 +158,6 @@ public class Activity {
         this.form = form;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getHost() {
         return host;
@@ -205,6 +166,15 @@ public class Activity {
     public void setHost(String host) {
         this.host = host;
     }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
 
     public Integer getReadCount() {
         return readCount;
@@ -229,4 +199,8 @@ public class Activity {
     public void setCover(String cover) {
         this.cover = cover;
     }
+
+    public Integer getHotelID() { return  hotelID; }
+
+    public void setHotelID(Integer hotelID) { this.hotelID = hotelID; }
 }

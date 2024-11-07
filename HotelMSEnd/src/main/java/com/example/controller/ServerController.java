@@ -22,8 +22,8 @@ public class ServerController {
 
     //添加用户
     @PostMapping("/add")
-    public Result add(@RequestBody Server user) {
-        serverService.add(user);
+    public Result add(@RequestBody Server server) {
+        serverService.add(server);
         return Result.success();
     }
 
@@ -35,9 +35,9 @@ public class ServerController {
 
     //批量查询用户
     @GetMapping("/select/batch")
-    public Result selectBatch(Server user) {
-        List<Server> users = serverService.selectBatch(user);
-        return Result.success(users);
+    public Result selectBatch(Server server) {
+        List<Server> servers = serverService.selectBatch(server);
+        return Result.success(servers);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -53,28 +53,28 @@ public class ServerController {
     }
 
     @PutMapping("/update")
-    public Result update(@RequestBody Server user) {
-        serverService.update(user);
+    public Result update(@RequestBody Server server) {
+        serverService.update(server);
         return Result.success();
     }
 
     @GetMapping("/selectPage")
-    public Result selectPage(Server user,
+    public Result selectPage(Server server,
                              @RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize) {
-       PageInfo<Server> pageInfo = serverService.selectPage(user, pageNum, pageSize);
+       PageInfo<Server> pageInfo = serverService.selectPage(server, pageNum, pageSize);
        return Result.success(pageInfo);
     }
 
     //更新积分
     @PutMapping("/updateIntegral")
-    public Result updateIntegral(@RequestBody Server user) {
-        serverService.updateIntegral(user);
+    public Result updateIntegral(@RequestBody Server server) {
+        serverService.updateIntegral(server);
         return Result.success();
     }
     @PutMapping("/updateIntegral2")
-    public Result updateIntegral2(@RequestBody Server user) {
-        serverService.updateIntegral2(user);
+    public Result updateIntegral2(@RequestBody Server server) {
+        serverService.updateIntegral2(server);
         return Result.success();
     }
 

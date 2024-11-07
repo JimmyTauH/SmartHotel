@@ -4,8 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.ActivityMapper">
     <sql id="Base_Column_List">
-        id,name,descr,content,applystart,applyend,start
-        ,end,form,address,host,read_count,cover
+        id,name,descr,content,applystart,applyend,form,host,number,read_count,cover,hotelID
     </sql>
     <insert id="add">
         insert into activity
@@ -15,13 +14,12 @@
             <if test="content != null">content,</if>
             <if test="applystart != null">applystart,</if>
             <if test="applyend != null">applyend,</if>
-            <if test="start != null">start,</if>
-            <if test="end != null">end,</if>
             <if test="form != null">form,</if>
-            <if test="address != null">address,</if>
             <if test="host != null">host,</if>
+            <if test="number != null">number,</if>
             <if test="readCount != null">read_count,</if>
             <if test="cover != null">cover,</if>
+            <if test="hotelID != null">hotelID,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null">#{name},</if>
@@ -29,13 +27,12 @@
             <if test="content != null">#{content},</if>
             <if test="applystart != null">#{applystart},</if>
             <if test="applyend != null">#{applyend},</if>
-            <if test="start != null">#{start},</if>
-            <if test="end != null">#{end},</if>
             <if test="form != null">#{form},</if>
-            <if test="address != null">#{address},</if>
             <if test="host != null">#{host},</if>
+            <if test="number != null">#{number},</if>
             <if test="readCount != null">#{readCount},</if>
             <if test="cover != null">#{cover},</if>
+            <if test="hotelID != null">#{hotelID},</if>
         </trim>
     </insert>
     <update id="updateById">
@@ -46,13 +43,12 @@
             <if test="content != null">content = #{content},</if>
             <if test="applystart != null">applystart = #{applystart},</if>
             <if test="applyend != null">applyend = #{applyend},</if>
-            <if test="start != null">start = #{start},</if>
-            <if test="end != null">end = #{end},</if>
             <if test="form != null">form = #{form},</if>
-            <if test="address != null">address = #{address},</if>
             <if test="host != null">host = #{host},</if>
+            <if test="number != null">number = #{number},</if>
             <if test="readCount != null">read_count = #{readCount},</if>
             <if test="cover != null">cover = #{cover},</if>
+            <if test="hotelID != null">hotelID = #{hotelID},</if>
         </set>
         <where>
             id = #{id}
@@ -80,13 +76,12 @@
             <if test="content != null">and content like concat ('%',#{content},'%')</if>
             <if test="applystart != null">and applystart like concat ('%',#{applystart},'%')</if>
             <if test="applyend != null">and applyend like concat ('%',#{applyend},'%')</if>
-            <if test="start != null">and start like concat ('%',#{start},'%')</if>
-            <if test="end != null">and end like concat ('%',#{end},'%')</if>
             <if test="form != null">and form like concat ('%',#{form},'%')</if>
-            <if test="address != null">and address like concat ('%',#{address},'%')</if>
             <if test="host != null">and host like concat ('%',#{host},'%')</if>
+            <if test="number != null">and number = #{number}</if>
             <if test="readCount != null">and read_count = #{readCount}</if>
             <if test="cover != null">and cover = #{cover}</if>
+            <if test="hotelID != null">and hotelID = #{hotelID}</if>
         </where>
         order by id desc
     </select>
@@ -97,6 +92,7 @@
         order by read_count desc
         limit 10
     </select>
+
     <!--查询用户已经报名的竞赛-->
     <select id="selectUser" resultType="com.example.entity.Activity">
         select activity.*
@@ -109,6 +105,7 @@
         </where>
         order by activity.id desc
     </select>
+
     <select id="selectLike" resultType="com.example.entity.Activity">
         select activity.*
         from likes
