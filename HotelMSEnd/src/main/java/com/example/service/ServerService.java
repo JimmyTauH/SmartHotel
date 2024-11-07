@@ -103,7 +103,7 @@ public class ServerService {
             throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
         }
         //生成token
-        String tokenData = dbUser.getId() + "-" + RoleEnum.USER.name();
+        String tokenData = dbUser.getId() + "-" + RoleEnum.SERVER.name();
         String token = TokenUtils.createToken(tokenData, dbUser.getPassword());
         dbUser.setToken(token);
         // 判断是否认证通过,如果认证通过，则设置用户为创作者

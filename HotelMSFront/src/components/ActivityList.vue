@@ -7,7 +7,7 @@
           <div style="margin: 10px 0; font-weight: bold;width: 100%; height: 35px;font-size:15px;">{{ item.name }}</div>
           <div style="display: flex; align-items: center; justify-content: space-between;">
             
-            <div><i class="el-icon-time" style="margin-right: 5px"></i>报名时间：{{ item.applystart }} - {{ item.applyend }}</div>
+            <div><i class="el-icon-time" style="margin-right: 5px"></i>入住时间：{{ item.applystart }} - {{ item.applyend }}</div>
             <div v-if="!item.isApplyStart" style="color: gray; font-weight: bold;">
               报名未开始
             </div>

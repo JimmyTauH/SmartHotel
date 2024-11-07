@@ -87,7 +87,7 @@ export default {
     },
     goToPerson() {
       if (this.user.role === 'RECEP') {
-        this.$router.push('/adminPerson')
+        this.$router.push('/recep/recepPerson')
       }
     },
     logout() {

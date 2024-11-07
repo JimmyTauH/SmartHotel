@@ -13,7 +13,10 @@
     "element-ui": "^2.15.14",
     "highlight.js": "^11.9.0",
     "less-loader": "^12.2.0",
+    "node-sass": "^9.0.0",
+    "style-loader": "^4.0.0",
     "vue": "^2.6.14",
+    "vue-baidu-map": "^0.21.22",
     "vue-router": "^3.5.1",
     "wangeditor": "^4.7.15"
   },
@@ -22,6 +25,7 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "less": "^4.2.0",
+    "sass-loader": "^7.3.1",
     "vue-template-compiler": "^2.6.14"
   },
   "browserslist": [

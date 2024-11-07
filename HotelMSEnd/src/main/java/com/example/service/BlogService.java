@@ -4,7 +4,6 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
-import com.example.common.Constants;
 import com.example.common.enums.LikesModuleEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.*;
@@ -12,14 +11,12 @@ import com.example.mapper.BlogMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-//import jdk.nashorn.internal.ir.CallNode;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -99,6 +96,10 @@ public class BlogService {
 
     public List<Blog> selectAll(Blog blog) {
         return blogMapper.selectAll(blog);
+    }
+
+    public List<Blog> selectBytitle(String title) {
+        return blogMapper.selectBytitle("%" + title + "%");
     }
 
     public PageInfo<Blog> selectPage(Blog blog, Integer pageNum, Integer pageSize) {

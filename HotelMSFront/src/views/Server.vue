@@ -76,10 +76,12 @@ export default {
   methods: {
     updateUser() {
       this.user = JSON.parse(localStorage.getItem('xm-user') || '{}')   // 重新获取下用户的最新信息
+      console.log(this.user.username)
+      console.log(this.user.id)
     },
     goToPerson() {
       if (this.user.role === 'SERVER') {
-        this.$router.push('/adminPerson')
+        this.$router.push('/server/serverPerson')
       }
     },
     logout() {

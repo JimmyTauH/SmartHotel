@@ -102,7 +102,7 @@ public class RecepService {
             throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
         }
         // 生成token
-        String tokenData = dbRecep.getId() + "-" + RoleEnum.ADMIN.name();
+        String tokenData = dbRecep.getId() + "-" + RoleEnum.RECEP.name();
         String token = TokenUtils.createToken(tokenData, dbRecep.getPassword());
         dbRecep.setToken(token);
         return dbRecep;

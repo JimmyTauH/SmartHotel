@@ -25,6 +25,10 @@ public class Blog {
      */
     private String descr;
     /**
+     * 地址
+     */
+    private String address;
+    /**
      * 封面
      */
     private String cover;
@@ -190,6 +194,15 @@ public class Blog {
 
     public void setDescr(String descr) {
         this.descr = descr;
+    }
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getCover() {

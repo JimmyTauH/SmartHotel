@@ -10,7 +10,7 @@
           <BlogList type="user" :showOpt="true"/>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="已报名酒店" name="已报名酒店">
+      <el-tab-pane label="已预订酒店" name="已预订酒店">
         <ActivityList type="user" :span="12"/>
       </el-tab-pane>
       <el-tab-pane label="我的点赞" name="我的点赞">

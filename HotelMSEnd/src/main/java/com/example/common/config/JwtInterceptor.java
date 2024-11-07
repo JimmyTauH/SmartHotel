@@ -37,8 +37,6 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Resource
     private UserService userService;
 
-
-    //Newly added
     @Resource
     private RecepService recepService;
 

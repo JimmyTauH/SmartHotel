@@ -1,14 +1,14 @@
 package com.example.controller;
 
 import com.example.common.Result;
-//import com.example.entity.Notice;
-//import com.example.service.NoticeService;
 import com.example.entity.ServiceBook;
 import com.example.service.ServiceBookService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import java.util.List;
+
 /**
  * 服务申请前端接口
  **/

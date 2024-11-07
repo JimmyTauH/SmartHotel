@@ -21,6 +21,10 @@ public class ServiceBook implements Serializable {
 
     private Integer hotel;
 
+    private String room;
+
+    private boolean state;
+
     public Integer getId() {
         return id;
     }
@@ -68,5 +72,13 @@ public class ServiceBook implements Serializable {
     public void setHotel(Integer hotel) {
         this.hotel = hotel;
     }
+
+    public String getRoom() {return room; }
+
+    public void setRoom(String room){ this.room = room;}
+
+    public boolean getState(){ return state; }
+
+    public void setState(boolean state) { this.state = state; }
 
 }

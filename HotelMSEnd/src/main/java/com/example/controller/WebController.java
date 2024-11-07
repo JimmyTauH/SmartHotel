@@ -33,6 +33,7 @@ public class WebController {
 
     @Resource
     private RecepService recepService;
+
     @GetMapping("/")
     public Result hello() {
         return Result.success("访问成功");
@@ -76,7 +77,7 @@ public class WebController {
             serverService.register(account);
         }else if (RoleEnum.RECEP.name().equals(account.getRole())) {
             recepService.register(account);
-        }else{
+        }else {
             return Result.error(ResultCodeEnum.PARAM_ERROR);
         }
         return Result.success();

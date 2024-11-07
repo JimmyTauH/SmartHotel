@@ -50,8 +50,8 @@ public class RecepController {
      * 修改
      */
     @PutMapping("/update")
-    public Result updateById(@RequestBody Recep admin) {
-        recepService.updateById(admin);
+    public Result updateById(@RequestBody Recep recep) {
+        recepService.updateById(recep);
         return Result.success();
     }
 
@@ -60,16 +60,16 @@ public class RecepController {
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {
-        Recep admin = recepService.selectById(id);
-        return Result.success(admin);
+        Recep recep = recepService.selectById(id);
+        return Result.success(recep);
     }
 
     /**
      * 查询所有
      */
     @GetMapping("/selectAll")
-    public Result selectAll(Recep admin ) {
-        List<Recep> list = recepService.selectAll(admin);
+    public Result selectAll(Recep recep ) {
+        List<Recep> list = recepService.selectAll(recep);
         return Result.success(list);
     }
 
@@ -77,10 +77,10 @@ public class RecepController {
      * 分页查询
      */
     @GetMapping("/selectPage")
-    public Result selectPage(Recep admin,
+    public Result selectPage(Recep recep,
                              @RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageInfo<Recep> page = recepService.selectPage(admin, pageNum, pageSize);
+        PageInfo<Recep> page = recepService.selectPage(recep, pageNum, pageSize);
         return Result.success(page);
     }
 

@@ -28,6 +28,15 @@
                     v-model="form.confirmPass"></el-input>
                 </el-form-item>
 
+                <el-form-item prop="role">
+                  <el-radio-group v-model="form.role">
+                    <el-radio label="ADMIN">管理员</el-radio>
+                    <el-radio label="USER">用户</el-radio>
+                    <el-radio label="RECEP">酒店前台</el-radio>
+                    <el-radio label="SERVER">后勤人员</el-radio>
+                  </el-radio-group>
+                </el-form-item>
+
                 <el-form-item prop="code">
                   <div style="display: flex">
                     <el-input style="flex: 1" size="medium" v-model="code"></el-input>
@@ -91,7 +100,7 @@ export default {
         username: '',
         password: '',
         confirmPass: '',
-        role:'USER',
+        role:'',
       },
       code: '', // 用户输入的验证码
       identifyCode: '', // 生成的验证码

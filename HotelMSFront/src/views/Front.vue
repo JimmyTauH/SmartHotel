@@ -11,7 +11,7 @@
       <div class="front-header-center">
         <div class="front-header-nav">
           <el-menu :default-active="$route.path" mode="horizontal" router >
-						<el-menu-item index="/front/home" style="margin-left: 240px">首页</el-menu-item>
+						<el-menu-item index="/front/home" style="margin-left: 100px">首页</el-menu-item>
 						<el-menu-item index="/front/activity">热门房型</el-menu-item>
 						<el-menu-item index="/front/person">个人中心</el-menu-item>
 <!--						<el-menu-item index="/front/signIn">签到</el-menu-item>-->
@@ -97,8 +97,8 @@ export default {
 
   mounted() {
     this.loadNotice()
-    this.fetchUnreadCount()
-    setInterval(this.fetchUnreadCount, 1000)
+    //this.fetchUnreadCount()
+    //setInterval(this.fetchUnreadCount, 1000)
   },
   methods: {
     goSearch(){
