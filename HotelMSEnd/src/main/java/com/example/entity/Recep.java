@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 管理员
-*/
+ */
 public class Recep extends Account implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -24,6 +24,8 @@ public class Recep extends Account implements Serializable {
     private String avatar;
     /** 角色标识 */
     private String role;
+
+    private Integer hotelid;
 
     @Override
     public Integer getId() {
@@ -100,4 +102,9 @@ public class Recep extends Account implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public Integer getHotelid(){ return hotelid;}
+
+    public void setHotelid(Integer hotelid){ this.hotelid = hotelid; }
+
 }

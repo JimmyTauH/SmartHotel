@@ -148,7 +148,7 @@ export default {
       });
     },
     viewTaskDetails() {
-      this.$router.push('/logistics/tasks');
+      this.$router.push('/server/work');
     },
   },
 };

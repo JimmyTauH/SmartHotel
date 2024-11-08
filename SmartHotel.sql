@@ -1,17 +1,17 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : Tencent
+ Source Server         : hotelms
  Source Server Type    : MySQL
- Source Server Version : 80039 (8.0.39-0ubuntu0.22.04.1)
- Source Host           : 42.194.239.205:3306
- Source Schema         : hotelms4v2
+ Source Server Version : 80035 (8.0.35)
+ Source Host           : localhost:3306
+ Source Schema         : smarthotel
 
  Target Server Type    : MySQL
- Target Server Version : 80039 (8.0.39-0ubuntu0.22.04.1)
+ Target Server Version : 80035 (8.0.35)
  File Encoding         : 65001
 
- Date: 08/11/2024 10:32:36
+ Date: 08/11/2024 22:17:43
 */
 
 SET NAMES utf8mb4;
@@ -101,13 +101,14 @@ CREATE TABLE `admin_recep`  (
   `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '角色标识',
   `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '电话',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '邮箱',
+  `hotelid` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '管理员' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of admin_recep
 -- ----------------------------
-INSERT INTO `admin_recep` VALUES (1, 'recep', 'recep', '服务员', 'http://localhost:9091/files/1717861781556-img5.png', 'RECEP', '13677889922', 'admin11@xm.com');
+INSERT INTO `admin_recep` VALUES (1, 'recep', 'recep', '服务员', 'http://localhost:9091/files/1717861781556-img5.png', 'RECEP', '13677889922', 'test@xm.com', 4);
 
 -- ----------------------------
 -- Table structure for blog
@@ -305,7 +306,7 @@ CREATE TABLE `faultreport`  (
   `state` tinyint(1) NULL DEFAULT NULL,
   `device_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of faultreport
@@ -571,7 +572,7 @@ INSERT INTO `service` VALUES (3, '早餐服务调整通知', '尊敬的宾客，
 INSERT INTO `service` VALUES (4, '入住时间及退房时间', '尊敬的宾客，酒店的入住时间为下午14:00，退房时间为中午12:00。如需延迟退房，请提前告知前台，具体费用按酒店政策执行。', '2024-06-10', 8, 7, '306', 0);
 INSERT INTO `service` VALUES (13, '房间清洁', '111', '2024-09-30T16:00:00.000Z', 9, 7, '213', 0);
 INSERT INTO `service` VALUES (14, '早餐服务', '222111', '2024-11-03T18:29:46.000Z', 9, 1, '401', 0);
-INSERT INTO `service` VALUES (15, '早餐服务', 'beizhu1', '2024-11-07T08:38:47.000Z', 9, 1, NULL, 0);
+INSERT INTO `service` VALUES (15, '早餐服务', 'beizhu1', '2024-11-07T08:38:47.000Z', 9, 1, NULL, 1);
 
 -- ----------------------------
 -- Table structure for sign_in
@@ -645,6 +646,6 @@ CREATE TABLE `user_server`  (
 -- ----------------------------
 -- Records of user_server
 -- ----------------------------
-INSERT INTO `user_server` VALUES (1, 'server1', '123456', 'server1', NULL, 'SERVER', NULL, NULL, NULL, NULL, 1, 0);
+INSERT INTO `user_server` VALUES (1, 'server1', '123456', 'server1', 'http://localhost:9091/files/1731075032774-1.jpg', 'SERVER', NULL, '19382891111', '2222', NULL, 3, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

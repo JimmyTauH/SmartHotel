@@ -5,7 +5,7 @@
 <mapper namespace="com.example.mapper.RecepMapper">
 
     <sql id="Base_Column_List">
-        id,username,password,name,phone,email,avatar,role
+        id,username,password,name,phone,email,avatar,role,hotelid
     </sql>
 
     <select id="selectAll" resultType="com.example.entity.Recep">
@@ -21,6 +21,7 @@
             <if test="email != null"> and email= #{email}</if>
             <if test="avatar != null"> and avatar= #{avatar}</if>
             <if test="role != null"> and role= #{role}</if>
+            <if test="hotelid != null"> and hotelid= #{hotelid}</if>
         </where>
     </select>
 
@@ -39,24 +40,26 @@
     <insert id="insert" parameterType="com.example.entity.Recep" useGeneratedKeys="true">
         insert into admin_recep
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="id != null">id,</if>
-                <if test="username != null">username,</if>
-                <if test="password != null">password,</if>
-                <if test="name != null">name,</if>
-                <if test="phone != null">phone,</if>
-                <if test="email != null">email,</if>
-                <if test="avatar != null">avatar,</if>
-                <if test="role != null">role,</if>
+            <if test="id != null">id,</if>
+            <if test="username != null">username,</if>
+            <if test="password != null">password,</if>
+            <if test="name != null">name,</if>
+            <if test="phone != null">phone,</if>
+            <if test="email != null">email,</if>
+            <if test="avatar != null">avatar,</if>
+            <if test="role != null">role,</if>
+            <if test="hotelid != null">hotelid,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="id != null">#{id},</if>
-                <if test="username != null">#{username},</if>
-                <if test="password != null">#{password},</if>
-                <if test="name != null">#{name},</if>
-                <if test="phone != null">#{phone},</if>
-                <if test="email != null">#{email},</if>
-                <if test="avatar != null">#{avatar},</if>
-                <if test="role != null">#{role},</if>
+            <if test="id != null">#{id},</if>
+            <if test="username != null">#{username},</if>
+            <if test="password != null">#{password},</if>
+            <if test="name != null">#{name},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="email != null">#{email},</if>
+            <if test="avatar != null">#{avatar},</if>
+            <if test="role != null">#{role},</if>
+            <if test="hotelid != null">#{hotelid},</if>
         </trim>
     </insert>
 
@@ -84,8 +87,11 @@
             <if test="role != null">
                 role = #{role},
             </if>
+            <if test="hotelid != null">
+                hotelid = #{hotelid},
+            </if>
         </set>
-        where id = #{id} 
+        where id = #{id}
     </update>
 
 </mapper>
