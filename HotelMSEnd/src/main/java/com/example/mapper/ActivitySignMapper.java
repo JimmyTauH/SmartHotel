@@ -30,8 +30,9 @@ public interface ActivitySignMapper {
     void userDelete(@Param("activityId") Integer activityId,  @Param("userId") Integer useId);
 
     // 1. 一周总预定量和总预定金额
+    // 1. 一周的总预定量和总预定金额
     @Select("SELECT COUNT(*) AS totalReservations, " +
-            "SUM(prize) AS totalAmount " +
+            "SUM(CAST(REGEXP_SUBSTR(a.host, '^[0-9]+') AS UNSIGNED)) AS totalAmount " +
             "FROM activity_sign s " +
             "JOIN activity a ON s.activity_id = a.id " +
             "WHERE s.time BETWEEN #{startDate} AND #{endDate}")
@@ -39,7 +40,7 @@ public interface ActivitySignMapper {
 
     // 2. 每天的总预定量和总预定金额
     @Select("SELECT s.time AS date, COUNT(*) AS totalReservations, " +
-            "SUM(prize) AS totalAmount " +
+            "SUM(CAST(REGEXP_SUBSTR(a.host, '^[0-9]+') AS UNSIGNED)) AS totalAmount " +
             "FROM activity_sign s " +
             "JOIN activity a ON s.activity_id = a.id " +
             "WHERE s.time BETWEEN #{startDate} AND #{endDate} " +
@@ -48,7 +49,7 @@ public interface ActivitySignMapper {
 
     // 3. 按房型统计的每日和每周的总预定量和总预定金额
     @Select("SELECT s.activity_id AS roomType, s.time AS date, COUNT(*) AS totalReservations, " +
-            "SUM(prize) AS totalAmount " +
+            "SUM(CAST(REGEXP_SUBSTR(a.host, '^[0-9]+') AS UNSIGNED)) AS totalAmount " +
             "FROM activity_sign s " +
             "JOIN activity a ON s.activity_id = a.id " +
             "WHERE s.time BETWEEN #{startDate} AND #{endDate} " +
