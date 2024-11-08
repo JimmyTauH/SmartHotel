@@ -111,6 +111,12 @@ public class ActivityService {
         activityMapper.updateCount(activityId);
     }
 
+
+
+    public Integer selectHotelIdByActivityID(Integer actId){
+        return activityMapper.selectHotelIdByActivityID(actId);
+    }
+
     //查询用户报名的竞赛
     public PageInfo<Activity> selectUser(Activity activity, Integer pageNum, Integer pageSize) {
         Account currentUser = TokenUtils.getCurrentUser();

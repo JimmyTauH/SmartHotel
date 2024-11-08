@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 import com.example.entity.Activity;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -22,6 +23,9 @@ public interface ActivityMapper {
     Activity selectById(Integer id);
 
     List<Activity> selectAll(Activity activity);
+
+    @Select("select hotelID from activity where id = #{actId}")
+    Integer selectHotelIdByActivityID(@Param("actId") Integer actId);
 
     @Select("SELECT * FROM Activity WHERE name LIKE #{name}")
     List<Activity> selectByName(String name);

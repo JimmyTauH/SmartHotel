@@ -12,17 +12,16 @@
         select
         <include refid="Base_Column_List" />
         from service
-        <where>
-            <if test="id != null"> and id = #{id}</if>
-            <if test="title != null"> and title like concat('%', #{title}, '%')</if>
-            <if test="content != null"> and content = #{content}</if>
-            <if test="time != null"> and time = #{time}</if>
-            <if test="user != null"> and user = #{user}</if>
-            <if test="hotel != null"> and hotel = #{hotel}</if>
-            <if test="room != null"> and room = #{room}</if>
-            <if test="state != null"> and state = #{state}</if>
-
-        </where>
+<!--        <where>-->
+<!--            <if test="id != null"> and id = #{id}</if>-->
+<!--            <if test="title != null"> and title like concat('%', #{title}, '%')</if>-->
+<!--            <if test="content != null"> and content = #{content}</if>-->
+<!--            <if test="time != null"> and time = #{time}</if>-->
+<!--            <if test="user != null"> and user = #{user}</if>-->
+<!--            <if test="hotel != null"> and hotel = #{hotel}</if>-->
+<!--            <if test="room != null"> and room = #{room}</if>-->
+<!--            <if test="state != null"> and state = #{state}</if>-->
+<!--        </where>-->
         order by id desc
     </select>
 
@@ -79,19 +78,19 @@
     </insert>
 
     <update id="updateById" parameterType="com.example.entity.ServiceBook">
-        update service
-        <set>
-            <trim suffixOverrides=",">
-                <if test="title != null">title = #{title},</if>
-                <if test="content != null">content = #{content},</if>
-                <if test="time != null">time = #{time},</if>
-                <if test="user != null">user = #{user},</if>
-                <if test="hotel != null">hotel = #{hotel},</if> <!-- 修正这里 -->
-                <if test="room != null">room = #{room},</if> <!-- 修正这里 -->
-                <if test="state != null">state = #{state},</if> <!-- 修正这里 -->
-            </trim>
-        </set>
-        where id = #{id}
-    </update>
+    update service
+    <set>
+        <trim suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="user != null">user = #{user},</if>
+            <if test="hotel != null">hotel = #{hotel},</if> <!-- 修正这里 -->
+            <if test="room != null">room = #{room},</if> <!-- 修正这里 -->
+            <if test="state != null">state = #{state},</if> <!-- 修正这里 -->
+        </trim>
+    </set>
+    where id = #{id}
+</update>
 
 </mapper>

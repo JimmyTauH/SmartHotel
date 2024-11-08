@@ -4,14 +4,33 @@
       酒店服务申请
     </div>
     <div class="card-body">
+
       <div class="section-title">
-        已申请服务
+        待完成服务
       </div>
-      <el-table :data="filteredServices" style="width: 100%" class="service-table">
-        <el-table-column prop="title" label="服务类型" width="200"></el-table-column>
-        <el-table-column prop="time" label="预约时间" width="250"></el-table-column>
+      <el-table :data="filteredServices_noncompleted" style="width: 100%" class="service-table">
+        <el-table-column prop="title" label="服务类型"></el-table-column>
+        <el-table-column prop="time" label="预约时间"></el-table-column>
+        <el-table-column prop="content" label="备注"></el-table-column>
+          <!-- 操作列 -->
+          <el-table-column label="操作" width="180" align="center">
+          <template v-slot="scope">
+            <el-button plain type="danger" size="mini" @click=updateService(scope.row.id)>服务状态更新</el-button>
+          </template>
+        </el-table-column>
+
+      </el-table>
+
+      <div class="section-title">
+        已完成服务
+      </div>
+      <el-table :data="filteredServices_completed" style="width: 100%" class="service-table">
+        <el-table-column prop="title" label="服务类型"></el-table-column>
+        <el-table-column prop="time" label="预约时间"></el-table-column>
         <el-table-column prop="content" label="备注"></el-table-column>
       </el-table>
+
+
     </div>
   </div>
 </template>
@@ -29,13 +48,12 @@ export default {
     this.loadServices();
   },
   computed: {
-    filteredServices() {
-      return this.services.map(service => ({
-        title: service.title,
-        time: new Date(service.time).toLocaleString(),
-        content: service.content
-      }));
-    }
+    filteredServices_noncompleted() {
+      return this.services.filter(item => item.state == 0);
+    },
+    filteredServices_completed() {
+      return this.services.filter(item => item.state == 1);
+    },
   },
   methods: {
     loadServices() {
@@ -43,8 +61,8 @@ export default {
         console.error("用户ID无效!无法加载服务!");
         return;
       }
-
-      this.$request.get(`/serviceBook/selectAll`)
+      console.log(this.user.birth);
+      this.$request.get(`/serviceBook/selectByHotel/`+this.user.birth)
         .then(res => {
           this.services = res.data || [];
         })
@@ -52,6 +70,23 @@ export default {
           console.error("加载服务出错:", err);
         });
     },
+    updateService(id) {
+    console.log(id);
+    // 更新 state 为 1 表示服务完成
+    this.$request.put(`/serviceBook/updateState/`+id)
+    .then(res => {
+      if (res.code === '200') {
+        this.$message.success('服务状态更新为已完成');
+        this.loadServices(); // 刷新服务列表
+      } else {
+        this.$message.error(res.msg);
+      }
+    })
+    .catch(err => {
+      console.error("更新服务状态出错:", err);
+    });
+  }
+
   }
 }
 </script>

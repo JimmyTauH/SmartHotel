@@ -1,22 +1,13 @@
 <template>
-  <div class="main-content" style="width: 50%">
-    <div class="card" style="font-weight: bold; font-size: 28px; display: flex">
+  <div class="main-content">
+    <div class="card-header">
       酒店服务申请
     </div>
-    <div class="card" style="margin-top: 10px">
-      <div style="font-size: 28px; display: flex">
-        已申请服务
-      </div>
-      <el-table :data="services" style="width: 100%">
-        <el-table-column prop="title" label="服务类型"></el-table-column>
-        <el-table-column prop="time" label="预约时间"></el-table-column>
-        <el-table-column prop="content" label="备注"></el-table-column>
-      </el-table>
-
-      <div style="font-size: 28px; display: flex; margin-top: 20px">
+    <div class="card-body">
+      <div class="section-title">
         申请服务
       </div>
-      <el-form :model="form" ref="formRef" label-width="200px" label-align="right" :rules="rules">
+      <el-form :model="form" ref="formRef" label-width="150px" label-align="right" :rules="rules" class="service-form">
         <el-form-item label="预约服务类型" prop="title" required>
           <el-select v-model="form.title" placeholder="选择服务类型">
             <el-option
@@ -34,9 +25,8 @@
         <el-form-item label="备注" prop="content">
           <el-input type="textarea" v-model="form.content" placeholder="请输入备注"></el-input>
         </el-form-item>
-        <div style="margin-bottom: 20rpx; margin-left: 200px;">
+        <div class="submit-button-container">
           <el-button 
-            style="background-color: #006eff" 
             :disabled="isFormDisabled" 
             class="my-button-primary"
             type="primary" 
@@ -45,6 +35,31 @@
           </el-button>
         </div>
       </el-form>
+
+      <div class="section-title">
+        待完成服务
+      </div>
+      <el-table :data="filteredServices_noncompleted" style="width: 100%" class="service-table">
+        <el-table-column prop="title" label="服务类型"></el-table-column>
+        <el-table-column prop="time" label="预约时间"></el-table-column>
+        <el-table-column prop="content" label="备注"></el-table-column>
+          <!-- 操作列 -->
+          <el-table-column label="操作" width="180" align="center">
+          <template v-slot="scope">
+            <el-button plain type="danger" size="mini" @click=deleteService(scope.row.id)>取消预约</el-button>
+          </template>
+        </el-table-column>
+
+      </el-table>
+
+      <div class="section-title">
+        已完成服务
+      </div>
+      <el-table :data="filteredServices_completed" style="width: 100%" class="service-table">
+        <el-table-column prop="title" label="服务类型"></el-table-column>
+        <el-table-column prop="time" label="预约时间"></el-table-column>
+        <el-table-column prop="content" label="备注"></el-table-column>
+      </el-table>
     </div>
   </div>
 </template>
@@ -76,15 +91,14 @@ export default {
     this.loadServices();
   },
   computed: {
-    filteredServices() {
-      return this.services.map(service => ({
-        title: service.title,
-        time: new Date(service.time).toLocaleString(),
-        content: service.content
-      }));
+    filteredServices_completed() {
+      return this.services.filter(item => item.state == 1);
+    },
+    filteredServices_noncompleted() {
+      return this.services.filter(item => item.state == 0);
     },
     isFormDisabled() {
-      return this.services.length >= 5; // 限制最多申请5个服务
+      return this.services.length >= 20; // 限制最多申请5个服务
     },
   },
   methods: {
@@ -93,9 +107,7 @@ export default {
         console.error("用户ID无效!无法加载服务!");
         return;
       }
-      console.log(this.user.id);
-      //this.$request.get(`/serviceBook/selectByUser/` + this.user.id)
-      this.$request.get(`/serviceBook/selectAll`)
+      this.$request.get(`/serviceBook/selectByUser/` + this.user.id)
         .then(res => {
           this.services = res.data || [];
         })
@@ -103,11 +115,25 @@ export default {
           console.error("加载服务出错:", err);
         });
     },
+    deleteService(id) {   // 单个删除
+      console.log(id);
+      this.$confirm('您确定删除吗？', '确认删除', {type: "warning"}).then(response => {
+        this.$request.delete('/serviceBook/delete/' + id).then(res => {
+          if (res.code === '200') {   // 表示操作成功
+            this.$message.success('操作成功')
+            //this.load(1)
+            this.loadServices()
+          } else {
+            this.$message.error(res.msg)  // 弹出错误的信息
+          }
+        })
+      }).catch(() => {
+      })
+    },
     submitRequest() {
       this.$refs.formRef.validate().then(() => {
-        // 确保 user.id 存在并传递给后端
         this.form.state = 0;
-        this.form.userId = this.user.id; // 确保用户ID传递给后端
+        this.form.user = this.user.id;
         this.$request.post('/serviceBook/add/', this.form)
           .then(res => {
             if (res.code === '200') {
@@ -124,35 +150,100 @@ export default {
       }).catch(err => {
         console.log('验证失败:', err);
       });
-    },
-    deleteService(serviceId) {
-      this.$confirm('您确定删除该服务申请吗？', '确认删除', { type: 'warning' })
-        .then(() => {
-          this.$request.delete(`/serviceBook/delete/${serviceId}`)
-            .then(res => {
-              if (res.code === '200') {
-                this.$message.success('删除成功');
-                this.loadServices();
-              } else {
-                this.$message.error(res.msg);
-              }
-            })
-            .catch(err => {
-              console.error("删除服务出错:", err);
-            });
-        }).catch(err => {
-          console.log('取消删除:', err);
-        });
     }
   }
 }
 </script>
 
 <style scoped>
+.main-content {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f5f8fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  background-color: #006eff;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.card-body {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.service-form {
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.service-table {
+  margin-top: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.el-table th {
+  background-color: #e9f5ff;
+  color: #333;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.el-table td {
+  font-size: 14px;
+}
+
+.el-table .el-table__body tr:hover {
+  background-color: #f5faff;
+}
+
+.submit-button-container {
+  margin-top: 20px;
+  text-align: right;
+}
+
 .my-button-primary {
   background-color: #006eff !important;
-  height: 70rpx;
-  line-height: 70rpx;
-  font-size: 28rpx;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.my-button-primary:hover {
+  background-color: #0056cc !important;
+}
+
+.delete-button {
+  color: #f56c6c; /* 删除按钮的红色 */
+}
+
+.delete-button:hover {
+  color: #ff4d4f;
 }
 </style>
+

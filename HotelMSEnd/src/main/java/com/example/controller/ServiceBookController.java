@@ -3,8 +3,13 @@ package com.example.controller;
 import com.example.common.Result;
 import com.example.entity.ServiceBook;
 import com.example.service.ServiceBookService;
+//import com.example.mapper.ActivitySignMapper;
+import com.example.service.ActivitySignService;
+//import com.example.mapper.ActivityMapper;
+import com.example.service.ActivityService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,13 +23,19 @@ public class ServiceBookController {
 
     @Resource
     private ServiceBookService serviceBookService;
-
+    @Resource
+    private ActivitySignService activitySignService;
+    @Resource
+    private ActivityService activityService;
     /**
      * 新增
      */
     @PostMapping("/add")
     public Result add(@RequestBody ServiceBook notice) {
-        notice.setHotel(1);
+        Integer userid = notice.getUser();
+        Integer act_id = activitySignService.selectActIdByUserId(userid);
+        Integer hotel_id = activityService.selectHotelIdByActivityID(act_id);
+        notice.setHotel(hotel_id);
         serviceBookService.add(notice);
         return Result.success();
     }
@@ -53,6 +64,12 @@ public class ServiceBookController {
     @PutMapping("/update")
     public Result updateById(@RequestBody ServiceBook notice) {
         serviceBookService.updateById(notice);
+        return Result.success();
+    }
+
+    @PutMapping("/updateState/{id}")
+    public Result updateState(@PathVariable Integer id) {
+        serviceBookService.updateState(id);
         return Result.success();
     }
 

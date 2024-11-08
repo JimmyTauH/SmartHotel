@@ -24,6 +24,9 @@ public interface ServiceBookMapper {
     */
     int updateById(ServiceBook notice);
 
+
+    //int updateState(Integer id);
+
     /**
       * 根据ID查询
     */

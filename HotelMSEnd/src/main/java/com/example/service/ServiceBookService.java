@@ -26,7 +26,9 @@ public class ServiceBookService {
     public void add(ServiceBook notice) {
         //notice.setTime(DateUtil.today());
         Account currentUser = TokenUtils.getCurrentUser();
-        notice.setUser(currentUser.getId());
+        Integer user_id = currentUser.getId();
+        notice.setUser(user_id);
+
         //还需要加入酒店信息
         serviceBookMapper.insert(notice);
     }
@@ -53,6 +55,17 @@ public class ServiceBookService {
     public void updateById(ServiceBook notice) {
         serviceBookMapper.updateById(notice);
     }
+
+    /**
+     * 修改状态
+     */
+    public void updateState(Integer id) {
+        ServiceBook service = serviceBookMapper.selectById(id);
+        service.setState(true);
+        serviceBookMapper.updateById(service);
+    }
+
+
 
     /**
      * 根据ID查询

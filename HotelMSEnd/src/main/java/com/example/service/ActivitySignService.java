@@ -40,14 +40,22 @@ public class ActivitySignService {
         activitySignMapper.insert(activitySign);
     }
 
+
+
     public ActivitySign selectByActivityIdAndUserId(Integer actId, Integer userId) {
         return activitySignMapper.selectByActivityIdAndUserId(actId, userId);
     }
+
     public PageInfo<ActivitySign> selectPage(ActivitySign activitySign, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<ActivitySign> list = activitySignMapper.selectAll(activitySign);
         return PageInfo.of(list);
     }
+
+    public Integer selectActIdByUserId(Integer id){
+        return activitySignMapper.selectActIdByUserId(id);
+    }
+
 
     public void deleteById(Integer id) {
         activitySignMapper.deleteById(id);
