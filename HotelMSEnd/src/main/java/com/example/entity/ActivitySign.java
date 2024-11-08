@@ -14,6 +14,8 @@ public class ActivitySign {
     private String start_date;
     private String end_date;
 
+    private Integer activity_number;
+
     public String getActivityName() {
         return activityName;
     }
@@ -76,6 +78,14 @@ public class ActivitySign {
 
     public void setEnd_date(String end_date) {
         this.end_date = end_date;
+    }
+
+    public Integer getActivity_number() {
+        return activity_number;
+    }
+
+    public void setActivity_number(Integer activity_number) {
+        this.activity_number = activity_number;
     }
 
 }

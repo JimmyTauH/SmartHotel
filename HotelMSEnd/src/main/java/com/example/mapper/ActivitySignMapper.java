@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 public interface ActivitySignMapper {
-    @Insert("insert into activity_sign (activity_id, user_id, time,start_date,end_date) VALUES (#{activityId},#{userId},#{time},#{start_date},#{end_date})")
+    @Insert("insert into activity_sign (activity_id, user_id, time,start_date,end_date,activity_number) VALUES (#{activityId},#{userId},#{time},#{start_date},#{end_date},#{activity_number})")
     void insert(ActivitySign activitySign);
 
     @Select("select * from activity_sign where activity_id = #{activityId} and user_id = #{userId}")

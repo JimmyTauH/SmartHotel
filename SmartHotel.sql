@@ -1,17 +1,17 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : hotelms
+ Source Server         : Tencent
  Source Server Type    : MySQL
- Source Server Version : 80035 (8.0.35)
- Source Host           : localhost:3306
- Source Schema         : hotelv2
+ Source Server Version : 80039 (8.0.39-0ubuntu0.22.04.1)
+ Source Host           : 42.194.239.205:3306
+ Source Schema         : hotelms4v2
 
  Target Server Type    : MySQL
- Target Server Version : 80035 (8.0.35)
+ Target Server Version : 80039 (8.0.39-0ubuntu0.22.04.1)
  File Encoding         : 65001
 
- Date: 07/11/2024 16:54:28
+ Date: 08/11/2024 10:32:36
 */
 
 SET NAMES utf8mb4;
@@ -42,7 +42,7 @@ CREATE TABLE `activity`  (
 -- ----------------------------
 INSERT INTO `activity` VALUES (30, '大床房（小冰箱+智能客控）', '20-22平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-6楼', '<h2>全部设施</h2><ul><li><h3>清洁服务</h3><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li><li><h3>洗浴用品</h3><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul>', NULL, NULL, NULL, '150(特价)', 3, 1, 'http://localhost:9091/files/1730864860245-ee08bb96-498d-4cf7-aa5b-3e437813d7f2.png', 12);
 INSERT INTO `activity` VALUES (31, '高级大床房（小冰箱+智能客控）', '\n25平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-5楼', '<h2>全部设施</h2><h3>清洁服务</h3><h2><ul><li><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li></ul></h2><h3>洗浴用品</h3><h2><ul><li><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul></h2>', NULL, NULL, NULL, '200', 3, 0, 'http://localhost:9091/files/1730865051507-82271b9a-d3cb-45fd-aca2-b8288fe397c0.png', 12);
-INSERT INTO `activity` VALUES (32, '高级双床房（小冰箱+智能客控）', '29平方米\n2张单人床1.2米\n加床费用：该房型不可加床\n2-5楼', '<h2>全部设施</h2><h3>清洁服务</h3><h2><ul><li><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li></ul></h2><h3>洗浴用品</h3><h2><ul><li><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul></h2>', NULL, NULL, NULL, '250（特价）', 4, 70, 'http://localhost:9091/files/1730865709540-c6c03219-5b32-4b89-b5ae-ae99283cafc9.png', 12);
+INSERT INTO `activity` VALUES (32, '高级双床房（小冰箱+智能客控）', '29平方米\n2张单人床1.2米\n加床费用：该房型不可加床\n2-5楼', '<h2>全部设施</h2><h3>清洁服务</h3><h2><ul><li><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li></ul></h2><h3>洗浴用品</h3><h2><ul><li><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul></h2>', '2024-11-12', '2024-11-23', '携程', '250（特价）', 4, 92, 'http://localhost:9091/files/1730865709540-c6c03219-5b32-4b89-b5ae-ae99283cafc9.png', 12);
 
 -- ----------------------------
 -- Table structure for activity_sign
@@ -53,16 +53,19 @@ CREATE TABLE `activity_sign`  (
   `activity_id` int NULL DEFAULT NULL COMMENT '竞赛id',
   `user_id` int NULL DEFAULT NULL COMMENT '用户id',
   `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '报名时间',
+  `start_date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `end_date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '竞赛报名表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '竞赛报名表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of activity_sign
 -- ----------------------------
-INSERT INTO `activity_sign` VALUES (1, 1, 14, '2024-06-10 12:59:44');
-INSERT INTO `activity_sign` VALUES (2, 1, 7, '2024-06-10 16:24:08');
-INSERT INTO `activity_sign` VALUES (3, 27, 1, '2024-11-03 22:30:16');
-INSERT INTO `activity_sign` VALUES (5, 29, 7, '2024-11-04 08:10:37');
+INSERT INTO `activity_sign` VALUES (1, 1, 14, '2024-06-10 12:59:44', NULL, NULL);
+INSERT INTO `activity_sign` VALUES (2, 1, 7, '2024-06-10 16:24:08', NULL, NULL);
+INSERT INTO `activity_sign` VALUES (3, 27, 1, '2024-11-03 22:30:16', NULL, NULL);
+INSERT INTO `activity_sign` VALUES (5, 29, 7, '2024-11-04 08:10:37', NULL, NULL);
+INSERT INTO `activity_sign` VALUES (8, 32, 7, '2024-11-07 23:33:57', '2024-11-12', '2024-11-23');
 
 -- ----------------------------
 -- Table structure for admin
@@ -134,7 +137,7 @@ INSERT INTO `blog` VALUES (8, '崇明漫墅美郡民宿', '<p>漫墅----慢生�
 INSERT INTO `blog` VALUES (9, '河泾美居酒店', '<p>上海虹桥漕河泾美居酒店位于上海漕河泾新兴技术开发区和上海虹桥经济技术开发区之间，距离NECC约20分钟车程。<br/>酒店拥有一百余间的智能客房，法式设计尽显浪漫及典雅；配备丰富中西式早餐的自助餐厅, 还设有大堂吧、健身房等设施，满足商旅宾客的各类需求。<br/></p>', '上海虹桥漕河泾美居酒店位于上海漕河泾新兴技术开发区和上海虹桥经济技术开发区之间，距离NECC约20分钟车程。\n酒店拥有一百余间的智能客房，法式设计尽显浪漫及典雅；配备丰富中西式早餐的自助餐厅, 还设有大堂吧、健身房等设施，满足商旅宾客的各类需求。', '上海漕河泾新兴技术开发区和上海虹桥经济技术开发区', 'http://localhost:9091/files/1728616627132-70.jpg', '[\"大床房\",\"双床房\",\"3-4人房\",\"电竞游戏房\",\"浪漫情侣房\",\"温馨亲子房\"]', 7, '2024-10-11', 14, 1, 24);
 INSERT INTO `blog` VALUES (10, '花筑·麦社民宿', '<p style=\"line-height:1.6;\">&nbsp;&nbsp;&nbsp;&nbsp;花筑·上海麦社民宿位于上海国际旅游度假区，距离上海迪士尼正门约3公里，提供民宿至迪士尼接送服务,地铁站约15分钟车程，交通便利；民宿周边景点有奕欧来购物村、上海科技馆、佛罗伦萨小镇。<br/>&nbsp;&nbsp;&nbsp;&nbsp;3层楼，有客厅餐厅及自助厨房，全部是朝南大床房。部分房间提供加床。<br/>&nbsp;&nbsp;&nbsp;&nbsp;这里每间客房都融入了民宿主人的精心设计，民宿坚持客户至上，诚信经营的理念。以亲情化、人性化、更为突出细节化的服务。给每一位入住的客人以家为核心的入住体验。门口沿河有观景台，前后庭院和屋顶花园非常休闲。<br/></p>', '花筑·上海麦社民宿位于上海国际旅游度假区，距离上海迪士尼正门约3公里，提供民宿至迪士尼接送服务,地铁站约15分钟车程，交通便利；民宿周边景点有奕欧来购物村、上海科技馆、佛罗伦萨小镇。\n3层楼，有客厅餐厅及自助厨房，全部是朝南大床房。部分房间提供加床。\n这里每间客房都融入了民宿主人的精心设计，民宿坚持客户至上，诚信经营的理念。以亲情化、人性化、更为突出细节化的服务。给每一位入住的客人以家为核心的入住体验。门口沿河有观景台，前后庭院和屋顶花园非常休闲。', '上海国际旅游度假区', 'http://localhost:9091/files/1728667558874-R5_D.jpg', '[\"大床房\",\"双床房\",\"3-4人房\",\"电竞游戏房\",\"浪漫情侣房\"]', 7, '2024-10-12', 306, 3, 24);
 INSERT INTO `blog` VALUES (11, '轻住·长裕优选酒店', '<p>位于浦建路，近中国农业银行，交通便捷。<br/>宾馆拥有温馨舒适的各类房型，设施齐全，卫生干净。酒店四周环境优雅，各项配套设施齐全，是商旅宾客放松身心理想之地。我们热忱欢迎您的到来！<br/></p><p>预订服务提供方</p><p><img src=\"https://dimg04.c-ctrip.com/images/1mc3p12000dinujg1955A_Z_702_0_Q70.jpg\"/></p><p><img src=\"https://dimg04.c-ctrip.com/images/0zm0e12000c0rbl4aCAC0_Z_702_0_Q70.jpg\"/></p><p><img src=\"https://dimg04.c-ctrip.com/images/0201u12000fjgyz4j47F3_Z_702_0_Q70.jpg\"/></p><p><img src=\"https://dimg04.c-ctrip.com/images/0202y12000c3wj0024A09_Z_702_0_Q70.jpg\"/></p>', '位于浦建路，近中国农业银行，交通便捷。\n宾馆拥有温馨舒适的各类房型，设施齐全，卫生干净。酒店四周环境优雅，各项配套设施齐全，是商旅宾客放松身心理想之地。我们热忱欢迎您的到来！', '111', 'http://localhost:9091/files/1728614772253-1.png', '[\"大床房\"]', 7, '2024-06-10', 41, 1, 24);
-INSERT INTO `blog` VALUES (12, '云和夜泊酒店(上海浦东国际机场店)', '<p>云和夜泊酒店(上海浦东国际机场店)位于浦东新区祝桥秋亭路，距上海迪士尼约18分钟车程， 距上海野生动物园约20分钟车程，距十六号线惠南站约15分钟车程。酒店地理位置优越，并配备大巴、中巴免费接送浦东机场. 迪士尼. 野生动物园. 十六号线惠南站（以上接送均为班车形式）。<br/>酒店客房空间宽敞，设计简约优雅，线条明朗。所有客房均采用栖云系列优质床品、全套精油草本精华洗浴用品供客使用，网络方面配备百兆高速光纤，WIFI全覆盖，致力于为客提供舒适便捷的住宿体验环境，秉承以人为本的服务理念，致力于让您乘兴而来、满意而归！<br/></p><p>预订服务提供方</p>', '云和夜泊酒店(上海浦东国际机场店)位于浦东新区祝桥秋亭路，距上海迪士尼约18分钟车程， 距上海野生动物园约20分钟车程，距十六号线惠南站约15分钟车程。酒店地理位置优越，并配备大巴、中巴免费接送浦东机场. 迪士尼. 野生动物园. 十六号线惠南站（以上接送均为班车形式）。', '上海浦东新区秋亭路128弄', 'http://localhost:9091/files/1730641575979-a57d35a1-0bff-4fda-862a-cf6e98f46593.png', '[\"大床房\"]', 7, '2024-11-03', 238, 1, NULL);
+INSERT INTO `blog` VALUES (12, '云和夜泊酒店(上海浦东国际机场店)', '<p>云和夜泊酒店(上海浦东国际机场店)位于浦东新区祝桥秋亭路，距上海迪士尼约18分钟车程， 距上海野生动物园约20分钟车程，距十六号线惠南站约15分钟车程。酒店地理位置优越，并配备大巴、中巴免费接送浦东机场. 迪士尼. 野生动物园. 十六号线惠南站（以上接送均为班车形式）。<br/>酒店客房空间宽敞，设计简约优雅，线条明朗。所有客房均采用栖云系列优质床品、全套精油草本精华洗浴用品供客使用，网络方面配备百兆高速光纤，WIFI全覆盖，致力于为客提供舒适便捷的住宿体验环境，秉承以人为本的服务理念，致力于让您乘兴而来、满意而归！<br/></p><p>预订服务提供方</p>', '云和夜泊酒店(上海浦东国际机场店)位于浦东新区祝桥秋亭路，距上海迪士尼约18分钟车程， 距上海野生动物园约20分钟车程，距十六号线惠南站约15分钟车程。酒店地理位置优越，并配备大巴、中巴免费接送浦东机场. 迪士尼. 野生动物园. 十六号线惠南站（以上接送均为班车形式）。', '上海浦东新区秋亭路128弄', 'http://localhost:9091/files/1730641575979-a57d35a1-0bff-4fda-862a-cf6e98f46593.png', '[\"大床房\"]', 7, '2024-11-03', 244, 1, NULL);
 
 -- ----------------------------
 -- Table structure for blog_encrypt
@@ -291,6 +294,24 @@ CREATE TABLE `concern`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for faultreport
+-- ----------------------------
+DROP TABLE IF EXISTS `faultreport`;
+CREATE TABLE `faultreport`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `reporter_id` int NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `report_time` datetime NULL DEFAULT NULL,
+  `state` tinyint(1) NULL DEFAULT NULL,
+  `device_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of faultreport
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for homepage
 -- ----------------------------
 DROP TABLE IF EXISTS `homepage`;
@@ -426,16 +447,19 @@ CREATE TABLE `notice`  (
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '内容',
   `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '创建时间',
   `user` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '创建人',
+  `hotel` int NULL DEFAULT NULL,
+  `room` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `state` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '公告信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of notice
 -- ----------------------------
-INSERT INTO `notice` VALUES (1, '设施维护通知', '尊敬的宾客，酒店将在2024年10月15日至17日期间对部分公共设施进行维护。期间可能会有短暂影响，敬请谅解。', '2023-09-05', 'admin');
-INSERT INTO `notice` VALUES (2, '停车服务温馨提示', '尊敬的宾客，酒店提供有限停车位，先到先得。请您在抵达前与酒店确认车位情况，感谢您的配合。', '2024-06-09', 'admin');
-INSERT INTO `notice` VALUES (3, '早餐服务调整通知', '尊敬的宾客，为优化服务体验，酒店早餐时间调整为每天6:30至10:00。早餐供应地点为一楼餐厅，感谢您的理解与支持。', '2024-06-09', 'admin');
-INSERT INTO `notice` VALUES (4, '入住时间及退房时间', '尊敬的宾客，酒店的入住时间为下午14:00，退房时间为中午12:00。如需延迟退房，请提前告知前台，具体费用按酒店政策执行。', '2024-06-10', 'admin');
+INSERT INTO `notice` VALUES (1, '设施维护通知', '尊敬的宾客，酒店将在2024年10月15日至17日期间对部分公共设施进行维护。期间可能会有短暂影响，敬请谅解。', '2023-09-05', 'admin', NULL, NULL, NULL);
+INSERT INTO `notice` VALUES (2, '停车服务温馨提示', '尊敬的宾客，酒店提供有限停车位，先到先得。请您在抵达前与酒店确认车位情况，感谢您的配合。', '2024-06-09', 'admin', NULL, NULL, NULL);
+INSERT INTO `notice` VALUES (3, '早餐服务调整通知', '尊敬的宾客，为优化服务体验，酒店早餐时间调整为每天6:30至10:00。早餐供应地点为一楼餐厅，感谢您的理解与支持。', '2024-06-09', 'admin', NULL, NULL, NULL);
+INSERT INTO `notice` VALUES (4, '入住时间及退房时间', '尊敬的宾客，酒店的入住时间为下午14:00，退房时间为中午12:00。如需延迟退房，请提前告知前台，具体费用按酒店政策执行。', '2024-06-10', 'admin', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for records

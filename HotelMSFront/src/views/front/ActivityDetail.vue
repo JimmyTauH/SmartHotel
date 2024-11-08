@@ -46,6 +46,11 @@
             </el-button>
             <el-button type="primary" v-else key="预订该房" @click="sign">预订该房</el-button>
           </div>
+          <div
+            style="font-weight: bold; font-size: 24px;margin-bottom: 20px;padding-left: 10px;border-left: 5px solid #409EFF">
+            房间号:
+          </div>
+
         </div>
       </div>
     </div>
@@ -93,7 +98,7 @@
       <el-dialog title="订房信息" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
         <el-form label-width="100px" style="padding-right: 50px" :model="form" :rules="rules" ref="formRef">
 
-          <div style="font-weight: bold;font-size: 15px;margin-bottom: 10px">  房型名：{{ activity.name }}</div>
+          <div style="font-weight: bold;font-size: 15px;margin-bottom: 10px"> 房型名：{{ activity.name }}</div>
           <el-form-item prop="applystart" label="房间入住时间">
             <el-date-picker v-model="form.applystart" type="date" placeholder="请选择房间入住时间" value-format="yyyy-MM-dd"
               format="yyyy-MM-dd" />
@@ -232,16 +237,16 @@ export default {
       })
     },
     sign() {
-      this.$request.post("/activitySign/add", { 
+      this.$request.post("/activitySign/add", {
         activityId: this.activityId,
         start_date: this.form.applystart,
         end_date: this.form.applyend
-       }).then(res => {
+      }).then(res => {
         if (res.code === '200') {
           this.$message.success("报名成功")
           this.load()
-        } 
-        else{ 
+        }
+        else {
           this.$message.error(res.msg)
         }
       })
