@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.ActivitySignMapper">
     <sql id="Base_Column_List">
-        id,activity_id,user_id,time,start_date,end_date
+        id,activity_id,user_id,time,start_date,end_date,activity_number
     </sql>
     <insert id="add">
         insert into activity_sigh
@@ -14,6 +14,7 @@
             <if test="time != null"> time,</if>
             <if test="start_date != null"> start_date,</if>
             <if test="end_date != null"> end_date,</if>
+            <if test="activity_number != null"> activity_number,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="activity_id != null"> #{activity_id},</if>
@@ -21,6 +22,7 @@
             <if test="time != null"> #{time},</if>
             <if test="start_date != null"> #{start_date},</if>
             <if test="end_date != null"> #{end_date},</if>
+            <if test="activity_number != null"> #{activity_number},</if>
         </trim>
     </insert>
 
