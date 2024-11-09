@@ -35,7 +35,7 @@
       <!--  侧边栏  -->
       <div class="manager-main-left">
         <el-menu :default-openeds="['info', 'user']" router style="border: none" :default-active="$route.path">
-          <el-menu-item index="/home" style="margin-top: 30px;">
+          <el-menu-item index="/recep/home" style="margin-top: 30px;">
             <i class="el-icon-s-home"></i>
             <span slot="title">系统首页</span>
           </el-menu-item>
@@ -53,7 +53,7 @@
             <template slot="title">
               <i class="el-icon-menu"></i><span>客人信息管理</span>
             </template>
-            <el-menu-item index="/user">客人信息</el-menu-item>
+            <el-menu-item index="/recep/home">客人信息</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>

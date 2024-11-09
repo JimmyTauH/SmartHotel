@@ -1,17 +1,17 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : hotelms
+ Source Server         : Tencent
  Source Server Type    : MySQL
- Source Server Version : 80035 (8.0.35)
- Source Host           : localhost:3306
- Source Schema         : smarthotel
+ Source Server Version : 80039 (8.0.39-0ubuntu0.22.04.1)
+ Source Host           : 42.194.239.205:3306
+ Source Schema         : hotelms4v2
 
  Target Server Type    : MySQL
- Target Server Version : 80035 (8.0.35)
+ Target Server Version : 80039 (8.0.39-0ubuntu0.22.04.1)
  File Encoding         : 65001
 
- Date: 08/11/2024 22:17:43
+ Date: 09/11/2024 17:05:20
 */
 
 SET NAMES utf8mb4;
@@ -40,7 +40,7 @@ CREATE TABLE `activity`  (
 -- ----------------------------
 -- Records of activity
 -- ----------------------------
-INSERT INTO `activity` VALUES (30, '大床房（小冰箱+智能客控）', '20-22平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-6楼', '<h2>全部设施</h2><ul><li><h3>清洁服务</h3><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li><li><h3>洗浴用品</h3><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul>', NULL, NULL, NULL, '150(特价)', 3, 1, 'http://localhost:9091/files/1730864860245-ee08bb96-498d-4cf7-aa5b-3e437813d7f2.png', 12);
+INSERT INTO `activity` VALUES (30, '大床房（小冰箱+智能客控）', '20-22平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-6楼', '<h2>全部设施</h2><ul><li><h3>清洁服务</h3><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li><li><h3>洗浴用品</h3><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul>', NULL, NULL, NULL, '150（特价）', 3, 1, 'http://localhost:9091/files/1730864860245-ee08bb96-498d-4cf7-aa5b-3e437813d7f2.png', 12);
 INSERT INTO `activity` VALUES (31, '高级大床房（小冰箱+智能客控）', '\n25平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-5楼', '<h2>全部设施</h2><h3>清洁服务</h3><h2><ul><li><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li></ul></h2><h3>洗浴用品</h3><h2><ul><li><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul></h2>', NULL, NULL, NULL, '200', 3, 0, 'http://localhost:9091/files/1730865051507-82271b9a-d3cb-45fd-aca2-b8288fe397c0.png', 12);
 INSERT INTO `activity` VALUES (32, '高级双床房（小冰箱+智能客控）', '29平方米\n2张单人床1.2米\n加床费用：该房型不可加床\n2-5楼', '<h2>全部设施</h2><h3>清洁服务</h3><h2><ul><li><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li></ul></h2><h3>洗浴用品</h3><h2><ul><li><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul></h2>', '2024-11-12', '2024-11-23', '携程', '250（特价）', 4, 92, 'http://localhost:9091/files/1730865709540-c6c03219-5b32-4b89-b5ae-ae99283cafc9.png', 12);
 
@@ -56,7 +56,7 @@ CREATE TABLE `activity_sign`  (
   `start_date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `end_date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '竞赛报名表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '竞赛报名表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of activity_sign
@@ -66,6 +66,8 @@ INSERT INTO `activity_sign` VALUES (2, 1, 7, '2024-06-10 16:24:08', NULL, NULL);
 INSERT INTO `activity_sign` VALUES (3, 27, 1, '2024-11-03 22:30:16', NULL, NULL);
 INSERT INTO `activity_sign` VALUES (5, 29, 7, '2024-11-04 08:10:37', NULL, NULL);
 INSERT INTO `activity_sign` VALUES (8, 32, 7, '2024-11-07 23:33:57', '2024-11-12', '2024-11-23');
+INSERT INTO `activity_sign` VALUES (9, 30, 7, '2024-11-06 23:33:57', '2024-11-12', '2024-11-23');
+INSERT INTO `activity_sign` VALUES (10, 30, 7, '2024-11-05 23:33:57', '2024-11-12', '2024-11-23');
 
 -- ----------------------------
 -- Table structure for admin
@@ -212,6 +214,44 @@ CREATE TABLE `certification`  (
 INSERT INTO `certification` VALUES (1, 7, 'sanqi', 'http://localhost:9091/files/1718004835864-OIP (2).jpg', '13002859313', '2021302111111', 'http://localhost:9091/files/1718004845178-QQ图片20230503000208.jpg', 'http://localhost:9091/files/1718004848663-QQ图片20230503000208.jpg', '武汉大学 计算机学院', '审核通过', NULL);
 
 -- ----------------------------
+-- Table structure for check_in
+-- ----------------------------
+DROP TABLE IF EXISTS `check_in`;
+CREATE TABLE `check_in`  (
+  `id` int NOT NULL,
+  `room_id` int NULL DEFAULT NULL,
+  `intime` datetime NULL DEFAULT NULL,
+  `guest_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `gender` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `guest_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `guest_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of check_in
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for check_out
+-- ----------------------------
+DROP TABLE IF EXISTS `check_out`;
+CREATE TABLE `check_out`  (
+  `id` int NOT NULL,
+  `room_id` int NULL DEFAULT NULL,
+  `outime` datetime NULL DEFAULT NULL,
+  `guest_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `gender` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `guest_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `guest_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of check_out
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for circulars
 -- ----------------------------
 DROP TABLE IF EXISTS `circulars`;
@@ -292,6 +332,24 @@ CREATE TABLE `concern`  (
 
 -- ----------------------------
 -- Records of concern
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for fault_report
+-- ----------------------------
+DROP TABLE IF EXISTS `fault_report`;
+CREATE TABLE `fault_report`  (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `device_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+  `logistics_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `report_time` datetime NOT NULL,
+  `image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of fault_report
 -- ----------------------------
 
 -- ----------------------------
@@ -548,6 +606,22 @@ INSERT INTO `records` VALUES (81, 3, '2024-04-23 00:38:29', 100, '开通会员�
 INSERT INTO `records` VALUES (82, 14, '2024-06-08 11:18:39', 10, '签到');
 
 -- ----------------------------
+-- Table structure for room
+-- ----------------------------
+DROP TABLE IF EXISTS `room`;
+CREATE TABLE `room`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `activity_id` int NOT NULL,
+  `state` int(10) UNSIGNED ZEROFILL NULL DEFAULT 0000000000 COMMENT '0 空闲\r\n1 已预定\r\n2 已入住\r\n3 打扫整理中',
+  `room_num` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of room
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for service
 -- ----------------------------
 DROP TABLE IF EXISTS `service`;
@@ -561,7 +635,7 @@ CREATE TABLE `service`  (
   `room` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `state` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '公告信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '公告信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of service
@@ -573,6 +647,7 @@ INSERT INTO `service` VALUES (4, '入住时间及退房时间', '尊敬的宾客
 INSERT INTO `service` VALUES (13, '房间清洁', '111', '2024-09-30T16:00:00.000Z', 9, 7, '213', 0);
 INSERT INTO `service` VALUES (14, '早餐服务', '222111', '2024-11-03T18:29:46.000Z', 9, 1, '401', 0);
 INSERT INTO `service` VALUES (15, '早餐服务', 'beizhu1', '2024-11-07T08:38:47.000Z', 9, 1, NULL, 1);
+INSERT INTO `service` VALUES (16, '早餐服务', '2', '2024-11-08T16:00:00.000Z', 7, 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sign_in
@@ -646,6 +721,6 @@ CREATE TABLE `user_server`  (
 -- ----------------------------
 -- Records of user_server
 -- ----------------------------
-INSERT INTO `user_server` VALUES (1, 'server1', '123456', 'server1', 'http://localhost:9091/files/1731075032774-1.jpg', 'SERVER', NULL, '19382891111', '2222', NULL, 3, 0);
+INSERT INTO `user_server` VALUES (1, 'server1', '123456', 'server1', NULL, 'SERVER', NULL, NULL, NULL, NULL, 1, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
