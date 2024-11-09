@@ -20,7 +20,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/week_report")
-public class ReportController {
+public class WeekReportController {
 
     @Resource
     private ReportService reportService;
