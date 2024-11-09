@@ -11,7 +11,7 @@
  Target Server Version : 80039 (8.0.39-0ubuntu0.22.04.1)
  File Encoding         : 65001
 
- Date: 09/11/2024 17:05:20
+ Date: 09/11/2024 21:09:32
 */
 
 SET NAMES utf8mb4;
@@ -231,6 +231,9 @@ CREATE TABLE `check_in`  (
 -- ----------------------------
 -- Records of check_in
 -- ----------------------------
+INSERT INTO `check_in` VALUES (1, 101, '2024-11-04 19:55:52', 'abaaba', '男', '441900', '10086');
+INSERT INTO `check_in` VALUES (2, 102, '2024-11-05 19:58:12', 'cdcdcd', '女', '441900', '10086');
+INSERT INTO `check_in` VALUES (3, 103, '2024-11-06 19:58:45', 'efef', '男', '441900', '10086');
 
 -- ----------------------------
 -- Table structure for check_out
@@ -239,7 +242,7 @@ DROP TABLE IF EXISTS `check_out`;
 CREATE TABLE `check_out`  (
   `id` int NOT NULL,
   `room_id` int NULL DEFAULT NULL,
-  `outime` datetime NULL DEFAULT NULL,
+  `outtime` datetime NULL DEFAULT NULL,
   `guest_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `gender` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `guest_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
@@ -250,6 +253,9 @@ CREATE TABLE `check_out`  (
 -- ----------------------------
 -- Records of check_out
 -- ----------------------------
+INSERT INTO `check_out` VALUES (1, 101, '2024-11-05 20:00:01', 'abaaba', '男', '441900', '10086');
+INSERT INTO `check_out` VALUES (2, 102, '2024-11-06 20:00:42', 'cdcdcd', '女', '441900', '10086');
+INSERT INTO `check_out` VALUES (3, 103, '2024-11-07 20:01:14', 'efef', '男', '441900', '10086');
 
 -- ----------------------------
 -- Table structure for circulars
@@ -340,17 +346,18 @@ CREATE TABLE `concern`  (
 DROP TABLE IF EXISTS `fault_report`;
 CREATE TABLE `fault_report`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `device_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `device_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
   `logistics_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `report_time` datetime NOT NULL,
+  `report_time` timestamp NULL DEFAULT NULL,
   `image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of fault_report
 -- ----------------------------
+INSERT INTO `fault_report` VALUES (1, 'Device A', '设备无法启动', '123456', '2024-11-09 15:00:00', '/uploads/images/device_a_fault.png');
 
 -- ----------------------------
 -- Table structure for faultreport
@@ -615,11 +622,14 @@ CREATE TABLE `room`  (
   `state` int(10) UNSIGNED ZEROFILL NULL DEFAULT 0000000000 COMMENT '0 空闲\r\n1 已预定\r\n2 已入住\r\n3 打扫整理中',
   `room_num` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of room
 -- ----------------------------
+INSERT INTO `room` VALUES (101, 30, 0000000000, '101');
+INSERT INTO `room` VALUES (102, 31, 0000000000, '102');
+INSERT INTO `room` VALUES (103, 32, 0000000000, '103');
 
 -- ----------------------------
 -- Table structure for service

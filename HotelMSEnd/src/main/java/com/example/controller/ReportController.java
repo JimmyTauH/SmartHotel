@@ -3,6 +3,8 @@ package com.example.controller;
 import com.example.dto.WeeklyReportDTO;
 import com.example.dto.DailyReportDTO;
 import com.example.dto.RoomTypeReportDTO;
+import com.example.dto.WeeklyCheckinCheckoutDTO;
+import com.example.dto.DailyCheckinCheckoutDTO;
 import com.example.service.ReportService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +29,6 @@ public class ReportController {
     public Map<String, Object> getWeeklyReservationCount(
             @RequestParam("startDate") String startDate,
             @RequestParam("endDate") String endDate) {
-
-
 
         Map<String, Object> result = new HashMap<>();
 
@@ -66,4 +66,40 @@ public class ReportController {
         }
         return result;
     }
+
+    @GetMapping("/checkinout_week")
+    public Map<String, Object> getWeeklyCheckinCheckoutCount(
+            @RequestParam("startDate") String startDate,
+            @RequestParam("endDate") String endDate) {
+
+        Map<String, Object> result = new HashMap<>();
+
+        // 获取一周的总入住量
+        WeeklyCheckinCheckoutDTO weeklySummary = reportService.getWeeklyCheckinCheckoutSummary(startDate, endDate);
+        if (weeklySummary == null) {
+            weeklySummary = new WeeklyCheckinCheckoutDTO();  // 使用默认值
+        }
+
+        // 获取每天的入住和退房人次
+        List<DailyCheckinCheckoutDTO> dailySummaries = reportService.getDailyCheckinCheckoutSummary(startDate, endDate);
+        if (dailySummaries == null) {
+            dailySummaries = Collections.emptyList();
+        }
+
+        // 将所有结果汇总为一个 Map 以返回给前端
+        result.put("weeklySummary", weeklySummary);
+        result.put("dailySummaries", dailySummaries);
+
+        // 使用 ObjectMapper 序列化为 JSON 测试
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonResult = objectMapper.writeValueAsString(result);
+            System.out.println("序列化后的 JSON 数据:" + jsonResult);  // 打印序列化后的 JSON 数据
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("序列化失败：" + e.getMessage());
+        }
+        return result;
+    }
 }
+

@@ -22,14 +22,21 @@
 
     <!-- 显示总预定量和总预定金额 -->
     <el-row style="text-align: center; font-size: 18px; margin-top: 20px;">
-      <el-col :span="12">本周总预定量: <strong>{{ summary.totalReservations }}</strong> 条</el-col>
-      <el-col :span="12">本周总预定金额: <strong>{{ summary.totalAmount }}</strong> 元</el-col>
+      <el-col :span="8">本周总预定量: <strong>{{ summary.totalReservations }}</strong> 条</el-col>
+      <el-col :span="8">本周总预定金额: <strong>{{ summary.totalAmount }}</strong> 元</el-col>
+      <el-col :span="8">本周总入住量: <strong>{{ checkinoutSummary.totalCheckins }}</strong> 人次</el-col>
     </el-row>
 
     <!-- 折线图：每天的预定量和金额 -->
     <div style="width: 80%; margin: 0 auto; margin-top: 30px;">
       <h3 style="text-align: center">每天的预定量和金额</h3>
       <div ref="lineChart" style="height: 400px;"></div>
+    </div>
+
+    <!-- 折线图：每天的入住和退房人次 -->
+    <div style="width: 80%; margin: 0 auto; margin-top: 30px;">
+      <h3 style="text-align: center">每天的入住和退房人次</h3>
+      <div ref="checkinoutChart" style="height: 400px;"></div>
     </div>
 
     <!-- 饼图：按房型的一周总预定量和总预定金额 -->
@@ -54,8 +61,12 @@ export default {
         totalReservations: 0,
         totalAmount: 0,
       },
+      checkinoutSummary: {
+        totalCheckins: 0,
+      },
       dailyData: [],
       roomTypeData: [],
+      checkinoutData: [],
     };
   },
   created() {
@@ -88,32 +99,38 @@ export default {
 
       try {
         this.$message.info(`开始获取数据：从 ${startDate} 到 ${endDate}`);
-        
-        const response = await this.$request.get('/week_report/activity_sign_week', {
+
+        // 获取预定数据
+        const reservationResponse = await this.$request.get('/week_report/activity_sign_week', {
             params: { startDate, endDate },
         });
+        const reservationData = reservationResponse || {};
+        this.summary = reservationData.weeklySummary || { totalReservations: 0, totalAmount: 0 };
+        this.dailyData = reservationData.dailySummaries || [];
+        this.roomTypeData = reservationData.roomTypeSummaries || [];
 
-        const data = response || {};
-        this.summary = data.weeklySummary || { totalReservations: 0, totalAmount: 0 };
-        this.dailyData = data.dailySummaries || [];
-        this.roomTypeData = data.roomTypeSummaries || [];
-
-        console.log("Daily Data:", this.dailyData);
-        console.log("Room Type Data:", this.roomTypeData);
+        // 获取入住退房数据
+        const checkinoutResponse = await this.$request.get('/week_report/checkinout_week', {
+            params: { startDate, endDate },
+        });
+        const checkinoutData = checkinoutResponse || {};
+        this.checkinoutSummary = checkinoutData.weeklySummary || { totalCheckins: 0 };
+        this.checkinoutData = checkinoutData.dailySummaries || [];
 
         this.$message.success("数据加载成功！");
         this.renderLineChart();
         this.renderPieChart();
+        this.renderCheckinoutChart();
       } catch (error) {
-          this.$message.error(`数据加载失败：${error.message || "未知错误"}`);
-          console.error("请求失败:", error);
+        this.$message.error(`数据加载失败：${error.message || "未知错误"}`);
+        console.error("请求失败:", error);
 
-          this.summary = { totalReservations: 0, totalAmount: 0 };
-          this.dailyData = [];
-          this.roomTypeData = [];
+        this.summary = { totalReservations: 0, totalAmount: 0 };
+        this.dailyData = [];
+        this.roomTypeData = [];
+        this.checkinoutSummary = { totalCheckins: 0 };
+        this.checkinoutData = [];
       }
-
-
     },
     formatDate(date) {
       const year = date.getFullYear();
@@ -178,6 +195,27 @@ export default {
       };
 
       pieChart.setOption(option);
+    },
+    renderCheckinoutChart() {
+      const checkinoutChart = echarts.init(this.$refs.checkinoutChart);
+
+      const dates = this.checkinoutData.map(item => item.date);
+      const dailyCheckins = this.checkinoutData.map(item => item.checkins);
+      const dailyCheckouts = this.checkinoutData.map(item => item.checkouts);
+
+      const option = {
+        title: { text: '每天的入住和退房人次', left: 'center' },
+        tooltip: { trigger: 'axis' },
+        legend: { data: ['入住人次', '退房人次'], bottom: 10 },
+        xAxis: { type: 'category', data: dates },
+        yAxis: { type: 'value', name: '人次' },
+        series: [
+          { name: '入住人次', type: 'line', data: dailyCheckins },
+          { name: '退房人次', type: 'line', data: dailyCheckouts },
+        ]
+      };
+
+      checkinoutChart.setOption(option);
     }
   }
 };
