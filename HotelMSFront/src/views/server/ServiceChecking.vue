@@ -59,10 +59,10 @@ export default {
   },
   computed: {
     filteredServices_noncompleted() {
-      return this.services.filter(item => item.state == 0);
+      return this.services.filter(item => item.state == 0 && item.title !== "房间清洁");
     },
     filteredServices_completed() {
-      return this.services.filter(item => item.state == 1);
+      return this.services.filter(item => item.state == 1 && item.title !== "房间清洁");
     },
   },
   methods: {

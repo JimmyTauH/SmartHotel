@@ -18,7 +18,17 @@
             ></el-option>
           </el-select>
         </el-form-item>
-
+        <!-- 选择房间号 -->
+        <el-form-item label="选择房间号" prop="room" required>
+          <el-select v-model="form.room" placeholder="选择房间号">
+            <el-option
+              v-for="room in roomOptions"
+              :key="room.number"
+              :label="room.number"
+              :value="room.number"
+            ></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="预约服务时间" prop="time" required>
           <el-date-picker v-model="form.time" type="datetime" placeholder="选择预约时间"></el-date-picker>
         </el-form-item>
@@ -81,8 +91,15 @@ export default {
         { label: '早餐服务', value: "早餐服务" },
         { label: '接送服务', value: "接送服务" },
       ],
+      roomOptions: [
+            { number: '101' },
+            { number: '102' },
+            { number: '103' },
+            { number: '104' },
+      ],
       rules: {
         title: [{ required: true, message: '请选择服务类型', trigger: 'change' }],
+        room: [{ required: true, message: '请选择房间号', trigger: 'change' }],
         time: [{ required: true, message: '请选择预约时间', trigger: 'change' }],
       }
     }
