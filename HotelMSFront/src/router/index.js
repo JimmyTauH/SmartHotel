@@ -56,6 +56,7 @@ const routes = [
       { path: 'editHomePage', name: 'EditHomePage', meta: { name: '编辑主页' }, component: () => import('../views/front/EditHomePage.vue') },
       { path: 'exitMemberWelfare', name: 'ExitMemberWelfare', meta: { name: '编辑会员福利' }, component: () => import('../views/front/ExitMemberWelfare.vue') },
       { path: 'serviceBooking', name: 'ServiceBooking', meta: { name: '服务预约申请' }, component: () => import('../views/front/ServiceBooking.vue') },
+      { path: 'report', name: 'Report', meta: { name: '设备报修' }, component: () => import('../views/front/Report.vue') },
     ]
   },
   { path: '/login', name: 'Login', meta: { name: '登录' }, component: () => import('../views/Login.vue') },
