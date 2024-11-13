@@ -56,7 +56,7 @@ const routes = [
       { path: 'editHomePage', name: 'EditHomePage', meta: { name: '编辑主页' }, component: () => import('../views/front/EditHomePage.vue') },
       { path: 'exitMemberWelfare', name: 'ExitMemberWelfare', meta: { name: '编辑会员福利' }, component: () => import('../views/front/ExitMemberWelfare.vue') },
       { path: 'serviceBooking', name: 'ServiceBooking', meta: { name: '服务预约申请' }, component: () => import('../views/front/ServiceBooking.vue') },
-      { path: 'report', name: 'Report', meta: { name: '设备报修' }, component: () => import('../views/front/Report.vue') },
+      { path: 'repair', name: 'Repair', meta: { name: '设备报修' }, component: () => import('../views/front/Repair.vue') },
     ]
   },
   { path: '/login', name: 'Login', meta: { name: '登录' }, component: () => import('../views/Login.vue') },
@@ -81,7 +81,7 @@ const routes = [
         { path: 'home', name: 'Home', meta: { name: '后勤首页' }, component: () => import('../views/server/Home.vue') },
         { path: 'serverPerson', name: 'ServerPerson', meta: { name: '个人信息' }, component: () => import('../views/server/ServerPerson.vue') },
         { path: 'work', name: 'work', meta: { name: '顾客预约服务' }, component: () => import('../views/server/ServiceChecking.vue') },
-        { path: 'report', name: 'report', meta: { name: '报告设施状态' }, component: () => import('../views/server/Report.vue') },
+        { path: 'repair', name: 'repair', meta: { name: '设备报修' }, component: () => import('../views/server/Repair.vue') },
         { path: 'logging', name: 'logging', meta: { name: '打扫日志' }, component: () => import('../views/server/Logging.vue') },
         { path: 'serverPerson', name: 'serverPerson', meta: { name: '主页' }, component: () => import('../views/server/ServerPerson.vue') },
   

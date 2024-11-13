@@ -17,7 +17,7 @@
 <!--						<el-menu-item index="/front/signIn">签到</el-menu-item>-->
 						<el-menu-item index="/front/Certification">会员认证</el-menu-item>
             <el-menu-item index = "/front/ServiceBooking">服务预约</el-menu-item>
-            <el-menu-item index = "/front/Report">设备报修</el-menu-item>
+            <el-menu-item index = "/front/Repair">设备报修</el-menu-item>
 						<el-menu-item index="/front/Circulars">
               系统通知
               <div class="notification-bell">

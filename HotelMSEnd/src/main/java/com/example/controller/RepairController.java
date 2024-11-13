@@ -1,10 +1,10 @@
 package com.example.controller;
 
 import com.example.common.Result;
-import com.example.entity.ServiceBook;
+import com.example.entity.Repair;
 import com.example.service.ActivityService;
 import com.example.service.ActivitySignService;
-import com.example.service.ServiceBookService;
+import com.example.service.RepairService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class RepairController {
 
     @Resource
-    private ServiceBookService serviceBookService;
+    private RepairService repairService;
     @Resource
     private ActivitySignService activitySignService;
     @Resource
@@ -28,12 +28,12 @@ public class RepairController {
      * 新增
      */
     @PostMapping("/add")
-    public Result add(@RequestBody ServiceBook notice) {
-        Integer userid = notice.getUser();
+    public Result add(@RequestBody Repair repair) {
+        Integer userid = repair.getUser();
         Integer act_id = activitySignService.selectActIdByUserId(userid);
         Integer hotel_id = activityService.selectHotelIdByActivityID(act_id);
-        notice.setHotel(hotel_id);
-        serviceBookService.add(notice);
+        repair.setHotel(hotel_id);
+        repairService.add(repair);
         return Result.success();
     }
 
@@ -42,7 +42,7 @@ public class RepairController {
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
-        serviceBookService.deleteById(id);
+        repairService.deleteById(id);
         return Result.success();
     }
 
@@ -51,7 +51,7 @@ public class RepairController {
      */
     @DeleteMapping("/delete/batch")
     public Result deleteBatch(@RequestBody List<Integer> ids) {
-        serviceBookService.deleteBatch(ids);
+        repairService.deleteBatch(ids);
         return Result.success();
     }
 
@@ -59,14 +59,14 @@ public class RepairController {
      * 修改
      */
     @PutMapping("/update")
-    public Result updateById(@RequestBody ServiceBook notice) {
-        serviceBookService.updateById(notice);
+    public Result updateById(@RequestBody Repair repair) {
+        repairService.updateById(repair);
         return Result.success();
     }
 
     @PutMapping("/updateState/{id}")
     public Result updateState(@PathVariable Integer id) {
-        serviceBookService.updateState(id);
+        repairService.updateState(id);
         return Result.success();
     }
 
@@ -75,8 +75,8 @@ public class RepairController {
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {
-        ServiceBook notice = serviceBookService.selectById(id);
-        return Result.success(notice);
+        Repair repair = repairService.selectById(id);
+        return Result.success(repair);
     }
 
     /**
@@ -84,7 +84,7 @@ public class RepairController {
      */
     @GetMapping("/selectByUser/{userid}")
     public Result selectByUser(@PathVariable Integer userid) {
-        List<ServiceBook> list = serviceBookService.selectByUser(userid);
+        List<Repair> list = repairService.selectByUser(userid);
         return Result.success(list);
     }
 
@@ -94,7 +94,7 @@ public class RepairController {
      */
     @GetMapping("/selectByHotel/{hotel_id}")
     public Result selectByHotel(@PathVariable Integer hotel_id) {
-        List<ServiceBook> list = serviceBookService.selectByHotel(hotel_id);
+        List<Repair> list = repairService.selectByHotel(hotel_id);
         return Result.success(list);
     }
 
@@ -102,8 +102,8 @@ public class RepairController {
      * 查询所有
      */
     @GetMapping("/selectAll")
-    public Result selectAll(ServiceBook notice) {
-        List<ServiceBook> list = serviceBookService.selectAll(notice);
+    public Result selectAll(Repair repair) {
+        List<Repair> list = repairService.selectAll(repair);
         return Result.success(list);
     }
 
@@ -111,10 +111,10 @@ public class RepairController {
      * 分页查询
      */
     @GetMapping("/selectPage")
-    public Result selectPage(ServiceBook notice,
+    public Result selectPage(Repair repair,
                              @RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageInfo<ServiceBook> page = serviceBookService.selectPage(notice, pageNum, pageSize);
+        PageInfo<Repair> page = repairService.selectPage(repair, pageNum, pageSize);
         return Result.success(page);
     }
 

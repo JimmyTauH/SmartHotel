@@ -8,21 +8,21 @@
         设备报修
       </div>
       
-      <el-form :model="form" ref="formRef" label-width="150px" label-align="right" :rules="rules" class="report-form">
-        <el-form-item label="房间号" prop="room" required>
+      <el-form :model="form" ref="formRef" label-width="150px" label-align="right" :rules="rules" class="repair-form">
+        <el-form-item label="房间号" prop="room">
           <el-input type="textarea" v-model="form.room" rows=1 placeholder="请输入房间号"></el-input>
         </el-form-item>
-        <el-form-item label="故障项目" prop="title" required>
+        <el-form-item label="故障项目" prop="title">
           <el-select v-model="form.title" placeholder="选择故障项目">
             <el-option
-              v-for="option in reportOptions"
+              v-for="option in repairOptions"
               :key="option.value"
               :label="option.label"
               :value="option.value"
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="故障描述" prop="content" required>
+        <el-form-item label="故障描述" prop="content">
           <el-input type="textarea" v-model="form.content" placeholder="请输入故障描述"></el-input>
         </el-form-item>
         
@@ -49,7 +49,7 @@
       <div class="section-title">
         待处理故障
       </div>
-      <el-table :data="filteredReports_noncompleted" style="width: 100%" class="service-table">
+      <el-table :data="filteredrepairs_noncompleted" style="width: 100%" class="service-table">
         <el-table-column prop="title" label="故障项目"></el-table-column>
         <el-table-column prop="content" label="描述"></el-table-column>
       </el-table>
@@ -59,7 +59,7 @@
 
 <script>
 export default {
-  name: "Report",
+  name: "repair",
   data() {
     return {
       user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
@@ -68,8 +68,8 @@ export default {
         title: '',
         content: ''
       },
-      reports: [],
-      reportOptions: [
+      repairs: [],
+      repairOptions: [
         { label: '水', value: "水" },
         { label: '电', value: "电" },
         { label: '木', value: "木" },
@@ -88,41 +88,41 @@ export default {
     }
   },
   mounted() {
-    this.loadReports();
+    this.loadrepairs();
   },
   computed: {
-    filteredReports_completed() {
-      return this.reports.filter(item => item.state == 1);
+    filteredrepairs_completed() {
+      return this.repairs.filter(item => item.state == 1);
     },
-    filteredReports_noncompleted() {
-      return this.reports.filter(item => item.state == 0);
+    filteredrepairs_noncompleted() {
+      return this.repairs.filter(item => item.state == 0);
     },
     // isFormDisabled() {
     //   return this.services.length >= 20; // 限制最多申请5个服务
     // },
   },
   methods: {
-    loadReports() {
+    loadrepairs() {
       if (!this.user.id) {
         console.error("用户ID无效!无法加载报修列表!");
         return;
       }
-      this.$request.get(`/serviceBook/selectByUser/` + this.user.id)
+      this.$request.get(`/repair/selectByUser/` + this.user.id)
         .then(res => {
-          this.services = res.data || [];
+          this.repairs = res.data || [];
         })
         .catch(err => {
           console.error("加载服务出错:", err);
         });
     },
-    deleteReport(id) {   // 单个删除
+    deleterepair(id) {   // 单个删除
       console.log(id);
       this.$confirm('您确定删除吗？', '确认删除', {type: "warning"}).then(response => {
-        this.$request.delete('/serviceBook/delete/' + id).then(res => {
+        this.$request.delete('/repair/delete/' + id).then(res => {
           if (res.code === '200') {   // 表示操作成功
             this.$message.success('操作成功')
             //this.load(1)
-            this.loadReports()
+            this.loadrepairs()
           } else {
             this.$message.error(res.msg)  // 弹出错误的信息
           }
@@ -141,11 +141,11 @@ export default {
     confirmSubmit() {
       this.form.state = 0;
       this.form.userId = this.user.id;
-      this.$request.post('/serviceBook/add/', this.form)
+      this.$request.post('/repair/add/', this.form)
         .then(res => {
           if (res.code === '200') {
             this.$message.success('申请成功');
-            this.loadServices();
+            this.loadrepairs();
             this.form = { room:'', title: '', content: '' }; // 重置表单
           } else {
             this.$message.error(res.msg);

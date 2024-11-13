@@ -1,14 +1,17 @@
 package com.example.service;
 
+import cn.hutool.core.date.DateUtil;
 import com.example.entity.Account;
+import com.example.entity.Repair;
 import com.example.entity.ServiceBook;
-import com.example.mapper.ServiceBookMapper;
+import com.example.mapper.RepairMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -18,26 +21,25 @@ import java.util.List;
 public class RepairService {
 
     @Resource
-    private ServiceBookMapper serviceBookMapper;
+    private RepairMapper repairMapper;
 
     /**
      * 新增
      */
-    public void add(ServiceBook notice) {
-        //notice.setTime(DateUtil.today());
+    public void add(Repair repair){
         Account currentUser = TokenUtils.getCurrentUser();
         Integer user_id = currentUser.getId();
-        notice.setUser(user_id);
+        repair.setUser(user_id);
+        repair.setTime(DateUtil.today());
 
-        //还需要加入酒店信息
-        serviceBookMapper.insert(notice);
+        repairMapper.insert(repair);
     }
 
     /**
      * 删除
      */
     public void deleteById(Integer id) {
-        serviceBookMapper.deleteById(id);
+        repairMapper.deleteById(id);
     }
 
     /**
@@ -45,33 +47,32 @@ public class RepairService {
      */
     public void deleteBatch(List<Integer> ids) {
         for (Integer id : ids) {
-            serviceBookMapper.deleteById(id);
+            repairMapper.deleteById(id);
         }
     }
 
     /**
      * 修改
      */
-    public void updateById(ServiceBook notice) {
-        serviceBookMapper.updateById(notice);
+    public void updateById(Repair repair) {
+        repairMapper.updateById(repair);
     }
 
     /**
      * 修改状态
      */
     public void updateState(Integer id) {
-        ServiceBook service = serviceBookMapper.selectById(id);
-        service.setState(true);
-        serviceBookMapper.updateById(service);
+        Repair repair = repairMapper.selectById(id);
+        repair.setState(true);
+        repairMapper.updateById(repair);
     }
-
 
 
     /**
      * 根据ID查询
      */
-    public ServiceBook selectById(Integer id) {
-        return serviceBookMapper.selectById(id);
+    public Repair selectById(Integer id) {
+        return repairMapper.selectById(id);
     }
 
 
@@ -81,26 +82,26 @@ public class RepairService {
     /**
      * 根据user查询
      */
-    public List<ServiceBook> selectByUser(Integer userid){return serviceBookMapper.selectByUser(userid);}
+    public List<Repair> selectByUser(Integer userid){return repairMapper.selectByUser(userid);}
 
     /**
      * 根据hotel查询
      */
-    public List<ServiceBook> selectByHotel(Integer hotel_id){return serviceBookMapper.selectByHotel(hotel_id);}
+    public List<Repair> selectByHotel(Integer hotel_id){return repairMapper.selectByHotel(hotel_id);}
 
     /**
      * 查询所有
      */
-    public List<ServiceBook> selectAll(ServiceBook notice) {
-        return serviceBookMapper.selectAll(notice);
+    public List<Repair> selectAll(Repair repair) {
+        return repairMapper.selectAll(repair);
     }
 
     /**
      * 分页查询
      */
-    public PageInfo<ServiceBook> selectPage(ServiceBook notice, Integer pageNum, Integer pageSize) {
+    public PageInfo<Repair> selectPage(Repair repair, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<ServiceBook> list = serviceBookMapper.selectAll(notice);
+        List<Repair> list = repairMapper.selectAll(repair);
         return PageInfo.of(list);
     }
 
