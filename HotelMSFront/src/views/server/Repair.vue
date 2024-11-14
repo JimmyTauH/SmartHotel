@@ -69,7 +69,7 @@ export default {
         return;
       }
       console.log(this.user.birth);
-      this.$request.get(`/serviceBook/selectByHotel/`+this.user.birth)
+      this.$request.get(`/repair/selectByHotel/`+this.user.birth)
         .then(res => {
           this.services = res.data || [];
         })
@@ -80,7 +80,7 @@ export default {
     updateReports(id) {
       console.log(id);
       // 更新 state 为 1 表示服务完成
-      this.$request.put(`/serviceBook/updateState/`+id)
+      this.$request.put(`/repair/updateState/`+id)
       .then(res => {
         if (res.code === '200') {
           this.$message.success('服务状态更新为已完成');
@@ -93,23 +93,6 @@ export default {
         console.error("更新服务状态出错:", err);
       });
     },
-
-    updateService0(id) {
-      console.log(id);
-      // 更新 state 为 0 表示未完成
-      this.$request.put(`/serviceBook/updateState0/`+id)
-      .then(res => {
-        if (res.code === '200') {
-          this.$message.success('服务状态更新为未完成');
-          this.loadReports(); // 刷新故障列表
-        } else {
-          this.$message.error(res.msg);
-        }
-      })
-      .catch(err => {
-        console.error("更新服务状态出错:", err);
-      });
-    }
   }
 }
 </script>

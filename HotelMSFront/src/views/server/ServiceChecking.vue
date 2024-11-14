@@ -31,9 +31,7 @@
         <el-table-column prop="room" label="房间号"></el-table-column>
         <el-table-column prop="time" label="预约时间"></el-table-column>
         <el-table-column prop="content" label="备注"></el-table-column>
-        <el-table-column prop="content" label="备注"></el-table-column>
-          <!-- 操作列 -->
-          <el-table-column label="操作" width="180" align="center">
+        <el-table-column label="操作" width="180" align="center">
           <template v-slot="scope">
             <el-button plain type="danger" size="mini" @click=updateService0(scope.row.id)>更新为未完成</el-button>
           </template>
