@@ -18,6 +18,7 @@ public enum ResultCodeEnum {
     SIGNING_ERROR("5007","今天已经签到了"),
     CERTIFICATION_EXIST_ERROR("5008","用户已提交认证"),
     INTEGRAL_NOT_ENOUGH("5009","积分不足"),
+    CHECKIN_FAILURE("5010","办理入住失败"),
     ;
 
     public String code;

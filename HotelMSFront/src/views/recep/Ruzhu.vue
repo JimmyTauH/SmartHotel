@@ -10,15 +10,21 @@
         <!-- 房间选择，支持手动输入 -->
         <el-form :model="form" ref="form">
           <el-form-item label="选择或输入房间">
-            <el-select 
-              v-model="form.room" 
-              placeholder="请选择或输入房间号"
-              filterable 
-              allow-create 
-              default-first-option
-            >
-              <el-option v-for="room in availableRooms" :key="room.id" :label="room.name" :value="room.name" />
-            </el-select>
+            <div style="display: flex; align-items: center;">
+              <el-select 
+                v-model="form.room" 
+                placeholder="请选择或输入房间号"
+                filterable 
+                allow-create 
+                default-first-option
+                style="flex: 1; margin-right: 10px;"
+              >
+                <el-option v-for="room in availableRooms" :key="room.id" :label="room.name" :value="room.name" />
+              </el-select>
+              <el-button type="primary" icon="el-icon-refresh" @click="fetchAvailableRooms">
+                查询
+              </el-button>
+            </div>
           </el-form-item>
           
           <!-- 动态添加客人信息 -->
@@ -77,8 +83,9 @@ export default {
     // 获取可用房间列表
     async fetchAvailableRooms() {
       try {
-        const response = await this.$axios.get('/recep/available-room');
+        const response = await this.$request.get('/recep/available-room');
         this.availableRooms = response.data;  // 假设 API 返回一个房间数组
+        this.$message.success("可用房间已更新！");
       } catch (error) {
         this.$message.error("获取可用房间失败，请重试");
         console.error(error);
@@ -109,7 +116,7 @@ export default {
       }
 
       try {
-        await this.$axios.post("/recep/checkin", this.form);  // 提交表单至 /recep/checkin API
+        await this.$request.post("/recep/checkin", this.form);  // 提交表单至 /recep/checkin API
         this.$message.success("办理入住成功！");
         this.form = { room: "", guests: [{ name: "", gender: "", idCard: "", phone: "" }] };  // 重置表单
       } catch (error) {

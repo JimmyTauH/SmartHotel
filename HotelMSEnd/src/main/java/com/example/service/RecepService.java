@@ -4,6 +4,8 @@ import cn.hutool.core.util.ObjectUtil;
 import com.example.common.Constants;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
+import com.example.dto.CheckInRequest;
+import com.example.service.RoomService;
 import com.example.entity.Account;
 import com.example.entity.Recep;
 import com.example.exception.CustomException;
@@ -25,6 +27,9 @@ public class RecepService {
 
     @Resource
     private RecepMapper recepMapper;
+
+    @Resource
+    private RoomService roomService; // 注入 RoomService
 
     /**
      * 新增
@@ -132,4 +137,21 @@ public class RecepService {
         recepMapper.updateById(dbAdmin);
     }
 
+    public void checkIn(CheckInRequest checkInRequest) {
+        Integer roomId = checkInRequest.getRoomId();
+        List<CheckInRequest.Guest> guests = checkInRequest.getGuests();
+
+        // 保存入住信息（根据实际需求实现）
+        saveGuestInfo(guests);
+
+        // 更新房间状态为已入住
+        roomService.updateRoomStatus(roomId, RoomService.STATE_OCCUPIED);
+    }
+
+    private void saveGuestInfo(List<CheckInRequest.Guest> guests) {
+        // 保存每位客人的信息到数据库（根据需求实现）
+        for (CheckInRequest.Guest guest : guests) {
+            // 实现保存逻辑
+        }
+    }
 }
