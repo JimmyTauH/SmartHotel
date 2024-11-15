@@ -70,7 +70,7 @@ export default {
     // 获取已入住房间列表
     async fetchOccupiedRooms() {
       try {
-        const response = await this.$axios.get('/recep/occupied-room');
+        const response = await this.$request.get('/recep/occupied-room');
         this.occupiedRooms = response.data;
       } catch (error) {
         this.$message.error("获取已入住房间失败，请重试");
@@ -84,7 +84,7 @@ export default {
         return;
       }
       try {
-        const response = await this.$axios.get(`/recep/room-guests?room=${this.form.room}`);
+        const response = await this.$request.get(`/recep/room-guests?room=${this.form.room}`);
         this.guests = response.data;
         if (this.guests.length === 0) {
           this.$message.info("该房间暂无入住客人");
@@ -97,7 +97,7 @@ export default {
     // 为单个客人退房
     async removeGuest(guestId) {
       try {
-        await this.$axios.post(`/recep/checkout`, { room: this.form.room, guestId });
+        await this.$request.post(`/recep/checkout`, { room: this.form.room, guestId });
         this.$message.success("退房成功！");
         this.guests = this.guests.filter(guest => guest.id !== guestId);
       } catch (error) {
@@ -108,7 +108,7 @@ export default {
     // 全部退房
     async clearRoom() {
       try {
-        await this.$axios.post(`/recep/checkout`, { room: this.form.room });
+        await this.$request.post(`/recep/checkout`, { room: this.form.room });
         this.$message.success("房间已全部退房！");
         this.guests = [];  // 清空客人信息
       } catch (error) {
