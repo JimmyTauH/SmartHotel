@@ -20,7 +20,7 @@
 
 
           <div style="display: flex; grid-gap: 20px">
-            <img :src="blog.cover" style="width: 40%; border-radius: 5px; height: auto" alt="">
+            <img :src="blog.cover" style="width: 40%; border-radius: 5px; height:260px" alt="">
             <div style="flex: 1">
               <div style="margin-top:5px; margin-bottom: 10px; color: #666666">
                 <i class="el-icon-location-outline" style="margin-right: 5px"></i>
@@ -57,22 +57,24 @@
                   <el-tag v-for="item in tagsArr" :key="item.id" type="primary" style="margin-right: 5px" size="small">
                     {{ item }}
                   </el-tag>
+                  <i class="el-icon-edit-outline" style="margin-right: 5px;margin-left: 25px;"></i>
+
+                  <span style="font-size: 14px;color: #666666">酒店简介:</span>
+                  <div style="letter-spacing: 3px;font-size: 13px;margin-top: 10px" v-html="blog.content"></div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="w-e-text" style="width: 100%;margin-top:5px;color: #666666">
-            <i class="el-icon-edit-outline" style="margin-right: 5px;margin-left: 25px;"></i>
-            <span style="font-size: 14px;color: #666666">酒店简介:</span>
-            <div style="letter-spacing: 3px;font-size: 15px;margin-top: 10px" v-html="blog.content"></div>
-          </div>
 
 
 
           <div>
             <el-row :gutter="10" v-if="total" style="margin-top: 20px;">
+              <div style="font-weight: bold;font-size: 20px; margin-bottom: 20px">具体房型如下：
+              </div>
               <el-col :span="24" v-for="item in tableData" :key="item.id" v-if="item.hotelID === blog.id">
+
                 <div class="card"
                   style="margin-bottom: 15px; cursor: pointer; padding: 15px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s;"
                   @click="goDetail(item.id)">
@@ -80,7 +82,8 @@
                     <img :src="item.cover" style="width: 200px; height: 120px; border-radius: 8px; margin-right: 15px;"
                       alt="Room Image">
                     <div style="flex-grow: 1;margin-left: 5px;">
-                      <div style="font-weight: bold; font-size: 18px; color: #333;margin-top: 15px;">{{ item.name }}</div>
+                      <div style="font-weight: bold; font-size: 18px; color: #333;margin-top: 15px;">{{ item.name }}
+                      </div>
                       <div class="el-icon-set-up" style="font-size: 14px; color: #777; margin-top: 15px;"> 简介: {{
                         item.descr }}
                       </div>
@@ -90,7 +93,7 @@
                           <span style="font-weight: bold; font-size: 16px; color: #333;">¥ 房价:</span>
                           <span style="font-weight: bold; font-size: 16px; color: #FFD700; margin-left: 25px;">{{
                             item.host
-                            }}</span>
+                          }}</span>
                         </div>
                         <div style="font-size: 16px; color: #999;">剩余房量: {{ item.number }}</div>
                       </div>

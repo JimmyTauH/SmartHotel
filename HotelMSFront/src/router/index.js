@@ -70,7 +70,7 @@ const routes = [
       { path: 'ruzhu', name: 'ruzhu', meta: { name: '入住管理' }, component: () => import('../views/recep/Ruzhu.vue') },
       { path: 'tuifang', name: 'tuifang', meta: { name: '退房管理' }, component: () => import('../views/recep/Tuifang.vue') },
       { path: 'houqin', name: 'houqin', meta: { name: '后勤管理' }, component: () => import('../views/recep/Houqin.vue') },
-      { path: 'kefu', name: 'kefu', meta: { name: '客服服务' }, component: () => import('../views/recep/Kefu.vue') },
+      { path: 'RoomCheck', name: 'RoomCheck', meta: { name: '客服服务' }, component: () => import('../views/recep/RoomCheck.vue') },
       ]
     },
     // 后勤路径

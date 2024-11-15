@@ -23,33 +23,37 @@
 
           </div>
           <div style="margin-bottom: 20px;margin-top: 20px;" class="table">
+            <el-table :data="filteredTableData" stripe @selection-change="handleSelectionChange2">
 
-            <el-table :data="filteredTableData" stripe @selection-change="handleSelectionChange">
-
-              <el-table-column prop="applystart" label="预订房间入住时间"></el-table-column>
-              <el-table-column prop="applyend" label="预订房间退房时间"></el-table-column>
+              <el-table-column prop="applystart" label="我的预订入住时间"></el-table-column>
+              <el-table-column prop="applyend" label="我的预订退房时间"></el-table-column>
               <el-table-column prop="form" label="订房渠道"></el-table-column>
 
               <el-table-column label="操作" width="180" align="center">
                 <template v-slot="scope">
-                  <el-button plain type="primary" @click="handleEdit(scope.row)" size="mini">查看订房信息</el-button>
+                  <el-button plain type="primary" @click="handleEdit(scope.row)">修改订房信息</el-button>
                 </template>
               </el-table-column>
 
             </el-table>
           </div>
-          <div style="display: flex">
 
-            <el-button type="success" v-if="activity.isSign" :key="sighText" @click="cancel"
-              @mouseenter.native="sighText = '取消预订'" @mouseleave.native="sighText = '已预订'">
-              {{ sighText }}
-            </el-button>
-            <el-button type="primary" v-else key="预订该房" @click="sign">预订该房</el-button>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+            <div style="font-weight: bold; font-size: 24px;">
+              房间号: {{ filteredTableData[0]?.roomnumber || '无数据' }}
+            </div>
+            <div style="margin-right: 20px;">
+              <el-button type="primary" plain @click="handleAdd">预约订房</el-button>
+              <el-button type="success" v-if="activity.isSign" :key="sighText" @click="cancel"
+                @mouseenter.native="sighText = '取消预订'" @mouseleave.native="sighText = '已预订'">
+                {{ sighText }}
+              </el-button>
+              <el-button type="primary" v-else key="预约状态" @click="sign">暂未预约</el-button>
+            </div>
           </div>
-          <div
-            style="font-weight: bold; font-size: 24px;margin-bottom: 20px;padding-left: 10px;border-left: 5px solid #409EFF">
-            房间号:
-          </div>
+
+
 
         </div>
       </div>
@@ -94,6 +98,8 @@
 
       <span style="margin-left: 20px;"><i class="el-icon-view"></i> {{ activity.readCount }}</span>
     </div>
+
+
     <div>
       <el-dialog title="订房信息" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
         <el-form label-width="100px" style="padding-right: 50px" :model="form" :rules="rules" ref="formRef">
@@ -121,6 +127,8 @@
         <div slot="footer" class="dialog-footer">
           <el-button @click="fromVisible = false">取 消</el-button>
           <el-button type="primary" @click="save">确 定</el-button>
+
+
         </div>
       </el-dialog>
 
@@ -129,8 +137,6 @@
 </template>
 <script>
 import Comment from "@/components/Comment.vue";
-import E from "wangeditor"
-import hljs from 'highlight.js'
 
 export default {
   name: "ActivityDetail",
@@ -139,13 +145,16 @@ export default {
       activity: {},
       form: {},
       tableData: [],  // 所有的数据
+      tableData2: [],  // 所有的数据
       pageSize: 10,  // 每页显示的个数,
       pageNum: 1,   // 当前的页码
       ids: [],
+      ids2: [],
       total: 0,
       name: null,
       host: null,
       activityId: this.$route.query.activityId,
+      userId: this.$route.query.userId,
       hotel: {},
       content: '',
       editor: null,
@@ -169,32 +178,43 @@ export default {
   created() {
     this.load()
     this.load2(1)
+    this.load3(1)
     //更新阅读量
     this.$request.put('/activity/updateCount/' + this.activityId)
   },
   computed: {
     filteredTableData() {
-      return this.tableData.filter(item => item.id === this.activity.id);
+      return this.tableData2.filter(item =>
+        item.activityId === this.activity.id && item.userId === this.user.id
+      );
     }
+
   },
   methods: {
     handleEdit(row) {   // 编辑数据
       this.form = JSON.parse(JSON.stringify(row))  // 给form对象赋值  注意要深拷贝数据
       this.fromVisible = true   // 打开弹窗
     },
+    // 新增房间订房信息初始化
+    handleAdd() {   // 新增数据
+      this.form = {}  // 新增数据的时候清空数据
+      this.form.activityId = this.activity.id
+      this.form.userId = this.user.id
+      this.form.time = new Date();
+      this.fromVisible = true   // 打开弹窗
+    },
     save() {   // 保存按钮触发的逻辑  它会触发新增或者更新
-      this.form.startdate = this.form.applystart;
-      this.form.enddate = this.form.applyend;
       this.$refs.formRef.validate((valid) => {
         if (valid) {
           this.$request({
-            url: this.form.id ? '/activity/update' : '/activity/add',
+            url: this.form.id ? '/activitySign/update' : '/activitySign/add',
             method: this.form.id ? 'PUT' : 'POST',
             data: this.form
           }).then(res => {
             if (res.code === '200') {  // 表示成功保存
               this.$message.success('保存成功')
               this.load2(1)
+              this.load3(1)
               this.fromVisible = false
             } else {
               this.$message.error(res.msg)  // 弹出错误的信息
@@ -203,6 +223,28 @@ export default {
         }
       })
     },
+    // updateroom() {
+    //   // 保存按钮触发的逻辑
+    //   this.$refs.formRef.validate((valid) => {
+    //     if (valid) {
+    //       // 直接调用更新接口，无需判断
+    //       this.$request({
+    //         url: '/activity/updateroom', // 使用更新房间号的专用接口
+    //         method: 'PUT',
+    //         data: this.form
+    //       }).then(res => {
+    //         if (res.code === '200') {  // 表示成功保存
+    //           this.$message.success('房间更新成功');
+    //           this.load(1); // 刷新页面数据
+    //           this.fromVisible = false; // 关闭表单弹窗
+    //         } else {
+    //           this.$message.error(res.msg);  // 弹出错误的信息
+    //         }
+    //       });
+    //     }
+    //   });
+    // },
+
     cancel() {   // 取消报名
       this.$confirm('您确定取消报名吗？', '确认取消', { type: "warning" }).then(response => {
         this.$request.delete('/activitySign/delete/user/' + this.activityId + '/' + this.user.id).then(res => {
@@ -236,21 +278,7 @@ export default {
         }
       })
     },
-    sign() {
-      this.$request.post("/activitySign/add", {
-        activityId: this.activityId,
-        start_date: this.form.applystart,
-        end_date: this.form.applyend
-      }).then(res => {
-        if (res.code === '200') {
-          this.$message.success("报名成功")
-          this.load()
-        }
-        else {
-          this.$message.error(res.msg)
-        }
-      })
-    },
+    sign() { },
     goDetail(id) {
       window.open('/front/blogDetail?blogId=' + id)
     },
@@ -276,6 +304,19 @@ export default {
         }
       }).then(res => {
         this.tableData = res.data?.list
+        this.total = res.data?.total
+      })
+    },
+
+    load3(pageNum) {  // 分页查询
+      if (pageNum) this.pageNum = pageNum
+      this.$request.get('/activitySign/selectPage', {
+        params: {
+          pageNum: this.pageNum,
+          pageSize: this.pageSize,
+        }
+      }).then(res => {
+        this.tableData2 = res.data?.list
         this.total = res.data?.total
       })
     },
@@ -339,6 +380,9 @@ export default {
     },
     handleSelectionChange(rows) {   // 当前选中的所有的行数据
       this.ids = rows.map(v => v.id)   //  [1,2]
+    },
+    handleSelectionChange2(rows2) {   // 当前选中的所有的行数据
+      this.ids2 = rows2.map(v => v.id)   //  [1,2]
     },
 
   }

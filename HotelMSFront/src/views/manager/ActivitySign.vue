@@ -4,7 +4,6 @@
     <div class="operation">
       <el-button type="danger" plain @click="delBatch">批量删除</el-button>
     </div>
-
     <div class="table">
       <el-table :data="tableData" stripe @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center"></el-table-column>

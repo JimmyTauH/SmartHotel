@@ -1,17 +1,17 @@
 /*
- Navicat Premium Dump SQL
+ Navicat Premium Data Transfer
 
- Source Server         : Tencent
+ Source Server         : MySQL
  Source Server Type    : MySQL
- Source Server Version : 80039 (8.0.39-0ubuntu0.22.04.1)
- Source Host           : 42.194.239.205:3306
- Source Schema         : hotelms4v2
+ Source Server Version : 80039
+ Source Host           : localhost:3306
+ Source Schema         : smarthotel
 
  Target Server Type    : MySQL
- Target Server Version : 80039 (8.0.39-0ubuntu0.22.04.1)
+ Target Server Version : 80039
  File Encoding         : 65001
 
- Date: 09/11/2024 21:09:32
+ Date: 15/11/2024 19:27:38
 */
 
 SET NAMES utf8mb4;
@@ -35,14 +35,20 @@ CREATE TABLE `activity`  (
   `cover` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '封面',
   `hotelID` int NULL DEFAULT NULL COMMENT '关联酒店',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '竞赛' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '竞赛' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of activity
 -- ----------------------------
-INSERT INTO `activity` VALUES (30, '大床房（小冰箱+智能客控）', '20-22平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-6楼', '<h2>全部设施</h2><ul><li><h3>清洁服务</h3><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li><li><h3>洗浴用品</h3><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul>', NULL, NULL, NULL, '150（特价）', 3, 1, 'http://localhost:9091/files/1730864860245-ee08bb96-498d-4cf7-aa5b-3e437813d7f2.png', 12);
-INSERT INTO `activity` VALUES (31, '高级大床房（小冰箱+智能客控）', '\n25平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-5楼', '<h2>全部设施</h2><h3>清洁服务</h3><h2><ul><li><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li></ul></h2><h3>洗浴用品</h3><h2><ul><li><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul></h2>', NULL, NULL, NULL, '200', 3, 0, 'http://localhost:9091/files/1730865051507-82271b9a-d3cb-45fd-aca2-b8288fe397c0.png', 12);
-INSERT INTO `activity` VALUES (32, '高级双床房（小冰箱+智能客控）', '29平方米\n2张单人床1.2米\n加床费用：该房型不可加床\n2-5楼', '<h2>全部设施</h2><h3>清洁服务</h3><h2><ul><li><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li></ul></h2><h3>洗浴用品</h3><h2><ul><li><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul></h2>', '2024-11-12', '2024-11-23', '携程', '250（特价）', 4, 92, 'http://localhost:9091/files/1730865709540-c6c03219-5b32-4b89-b5ae-ae99283cafc9.png', 12);
+INSERT INTO `activity` VALUES (30, '大床房（小冰箱+智能客控）', '20-22平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-6楼', '<h2>全部设施</h2><ul><li><h3>清洁服务</h3><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li><li><h3>洗浴用品</h3><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul>', '2024-11-01', '2024-11-01', NULL, '150（特价）', 3, 42, 'http://localhost:9091/files/1730864860245-ee08bb96-498d-4cf7-aa5b-3e437813d7f2.png', 12);
+INSERT INTO `activity` VALUES (31, '高级大床房（小冰箱+智能客控）', '\n25平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-5楼', '<h2>全部设施</h2><h3>清洁服务</h3><h2><ul><li><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li></ul></h2><h3>洗浴用品</h3><h2><ul><li><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul></h2>', '2024-11-01', '2024-11-09', '美团', '200', 3, 12, 'http://localhost:9091/files/1730865051507-82271b9a-d3cb-45fd-aca2-b8288fe397c0.png', 12);
+INSERT INTO `activity` VALUES (32, '高级双床房（小冰箱+智能客控）', '29平方米\n2张单人床1.2米\n加床费用：该房型不可加床\n2-5楼', '<h2>全部设施</h2><h3>清洁服务</h3><h2><ul><li><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li></ul></h2><h3>洗浴用品</h3><h2><ul><li><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul></h2>', '2024-11-01', '2024-11-23', '美团', '250（特价）', 4, 142, 'http://localhost:9091/files/1730865709540-c6c03219-5b32-4b89-b5ae-ae99283cafc9.png', 12);
+INSERT INTO `activity` VALUES (33, '望竹·高级大床房+全景落地+河景', '20-22平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-6楼', '<h2>全部设施</h2><ul><li><h3>清洁服务</h3><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li><li><h3>洗浴用品</h3><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul>', '2024-11-01', '2024-11-01', NULL, '250（特价）', 2, 6, 'http://localhost:9091/files/1731298909199-2fd562e8-e862-4649-9099-0a9aba8d84b3.png', 10);
+INSERT INTO `activity` VALUES (34, '观水·大床房+全景落地+河景', '20-22平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-6楼', '<h2>全部设施</h2><ul><li><h3>清洁服务</h3><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li><li><h3>洗浴用品</h3><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul>', '2024-11-01', '2024-11-01', NULL, '200', 1, 14, 'http://localhost:9091/files/1731298882005-04e0c789-ecf7-4469-a5d4-cea84980dab4.png', 10);
+INSERT INTO `activity` VALUES (36, '温馨双床房（小冰箱+智能客控）', '20-22平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-6楼', '<h2>全部设施</h2><ul><li><h3>清洁服务</h3><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li><li><h3>洗浴用品</h3><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul>', '2024-11-01', '2024-11-01', NULL, '150（特价）', 3, 1, 'http://localhost:9091/files/1731298762742-1766f3e8-7c0f-4520-9620-669c93a169e8.png', 13);
+INSERT INTO `activity` VALUES (37, '大床房（小冰箱+智能客控）', '20-22平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-6楼', '<h2>全部设施</h2><ul><li><h3>清洁服务</h3><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li><li><h3>洗浴用品</h3><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul>', '2024-11-01', '2024-11-16', NULL, '250（特价）', 3, 1, 'http://localhost:9091/files/1731298681249-82271b9a-d3cb-45fd-aca2-b8288fe397c0.png', 13);
+INSERT INTO `activity` VALUES (38, '精致大床特价房', '20-22平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-6楼', '<h2>全部设施</h2><ul><li><h3>清洁服务</h3><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li><li><h3>洗浴用品</h3><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul>', '2024-11-01', '2024-11-01', NULL, '250（特价）', 2, 5, 'http://localhost:9091/files/1731296923973-99c791ce-8f30-470b-a11a-ecce688ac105.png', 14);
+INSERT INTO `activity` VALUES (39, '豪华园景双床房', '20-22平方米\n1张大床1.8米\n加床费用：该房型不可加床\n1-6楼', '<h2>全部设施</h2><ul><li><h3>清洁服务</h3><p><i></i>每日打扫、打扫工具、洗衣用品</p><p><i></i>熨衣设备、熨裤机</p></li><li><h3>洗浴用品</h3><p><i></i>牙刷、牙膏</p><p><i></i>沐浴露、洗发水护发素、香皂、浴帽、梳子、剃须刀</p></li></ul>', '2024-12-13', '2024-12-21', '抖音', '250（特价）', 2, 221, 'http://localhost:9091/files/1731296981060-5a34e1fe-0831-466d-a270-e5835cc107f9.png', 14);
 
 -- ----------------------------
 -- Table structure for activity_sign
@@ -50,24 +56,25 @@ INSERT INTO `activity` VALUES (32, '高级双床房（小冰箱+智能客控）'
 DROP TABLE IF EXISTS `activity_sign`;
 CREATE TABLE `activity_sign`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `roomnumber` int NULL DEFAULT NULL COMMENT '房间号',
   `activity_id` int NULL DEFAULT NULL COMMENT '竞赛id',
   `user_id` int NULL DEFAULT NULL COMMENT '用户id',
   `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '报名时间',
-  `start_date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `end_date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `applystart` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `applyend` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `form` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '途径',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '竞赛报名表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '竞赛报名表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of activity_sign
 -- ----------------------------
-INSERT INTO `activity_sign` VALUES (1, 1, 14, '2024-06-10 12:59:44', NULL, NULL);
-INSERT INTO `activity_sign` VALUES (2, 1, 7, '2024-06-10 16:24:08', NULL, NULL);
-INSERT INTO `activity_sign` VALUES (3, 27, 1, '2024-11-03 22:30:16', NULL, NULL);
-INSERT INTO `activity_sign` VALUES (5, 29, 7, '2024-11-04 08:10:37', NULL, NULL);
-INSERT INTO `activity_sign` VALUES (8, 32, 7, '2024-11-07 23:33:57', '2024-11-12', '2024-11-23');
-INSERT INTO `activity_sign` VALUES (9, 30, 7, '2024-11-06 23:33:57', '2024-11-12', '2024-11-23');
-INSERT INTO `activity_sign` VALUES (10, 30, 7, '2024-11-05 23:33:57', '2024-11-12', '2024-11-23');
+INSERT INTO `activity_sign` VALUES (1, 104, 32, 9, '2024-11-15T04:22:54.673Z', '2024-12-01', '2024-11-23', '美团');
+INSERT INTO `activity_sign` VALUES (2, 102, 39, 8, '2024-11-15T04:22:54.673Z', '2024-11-01', '2024-11-02', '去哪儿旅行');
+INSERT INTO `activity_sign` VALUES (3, 101, 32, 6, '2024-11-15T04:54:29.288Z', '2024-11-01', '2024-11-23', '其他');
+INSERT INTO `activity_sign` VALUES (4, 103, 39, 2, '2024-11-15T05:35:54.301Z', '2024-11-01', '2024-11-16', '去哪儿旅行');
+INSERT INTO `activity_sign` VALUES (5, 105, 38, 1, '2024-11-15T05:35:54.301Z', '2024-11-01', '2024-11-30', '去哪儿旅行');
+INSERT INTO `activity_sign` VALUES (44, 106, 38, 7, '2024-11-15T06:04:04.623Z', '2024-12-07', '2024-12-21', '抖音');
 
 -- ----------------------------
 -- Table structure for admin
@@ -130,17 +137,19 @@ CREATE TABLE `blog`  (
   `category_id` int NULL DEFAULT NULL COMMENT '分类ID',
   `contest_id` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '博客信息' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '博客信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of blog
 -- ----------------------------
-INSERT INTO `blog` VALUES (7, '际庭酒店式公寓', '<p>公寓地理位置优越，位于杨浦区杨树浦路2300号交通便利，附近商场（百联滨江购物中心，宝龙旭辉广场，奥特莱斯，等大型商场）直线距离不远，附近配套设施齐舍，给商务洽谈、旅游观光等八方来宾带来极大的便利。酒店有欢聚高级双床房、欢享舒适大床房、欢喜特惠大床房、欢享大床房、欢享高级大床房，欢悦大床房、多种房型供您选择，彰显尊荣地位，轻享房如居家般随兴，客房设计温馨舒适，配备高品质的床品和设施，是家的感觉，又胜过家的感觉，带来不期而遇的温暖和方寸之间的美感，民俗与高雅共生，传统与现代并存。化繁为简，怡然栖居。四方食事，人间烟火，这里有丰富多样的设施与服务，包括餐厅、会议室、接待室等，内部配备网络系统、投影仪，可为您提供不同规格的会议接待、商务谈判、会晤接见及私人会谈、演示和签约仪式等。熠熠生辉、恢宏从容，您尽管放松心境，尽情享受。<br/></p>', '酒店有欢聚高级双床房、欢享舒适大床房、欢喜特惠大床房、欢享大床房、欢享高级大床房，欢悦大床房、多种房型供您选择，彰显尊荣地位，轻享房如居家般随兴，客房设计温馨舒适，配备高品质的床品和设施，是家的感觉，又胜过家的感觉，带来不期而遇的温暖和方寸之间的美感', NULL, 'http://localhost:9091/files/1728616308666-2.png', '[\"大床房\",\"双床房\",\"电竞游戏房\",\"3-4人房\",\"浪漫情侣房\",\"温馨亲子房\"]', 5, '2024-10-11', 101, 2, 24);
-INSERT INTO `blog` VALUES (8, '崇明漫墅美郡民宿', '<p>漫墅----慢生活，漫情怀。<br/>美丽的崇明，静享一片悠闲时光。<br/>漫墅为您营造一篇音乐、书与咖啡交融的主题乐章，1000多平的大草坪，可露营，可烧烤，远离尘世的喧嚣，静享下午温暖的阳光。<br/>跨过长江隧桥，下高速左转，沿着美丽的陈彷公路，行驶约2公里，即到达漫墅美郡。<br/></p>', '漫墅----慢生活，漫情怀。\n美丽的崇明，静享一片悠闲时光。\n漫墅为您营造一篇音乐、书与咖啡交融的主题乐章，1000多平的大草坪，可露营，可烧烤，远离尘世的喧嚣，静享下午温暖的阳光。\n跨过长江隧桥，下高速左转，沿着美丽的陈彷公路，行驶约2公里，即到达漫墅美郡。', NULL, 'http://localhost:9091/files/1728616573999-3.png', '[\"大床房\",\"双床房\",\"温馨亲子房\",\"浪漫情侣房\"]', 7, '2024-10-11', 6, 3, 24);
-INSERT INTO `blog` VALUES (9, '河泾美居酒店', '<p>上海虹桥漕河泾美居酒店位于上海漕河泾新兴技术开发区和上海虹桥经济技术开发区之间，距离NECC约20分钟车程。<br/>酒店拥有一百余间的智能客房，法式设计尽显浪漫及典雅；配备丰富中西式早餐的自助餐厅, 还设有大堂吧、健身房等设施，满足商旅宾客的各类需求。<br/></p>', '上海虹桥漕河泾美居酒店位于上海漕河泾新兴技术开发区和上海虹桥经济技术开发区之间，距离NECC约20分钟车程。\n酒店拥有一百余间的智能客房，法式设计尽显浪漫及典雅；配备丰富中西式早餐的自助餐厅, 还设有大堂吧、健身房等设施，满足商旅宾客的各类需求。', '上海漕河泾新兴技术开发区和上海虹桥经济技术开发区', 'http://localhost:9091/files/1728616627132-70.jpg', '[\"大床房\",\"双床房\",\"3-4人房\",\"电竞游戏房\",\"浪漫情侣房\",\"温馨亲子房\"]', 7, '2024-10-11', 14, 1, 24);
-INSERT INTO `blog` VALUES (10, '花筑·麦社民宿', '<p style=\"line-height:1.6;\">&nbsp;&nbsp;&nbsp;&nbsp;花筑·上海麦社民宿位于上海国际旅游度假区，距离上海迪士尼正门约3公里，提供民宿至迪士尼接送服务,地铁站约15分钟车程，交通便利；民宿周边景点有奕欧来购物村、上海科技馆、佛罗伦萨小镇。<br/>&nbsp;&nbsp;&nbsp;&nbsp;3层楼，有客厅餐厅及自助厨房，全部是朝南大床房。部分房间提供加床。<br/>&nbsp;&nbsp;&nbsp;&nbsp;这里每间客房都融入了民宿主人的精心设计，民宿坚持客户至上，诚信经营的理念。以亲情化、人性化、更为突出细节化的服务。给每一位入住的客人以家为核心的入住体验。门口沿河有观景台，前后庭院和屋顶花园非常休闲。<br/></p>', '花筑·上海麦社民宿位于上海国际旅游度假区，距离上海迪士尼正门约3公里，提供民宿至迪士尼接送服务,地铁站约15分钟车程，交通便利；民宿周边景点有奕欧来购物村、上海科技馆、佛罗伦萨小镇。\n3层楼，有客厅餐厅及自助厨房，全部是朝南大床房。部分房间提供加床。\n这里每间客房都融入了民宿主人的精心设计，民宿坚持客户至上，诚信经营的理念。以亲情化、人性化、更为突出细节化的服务。给每一位入住的客人以家为核心的入住体验。门口沿河有观景台，前后庭院和屋顶花园非常休闲。', '上海国际旅游度假区', 'http://localhost:9091/files/1728667558874-R5_D.jpg', '[\"大床房\",\"双床房\",\"3-4人房\",\"电竞游戏房\",\"浪漫情侣房\"]', 7, '2024-10-12', 306, 3, 24);
-INSERT INTO `blog` VALUES (11, '轻住·长裕优选酒店', '<p>位于浦建路，近中国农业银行，交通便捷。<br/>宾馆拥有温馨舒适的各类房型，设施齐全，卫生干净。酒店四周环境优雅，各项配套设施齐全，是商旅宾客放松身心理想之地。我们热忱欢迎您的到来！<br/></p><p>预订服务提供方</p><p><img src=\"https://dimg04.c-ctrip.com/images/1mc3p12000dinujg1955A_Z_702_0_Q70.jpg\"/></p><p><img src=\"https://dimg04.c-ctrip.com/images/0zm0e12000c0rbl4aCAC0_Z_702_0_Q70.jpg\"/></p><p><img src=\"https://dimg04.c-ctrip.com/images/0201u12000fjgyz4j47F3_Z_702_0_Q70.jpg\"/></p><p><img src=\"https://dimg04.c-ctrip.com/images/0202y12000c3wj0024A09_Z_702_0_Q70.jpg\"/></p>', '位于浦建路，近中国农业银行，交通便捷。\n宾馆拥有温馨舒适的各类房型，设施齐全，卫生干净。酒店四周环境优雅，各项配套设施齐全，是商旅宾客放松身心理想之地。我们热忱欢迎您的到来！', '111', 'http://localhost:9091/files/1728614772253-1.png', '[\"大床房\"]', 7, '2024-06-10', 41, 1, 24);
-INSERT INTO `blog` VALUES (12, '云和夜泊酒店(上海浦东国际机场店)', '<p>云和夜泊酒店(上海浦东国际机场店)位于浦东新区祝桥秋亭路，距上海迪士尼约18分钟车程， 距上海野生动物园约20分钟车程，距十六号线惠南站约15分钟车程。酒店地理位置优越，并配备大巴、中巴免费接送浦东机场. 迪士尼. 野生动物园. 十六号线惠南站（以上接送均为班车形式）。<br/>酒店客房空间宽敞，设计简约优雅，线条明朗。所有客房均采用栖云系列优质床品、全套精油草本精华洗浴用品供客使用，网络方面配备百兆高速光纤，WIFI全覆盖，致力于为客提供舒适便捷的住宿体验环境，秉承以人为本的服务理念，致力于让您乘兴而来、满意而归！<br/></p><p>预订服务提供方</p>', '云和夜泊酒店(上海浦东国际机场店)位于浦东新区祝桥秋亭路，距上海迪士尼约18分钟车程， 距上海野生动物园约20分钟车程，距十六号线惠南站约15分钟车程。酒店地理位置优越，并配备大巴、中巴免费接送浦东机场. 迪士尼. 野生动物园. 十六号线惠南站（以上接送均为班车形式）。', '上海浦东新区秋亭路128弄', 'http://localhost:9091/files/1730641575979-a57d35a1-0bff-4fda-862a-cf6e98f46593.png', '[\"大床房\"]', 7, '2024-11-03', 244, 1, NULL);
+INSERT INTO `blog` VALUES (7, '际庭酒店式公寓', '<p>公寓地理位置优越，位于杨浦区杨树浦路2300号交通便利，附近商场（百联滨江购物中心，宝龙旭辉广场，奥特莱斯，等大型商场）直线距离不远，附近配套设施齐舍，给商务洽谈、旅游观光等八方来宾带来极大的便利。酒店有欢聚高级双床房、欢享舒适大床房、欢喜特惠大床房、欢享大床房、欢享高级大床房，欢悦大床房、多种房型供您选择，彰显尊荣地位，轻享房如居家般随兴，客房设计温馨舒适，配备高品质的床品和设施，是家的感觉，又胜过家的感觉，带来不期而遇的温暖和方寸之间的美感，民俗与高雅共生，传统与现代并存。化繁为简，怡然栖居。四方食事，人间烟火，这里有丰富多样的设施与服务，包括餐厅、会议室、接待室等，内部配备网络系统、投影仪，可为您提供不同规格的会议接待、商务谈判、会晤接见及私人会谈、演示和签约仪式等。熠熠生辉、恢宏从容，您尽管放松心境，尽情享受。<br/></p>', '酒店有欢聚高级双床房、欢享舒适大床房、欢喜特惠大床房、欢享大床房、欢享高级大床房，欢悦大床房、多种房型供您选择，彰显尊荣地位，轻享房如居家般随兴，客房设计温馨舒适，配备高品质的床品和设施，是家的感觉，又胜过家的感觉，带来不期而遇的温暖和方寸之间的美感', '杨浦区杨树浦路2300号', 'http://localhost:9091/files/1728616308666-2.png', '[\"大床房\",\"双床房\",\"3-4人房\",\"浪漫情侣房\",\"温馨亲子房\"]', 5, '2024-10-11', 102, 2, 24);
+INSERT INTO `blog` VALUES (8, '崇明漫墅美郡民宿', '<p>漫墅----慢生活，漫情怀。<br/>美丽的崇明，静享一片悠闲时光。<br/>漫墅为您营造一篇音乐、书与咖啡交融的主题乐章，1000多平的大草坪，可露营，可烧烤，远离尘世的喧嚣，静享下午温暖的阳光。<br/>跨过长江隧桥，下高速左转，沿着美丽的陈彷公路，行驶约2公里，即到达漫墅美郡。<br/></p>', '漫墅----慢生活，漫情怀。\n美丽的崇明，静享一片悠闲时光。\n漫墅为您营造一篇音乐、书与咖啡交融的主题乐章，1000多平的大草坪，可露营，可烧烤，远离尘世的喧嚣，静享下午温暖的阳光。\n跨过长江隧桥，下高速左转，沿着美丽的陈彷公路，行驶约2公里，即到达漫墅美郡。', '长江隧桥2公里', 'http://localhost:9091/files/1728616573999-3.png', '[\"大床房\",\"双床房\",\"温馨亲子房\",\"浪漫情侣房\"]', 7, '2024-10-11', 8, 3, 24);
+INSERT INTO `blog` VALUES (9, '河泾美居酒店', '<p>上海虹桥漕河泾美居酒店位于上海漕河泾新兴技术开发区和上海虹桥经济技术开发区之间，距离NECC约20分钟车程。<br/>酒店拥有一百余间的智能客房，法式设计尽显浪漫及典雅；配备丰富中西式早餐的自助餐厅, 还设有大堂吧、健身房等设施，满足商旅宾客的各类需求。<br/></p>', '上海虹桥漕河泾美居酒店位于上海漕河泾新兴技术开发区和上海虹桥经济技术开发区之间，距离NECC约20分钟车程。\n酒店拥有一百余间的智能客房，法式设计尽显浪漫及典雅；配备丰富中西式早餐的自助餐厅, 还设有大堂吧、健身房等设施，满足商旅宾客的各类需求。', '上海漕河泾新兴技术开发区和上海虹桥经济技术开发区', 'http://localhost:9091/files/1728616627132-70.jpg', '[\"大床房\",\"双床房\",\"3-4人房\",\"电竞游戏房\",\"浪漫情侣房\",\"温馨亲子房\"]', 7, '2024-10-11', 16, 1, 24);
+INSERT INTO `blog` VALUES (10, '花筑·麦社民宿', '<p style=\"line-height:1.6;\">&nbsp;&nbsp;&nbsp;&nbsp;花筑·上海麦社民宿位于上海国际旅游度假区，距离上海迪士尼正门约3公里，提供民宿至迪士尼接送服务,地铁站约15分钟车程，交通便利；民宿周边景点有奕欧来购物村、上海科技馆、佛罗伦萨小镇。<br/>&nbsp;&nbsp;&nbsp;&nbsp;3层楼，有客厅餐厅及自助厨房，全部是朝南大床房。部分房间提供加床。<br/>&nbsp;&nbsp;&nbsp;&nbsp;这里每间客房都融入了民宿主人的精心设计，民宿坚持客户至上，诚信经营的理念。以亲情化、人性化、更为突出细节化的服务。给每一位入住的客人以家为核心的入住体验。门口沿河有观景台，前后庭院和屋顶花园非常休闲。<br/></p>', '花筑·上海麦社民宿位于上海国际旅游度假区，距离上海迪士尼正门约3公里，提供民宿至迪士尼接送服务,地铁站约15分钟车程，交通便利；民宿周边景点有奕欧来购物村、上海科技馆、佛罗伦萨小镇。\n3层楼，有客厅餐厅及自助厨房，全部是朝南大床房。部分房间提供加床。\n这里每间客房都融入了民宿主人的精心设计，民宿坚持客户至上，诚信经营的理念。以亲情化、人性化、更为突出细节化的服务。给每一位入住的客人以家为核心的入住体验。门口沿河有观景台，前后庭院和屋顶花园非常休闲。', '上海国际旅游度假区', 'http://localhost:9091/files/1728667558874-R5_D.jpg', '[\"大床房\",\"双床房\",\"3-4人房\",\"电竞游戏房\",\"浪漫情侣房\"]', 7, '2024-10-12', 313, 3, 24);
+INSERT INTO `blog` VALUES (11, '轻住·长裕优选酒店', '<p>位于浦建路，近中国农业银行，交通便捷。<br/>宾馆拥有温馨舒适的各类房型，设施齐全，卫生干净。酒店四周环境优雅，各项配套设施齐全，是商旅宾客放松身心理想之地。我们热忱欢迎您的到来！</p>', '位于浦建路，近中国农业银行，交通便捷。\n宾馆拥有温馨舒适的各类房型，设施齐全，卫生干净。酒店四周环境优雅，各项配套设施齐全，是商旅宾客放松身心理想之地。我们热忱欢迎您的到来！', '浦建路中国农业银行', 'http://localhost:9091/files/1731299522533-f15e1b0a-31e8-48ae-a5c1-297638be959f.png', '[\"大床房\"]', 7, '2024-06-10', 50, 1, 24);
+INSERT INTO `blog` VALUES (12, '云和夜泊酒店(上海浦东国际机场店)', '<p>云和夜泊酒店(上海浦东国际机场店)位于浦东新区祝桥秋亭路，距上海迪士尼约18分钟车程， 距上海野生动物园约20分钟车程，距十六号线惠南站约15分钟车程。酒店地理位置优越，并配备大巴、中巴免费接送浦东机场. 迪士尼. 野生动物园. 十六号线惠南站（以上接送均为班车形式）。<br/>酒店客房空间宽敞，设计简约优雅，线条明朗。所有客房均采用栖云系列优质床品、全套精油草本精华洗浴用品供客使用，网络方面配备百兆高速光纤，WIFI全覆盖，致力于为客提供舒适便捷的住宿体验环境，秉承以人为本的服务理念，致力于让您乘兴而来、满意而归！<br/></p><p>预订服务提供方</p>', '云和夜泊酒店(上海浦东国际机场店)位于浦东新区祝桥秋亭路，距上海迪士尼约18分钟车程， 距上海野生动物园约20分钟车程，距十六号线惠南站约15分钟车程。酒店地理位置优越，并配备大巴、中巴免费接送浦东机场. 迪士尼. 野生动物园. 十六号线惠南站（以上接送均为班车形式）。', '上海浦东新区秋亭路128弄', 'http://localhost:9091/files/1730641575979-a57d35a1-0bff-4fda-862a-cf6e98f46593.png', '[\"大床房\"]', 7, '2024-11-03', 269, 1, 24);
+INSERT INTO `blog` VALUES (13, '星明归酒店(上海虹桥站国家会展中心店)', '<p>星明归酒店（上海虹桥站国家会展中心店）坐落于虹桥世界中心，地理位置优越。距离国家会展中心直线距离仅 100 米，方便您轻松参加各类展会活动。距离地铁 2 号线 大约1 公里，出行便捷，可快速抵达城市各处。抵达上海虹桥站仅需10分钟车程，为您的旅途提供便利。 酒店拥有多种房型满足不同需求。大床和标间面积约 30 -40平米，空间宽敞舒适。套房面积达 80-110 平米，为您提供更加奢华的居住体验。整体装修风格简约大方，营造出宁静舒适的居住氛围。 酒店周边设施齐全，附近有超市、餐馆、咖啡厅等，满足您的日常生活和休闲需求。无论是商务出行还是旅游度假，星明归酒店都是您的理想之选。</p>', '星明归酒店（上海虹桥站国家会展中心店）坐落于虹桥世界中心，地理位置优越。距离国家会展中心直线距离仅 100 米，方便您轻松参加各类展会活动。', '上海青浦区徐泾镇诸光路1588弄672号', 'http://localhost:9091/files/1731295273351-9c5a79bb-a3b8-4db7-8277-7b332208d96f.png', '[\"大床房\"]', 7, '2024-11-11', 12, 1, 24);
+INSERT INTO `blog` VALUES (14, '嘉璞·轩酒店(国家会展中心江桥万达店)', '<p>酒店位于金园一路1398号，地铁13号线金运路站4号口出<br/>“ 雅蓄于心, 自在于形，兼容并蓄, 追求创新”无疑是对新中式宿泊风格的嘉璞·轩品质的诠释。公寓专为出行便捷、居住舒适的商务人士量身定制。是客人身心安顿、放心之所。“相逢自是有缘，嘉璞以客为尊”。<br/>酒店拥有着完善的配套设施：中西式自助早餐厅、下沉式多媒体休闲区、会议厅、健身房、书吧等一应俱全。公寓所有客房均采用喜临门优质床品、全套精油草本精华洗浴用品，网络配备百兆高速光纤，WIFI全覆盖，致力于为客提供舒适便捷的住宿体验环境，秉承以人为本的服务理念，让您乘兴而来、满意而归！<br/></p>', '酒店位于金园一路1398号，地铁13号线金运路站4号口出\n“ 雅蓄于心, 自在于形，兼容并蓄, 追求创新”无疑是对新中式宿泊风格的嘉璞·轩品质的诠释。公寓专为出行便捷、居住舒适的商务人士量身定制。是客人身心安顿、放心之所。“相逢自是有缘，嘉璞以客为尊”。', '上海嘉定区金园一路1398号A区', 'http://localhost:9091/files/1731296615225-0373af59-5920-424f-9067-14b9057edc6b.png', '[\"大床房\",\"双床房\"]', 7, '2024-11-11', 112, 8, 30);
 
 -- ----------------------------
 -- Table structure for blog_encrypt
@@ -178,7 +187,7 @@ CREATE TABLE `category`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '分类名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '博客分类' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '博客分类' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of category
@@ -187,7 +196,8 @@ INSERT INTO `category` VALUES (1, '标准酒店');
 INSERT INTO `category` VALUES (2, '温馨公寓');
 INSERT INTO `category` VALUES (3, '美居民宿');
 INSERT INTO `category` VALUES (4, '独栋别墅');
-INSERT INTO `category` VALUES (6, '其他');
+INSERT INTO `category` VALUES (8, '会议酒店');
+INSERT INTO `category` VALUES (9, '其他');
 
 -- ----------------------------
 -- Table structure for certification
@@ -226,7 +236,7 @@ CREATE TABLE `check_in`  (
   `guest_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `guest_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of check_in
@@ -248,7 +258,7 @@ CREATE TABLE `check_out`  (
   `guest_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `guest_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of check_out
@@ -269,13 +279,14 @@ CREATE TABLE `circulars`  (
   `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '通知时间',
   `isChecked` tinyint NULL DEFAULT 0 COMMENT '消息是否已读',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统通知表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统通知表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of circulars
 -- ----------------------------
 INSERT INTO `circulars` VALUES (33, 7, '您的帖子<a href=\"/front/blogDetail?blogId=6\" target=\"_blank\" style=\"color: blue;\">《轻住·长裕优选酒店》</a>有了新的回复：酒店环境不错', '新的回复', '2024-10-11 21:07:22', 1);
 INSERT INTO `circulars` VALUES (34, 7, '您的帖子<a href=\"/front/blogDetail?blogId=10\" target=\"_blank\" style=\"color: blue;\">《花筑·麦社民宿》</a>有了新的回复：酒店的房型非常丰富', '新的回复', '2024-10-12 19:39:59', 1);
+INSERT INTO `circulars` VALUES (35, 7, '您的帖子<a href=\"/front/blogDetail?blogId=14\" target=\"_blank\" style=\"color: blue;\">《嘉璞·轩酒店(国家会展中心江桥万达店)》</a>有了新的回复：“ 雅蓄于心, 自在于形，兼容并蓄, 追求创新”的形式体现的很好', '新的回复', '2024-11-11 12:05:22', 0);
 
 -- ----------------------------
 -- Table structure for collect
@@ -287,7 +298,7 @@ CREATE TABLE `collect`  (
   `user_id` int NOT NULL COMMENT '收藏人ID',
   `module` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '模块',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '收藏' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '收藏' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of collect
@@ -298,6 +309,8 @@ INSERT INTO `collect` VALUES (3, 29, 1, '酒店');
 INSERT INTO `collect` VALUES (4, 28, 1, '酒店');
 INSERT INTO `collect` VALUES (5, 12, 7, '帖子');
 INSERT INTO `collect` VALUES (8, 32, 7, '酒店');
+INSERT INTO `collect` VALUES (9, 14, 1, '帖子');
+INSERT INTO `collect` VALUES (10, 11, 7, '帖子');
 
 -- ----------------------------
 -- Table structure for comment
@@ -314,7 +327,7 @@ CREATE TABLE `comment`  (
   `fid` int NULL DEFAULT NULL COMMENT '关联帖子/竞赛ID',
   `module` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '模块',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 115 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '评论表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 116 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '评论表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment
@@ -323,6 +336,7 @@ INSERT INTO `comment` VALUES (111, '欢迎投递！', 14, 14, NULL, 111, '2024-0
 INSERT INTO `comment` VALUES (112, '酒店环境不错', 7, 7, NULL, 112, '2024-10-11 21:07:22', 6, '帖子');
 INSERT INTO `comment` VALUES (113, '酒店的房型非常丰富', 8, 7, NULL, 113, '2024-10-12 19:39:59', 10, '帖子');
 INSERT INTO `comment` VALUES (114, '这个房型非常喜欢', 7, NULL, NULL, 114, '2024-11-06 13:24:39', 32, '酒店');
+INSERT INTO `comment` VALUES (115, '“ 雅蓄于心, 自在于形，兼容并蓄, 追求创新”的形式体现的很好', NULL, 7, NULL, 115, '2024-11-11 12:05:22', 14, '帖子');
 
 -- ----------------------------
 -- Table structure for concern
@@ -352,7 +366,7 @@ CREATE TABLE `fault_report`  (
   `report_time` timestamp NULL DEFAULT NULL,
   `image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of fault_report
@@ -406,7 +420,7 @@ CREATE TABLE `likes`  (
   `user_id` int NOT NULL COMMENT '点赞人ID',
   `module` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '模块',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '点赞' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '点赞' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of likes
@@ -419,6 +433,10 @@ INSERT INTO `likes` VALUES (5, 7, 1, '帖子');
 INSERT INTO `likes` VALUES (6, 27, 1, '酒店');
 INSERT INTO `likes` VALUES (7, 12, 1, '帖子');
 INSERT INTO `likes` VALUES (10, 12, 7, '帖子');
+INSERT INTO `likes` VALUES (11, 14, 1, '帖子');
+INSERT INTO `likes` VALUES (13, 11, 7, '帖子');
+INSERT INTO `likes` VALUES (14, 39, 7, '酒店');
+INSERT INTO `likes` VALUES (15, 14, 7, '帖子');
 
 -- ----------------------------
 -- Table structure for member
@@ -622,7 +640,7 @@ CREATE TABLE `room`  (
   `state` int(10) UNSIGNED ZEROFILL NULL DEFAULT 0000000000 COMMENT '0 空闲\r\n1 已预定\r\n2 已入住\r\n3 打扫整理中',
   `room_num` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of room
@@ -698,12 +716,12 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'elysia', 'elysian', 'elysia', 'http://localhost:9091/files/1705558132617-1697438073596-avatar.png', 'USER', '女', '18383838383', '18383838383@163.com', '正在创作 毕业设计', '2000-12-22', 2657);
+INSERT INTO `user` VALUES (1, 'admin', 'admin', '管理员', 'http://localhost:9091/files/1717861781556-img5.png', 'ADMIN', '女', '13677889923', 'admin11@xm.com', '正在创作 毕业设计', '2000-12-22', 2657);
 INSERT INTO `user` VALUES (2, 'kevin', 'elysian', 'kevin', 'http://localhost:9091/files/1705565856634-ROG_FLOW_X13_product_wallpaper_3840x2400.jpg', 'USER', NULL, '18318338075', NULL, '简介简介简介简介简介', NULL, 110);
 INSERT INTO `user` VALUES (3, 'test1', '123456789', 'test1', 'http://localhost:9091/files/1712820559058-1697438073596-avatar.png', 'USER', NULL, '12345678901', NULL, NULL, NULL, 337);
 INSERT INTO `user` VALUES (4, 'num2', 'num2', 'num2', 'http://localhost:9091/files/1713113586356-1697438073596-avatar.png', 'USER', NULL, '13345678900', '1234tgfweqw3124123@123.com', NULL, NULL, 137);
 INSERT INTO `user` VALUES (5, 'user5', '12345', 'user5', 'http://localhost:9091/files/1713455395862-头像.jpg', 'USER', NULL, '13434344333', '23124fer2@163.COM', NULL, NULL, 37);
-INSERT INTO `user` VALUES (6, 'test', '123', 'test', NULL, 'USER', NULL, NULL, NULL, NULL, NULL, 20);
+INSERT INTO `user` VALUES (6, 'test', '123456', 'test', NULL, 'USER', NULL, NULL, NULL, NULL, NULL, 20);
 INSERT INTO `user` VALUES (7, 'sanqi', 'sanqi', 'sanqi', 'http://localhost:9091/files/1717863322272-吴彦祖.jpg', 'USER', NULL, '13002859313', '1078825799@qq.com', NULL, NULL, 0);
 INSERT INTO `user` VALUES (8, 'hoteltest', 'hoteltest', 'hoteltest', NULL, 'USER', NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `user` VALUES (9, '1234', '1234', '1234', NULL, 'USER', NULL, NULL, NULL, NULL, NULL, 0);

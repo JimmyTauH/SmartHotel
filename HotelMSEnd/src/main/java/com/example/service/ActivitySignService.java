@@ -3,6 +3,7 @@ package com.example.service;
 import cn.hutool.core.date.DateUtil;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.entity.Account;
+import com.example.entity.Activity;
 import com.example.entity.ActivitySign;
 import com.example.exception.CustomException;
 import com.example.mapper.ActivitySignMapper;
@@ -25,6 +26,15 @@ public class ActivitySignService {
     @Resource
     private ActivitySignMapper activitySignMapper;
 
+    public void add(ActivitySign activitySign) {
+        activitySignMapper.add(activitySign);
+    }
+
+    public void updateById(ActivitySign activitySign) {
+        activitySignMapper.updateById(activitySign);
+    }
+
+
     public void insert(ActivitySign activitySign) {
         //查询竞赛是否已报名
         Account currentUser = TokenUtils.getCurrentUser();
@@ -41,7 +51,9 @@ public class ActivitySignService {
     }
 
 
-
+    public List<ActivitySign> selectAll(ActivitySign activitySign) {
+        return activitySignMapper.selectAll(activitySign);
+    }
     public ActivitySign selectByActivityIdAndUserId(Integer actId, Integer userId) {
         return activitySignMapper.selectByActivityIdAndUserId(actId, userId);
     }
@@ -51,6 +63,9 @@ public class ActivitySignService {
         List<ActivitySign> list = activitySignMapper.selectAll(activitySign);
         return PageInfo.of(list);
     }
+
+
+
 
     public Integer selectActIdByUserId(Integer id){
         return activitySignMapper.selectActIdByUserId(id);

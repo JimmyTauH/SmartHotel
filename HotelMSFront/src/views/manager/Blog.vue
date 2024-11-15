@@ -15,37 +15,38 @@
 
     <div class="table">
       <el-table :data="tableData" stripe @selection-change="handleSelectionChange">
-        <el-table-column type="selection" width="55" align="center"></el-table-column>
-        <el-table-column prop="id" label="序号" width="80" align="center" sortable></el-table-column>
-        <el-table-column prop="title" label="标题" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="descr" label="简介" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="address" label="酒店地址" show-overflow-tooltip></el-table-column>
-        
-        <el-table-column prop="cover" label="封面">
+        <el-table-column type="selection" width="45" align="center"></el-table-column>
+        <el-table-column prop="id" label="序号" width="70" align="center" sortable></el-table-column>
+                <el-table-column prop="cover" label="封面" width="150">
         
           <template v-slot="scope">
             <div style="display: flex; align-items: center">
-              <el-image style="width: 50px;height: 50px;border-radius: 5px;" v-if="scope.row.cover"
+              <el-image style="width: 120px;height: 75px; border-radius: 5px;" v-if="scope.row.cover"
                         :src="scope.row.cover" :preview-src-list="[scope.row.cover]"></el-image>
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="categoryName" label="分类"></el-table-column>
-        <el-table-column prop="tags" label="标签">
+        <el-table-column prop="title" label="标题" width="240" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="address" label="酒店地址" width="250" show-overflow-tooltip></el-table-column>
+        
+
+        <el-table-column prop="categoryName" label="分类" width="100"></el-table-column>
+
+        <!-- <el-table-column prop="userId" label="发布人id"></el-table-column> -->
+        <el-table-column prop="userName" label="酒店联系人" width="80"></el-table-column>
+        <el-table-column prop="tags" label="标签" width="200" >
           <template v-slot="scope">
             <!--tag in JSON.parse(scope.row.tags || '[]')  将tags对象转成字符串后的字符串转成数组，然后循环渲染-->
             <el-tag v-for="tag in JSON.parse(scope.row.tags || '[]')" :key="tag.id" style="margin: 5px">{{ tag }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="userId" label="发布人id"></el-table-column>
-        <el-table-column prop="userName" label="发布人"></el-table-column>
         <el-table-column prop="date" label="发布日期"></el-table-column>
-        <el-table-column prop="readCount" label="浏览量"></el-table-column>
+        <el-table-column prop="readCount" label="浏览量" width="70"></el-table-column>
         <el-table-column label="酒店简介">
           <template v-slot="scope">
             <div>
-              <el-button @click="handleBlogContent(scope.row.content)">查看内容</el-button>
+              <el-button @click="handleBlogContent(scope.row.content)">查看酒店简介</el-button>
             </div>
           </template>
         </el-table-column>

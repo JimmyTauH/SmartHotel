@@ -45,7 +45,7 @@
             </template>
             <el-menu-item index="/recep/ruzhu">办理入住</el-menu-item>
             <el-menu-item index="/recep/tuifang">办理退房</el-menu-item>
-            <el-menu-item index="/recep/kefu">消息聊天</el-menu-item>
+            <el-menu-item index="/recep/RoomCheck">房间管理</el-menu-item>
             <el-menu-item index="/recep/houqin">后勤管理</el-menu-item>
           </el-submenu>
 

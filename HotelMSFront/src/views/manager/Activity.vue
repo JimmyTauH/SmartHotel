@@ -15,20 +15,21 @@
 
     <div class="table">
 
-      <el-table :data="filteredTableData" stripe @selection-change="handleSelectionChange">
+      <el-table :data="filteredTableData" stripe @selection-change="handleSelectionChange" >
         <el-table-column type="selection" width="60" align="center"></el-table-column>
-        <el-table-column prop="hotelID" label="所属酒店" :formatter="getHotelName" width="240"></el-table-column>
-        <el-table-column prop="name" label="房型名称" show-overflow-tooltip width="240"></el-table-column>
-
-
-        <el-table-column prop="cover" label="封面">
+        <el-table-column prop="cover" label="封面" >
           <template v-slot="scope">
-            <div style="display: flex; align-items: center">
-              <el-image style="width: 90px; height: 50px; border-radius: 5px" v-if="scope.row.cover"
+            <div style="display: flex; align-items: center" >
+              <el-image style="width:120px; height: 70px; border-radius: 5px" v-if="scope.row.cover"
                 :src="scope.row.cover" :preview-src-list="[scope.row.cover]"></el-image>
             </div>
           </template>
         </el-table-column>
+        <el-table-column prop="hotelID" label="所属酒店" :formatter="getHotelName" width="240"></el-table-column>
+        <el-table-column prop="name" label="房型名称" show-overflow-tooltip width="240"></el-table-column>
+
+
+
         <el-table-column prop="descr" label="房间简介" show-overflow-tooltip width="240"></el-table-column>
         <!-- <el-table-column prop="applystart" label="房间入住时间"></el-table-column>
         <el-table-column prop="applyend" label="房间退房时间"></el-table-column> -->

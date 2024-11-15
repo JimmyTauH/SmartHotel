@@ -1,5 +1,6 @@
 package com.example.mapper;
 
+import com.example.entity.Activity;
 import com.example.entity.ActivitySign;
 import com.example.dto.DailyReportDTO;
 import com.example.dto.RoomTypeReportDTO;
@@ -12,16 +13,22 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 public interface ActivitySignMapper {
-    @Insert("insert into activity_sign (activity_id, user_id, time,start_date,end_date,activity_number) VALUES (#{activityId},#{userId},#{time},#{start_date},#{end_date},#{activity_number})")
+
+    void updateById(ActivitySign activitySign);
+
+    void add(ActivitySign activitySign);
+
+
+
+    @Insert("insert into activity_sign (roomnumber, activity_id, user_id, time,applystart,applyend,activity_number,form) VALUES (#{roomnumber},#{activityId},#{userId},#{time},#{applystart},#{applyend},#{activity_number},#{form})")
     void insert(ActivitySign activitySign);
 
     @Select("select * from activity_sign where activity_id = #{activityId} and user_id = #{userId}")
     ActivitySign selectByActivityIdAndUserId(@Param("activityId") Integer actId,@Param("userId") Integer userId);
-    
-	@Select("select activity_id from activity_sign where user_id = #{userId}")
-    Integer selectActIdByUserId(@Param("userId") Integer userId);
 
     List<ActivitySign> selectAll(ActivitySign activitySign);
+	@Select("select activity_id from activity_sign where user_id = #{userId}")
+    Integer selectActIdByUserId(@Param("userId") Integer userId);
 
     @Delete("delete from activity_sign where id = #{id}")
     void deleteById(Integer id);

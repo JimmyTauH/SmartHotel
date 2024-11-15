@@ -6,13 +6,19 @@ package com.example.entity;
  */
 public class ActivitySign {
     private Integer id;
+
+    private Integer roomnumber;
     private Integer activityId;
     private Integer userId;
     private String time;
     private String activityName;
     private String userName;
-    private String start_date;
-    private String end_date;
+
+    private String applystart;
+
+    private String applyend;
+
+    private String form;
 
     private Integer activity_number;
 
@@ -40,6 +46,14 @@ public class ActivitySign {
         this.id = id;
     }
 
+    public Integer getRoomnumber() {
+        return roomnumber;
+    }
+
+    public void setRoomnumber(Integer roomnumber) {
+        this.roomnumber = roomnumber;
+    }
+
     public Integer getActivityId() {
         return activityId;
     }
@@ -64,20 +78,20 @@ public class ActivitySign {
         this.time = time;
     }
 
-    public String getStart_date() {
-        return start_date;
+    public String getApplystart() {
+        return applystart;
     }
 
-    public void setStart_date(String start_date) {
-        this.start_date = start_date;
+    public void setApplystart(String applystart) {
+        this.applystart = applystart;
     }
 
-    public String getEnd_date() {
-        return end_date;
+    public String getApplyend() {
+        return applyend;
     }
 
-    public void setEnd_date(String end_date) {
-        this.end_date = end_date;
+    public void setApplyend(String  applyend) {
+        this.applyend = applyend;
     }
 
     public Integer getActivity_number() {
@@ -86,6 +100,14 @@ public class ActivitySign {
 
     public void setActivity_number(Integer activity_number) {
         this.activity_number = activity_number;
+    }
+
+    public String getForm() {
+        return form;
+    }
+
+    public void setForm(String form) {
+        this.form = form;
     }
 
 }

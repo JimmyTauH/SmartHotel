@@ -42,6 +42,22 @@ public class ActivityService {
         activityMapper.deleteById(id);
     }
 
+    public Integer updateRoom(Activity activity) {
+        // 检查是否还有房间可以预订
+        if (activity.getNumber() <= 0) {
+            return 0; // 或者返回一个特定的值，表示没有可用房间
+        }
+        int startRoomNumber = 201;
+        // 计算当前要分配的房间号
+        int assignedRoomNumber = startRoomNumber + 1;
+        // 预订一个房间，将房间数量减一
+        activity.setNumber(activity.getNumber() - 1);
+        // 更新数据库中的房间数量
+        activityMapper.updateById(activity);
+        // 返回分配的房间号给前端
+        return assignedRoomNumber;
+    }
+
     public void deleteBatch(List<Integer> ids) {
         for (Integer id : ids) {
             activityMapper.deleteById(id);
@@ -87,7 +103,7 @@ public class ActivityService {
         for (Activity act : activityList) {
             this.setAct(act, currentUser);
         }
-        return activityPageInfo;
+        return PageInfo.of(list);
     }
 
     //设置竞赛信息

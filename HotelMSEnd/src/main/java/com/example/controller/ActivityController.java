@@ -58,6 +58,11 @@ public class ActivityController {
         return Result.success();
     }
 
+    @PutMapping("/updateroom")
+    public Result updateRoom(@RequestBody Activity activity) {
+        activityService.updateRoom(activity);
+        return Result.success();
+    }
 
     /**
      * 根据ID查询
