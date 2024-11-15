@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import cn.hutool.core.date.DateUtil;
 import com.example.common.Result;
 import com.example.entity.ServiceBook;
 import com.example.service.ServiceBookService;
@@ -37,6 +38,19 @@ public class ServiceBookController {
         Integer hotel_id = activityService.selectHotelIdByActivityID(act_id);
         notice.setHotel(hotel_id);
         serviceBookService.add(notice);
+        return Result.success();
+    }
+
+    /**
+     * 批量新增
+     */
+    @PostMapping("/batchAdd")
+    public Result batchAdd(@RequestBody List<ServiceBook> serviceBooks) {
+        for (ServiceBook serviceBook : serviceBooks) {
+            serviceBook.setState(false);
+            serviceBook.setTime(DateUtil.now());
+            serviceBookService.add(serviceBook);
+        }
         return Result.success();
     }
 

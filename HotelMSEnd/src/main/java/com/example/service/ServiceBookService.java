@@ -34,6 +34,15 @@ public class ServiceBookService {
     }
 
     /**
+     * 批量新增
+     */
+    public void batchAdd(List<ServiceBook> serviceBooks) {
+        for (ServiceBook serviceBook : serviceBooks) {
+            add(serviceBook);
+        }
+    }
+
+    /**
      * 删除
      */
     public void deleteById(Integer id) {
