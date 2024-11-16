@@ -84,8 +84,16 @@ export default {
     async fetchAvailableRooms() {
       try {
         const response = await this.$request.get('/recep/available-room');
-        this.availableRooms = response.data;  // 假设 API 返回一个房间数组
-        this.$message.success("可用房间已更新！");
+        if (response.code === "200") {
+          this.availableRooms = (response.data || []).map(room => ({
+            id: room.id,
+            name: room.name || `${room.id}`,
+            status: room.status || '未知状态',
+          }));
+          this.$message.success("可用房间已更新！");
+        } else {
+          this.$message.error("获取可用房间失败：" + (response.msg || "未知错误"));
+        }
       } catch (error) {
         this.$message.error("获取可用房间失败，请重试");
         console.error(error);

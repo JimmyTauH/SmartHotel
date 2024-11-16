@@ -104,6 +104,7 @@ public class RecepController {
 
     @PostMapping("/checkin")
     public Result handleCheckIn(@RequestBody Map<String, Object> request) {
+        System.out.println("Received check-in request: " + request);
         try {
             // 获取并转换 room 字段为整数
             String roomStr = (String) request.get("room");

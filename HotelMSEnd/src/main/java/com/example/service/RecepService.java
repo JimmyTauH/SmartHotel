@@ -5,6 +5,9 @@ import com.example.common.Constants;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.dto.CheckInRequest;
+import com.example.entity.CheckIn;
+import com.example.mapper.CheckInMapper;
+import com.example.mapper.MemberWelfareMapper;
 import com.example.service.RoomService;
 import com.example.entity.Account;
 import com.example.entity.Recep;
@@ -17,6 +20,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -30,6 +34,9 @@ public class RecepService {
 
     @Resource
     private RoomService roomService; // 注入 RoomService
+
+    @Resource
+    private CheckInMapper checkInMapper;
 
     /**
      * 新增
@@ -141,17 +148,29 @@ public class RecepService {
         Integer roomId = checkInRequest.getRoomId();
         List<CheckInRequest.Guest> guests = checkInRequest.getGuests();
 
-        // 保存入住信息（根据实际需求实现）
-        saveGuestInfo(guests);
+        // 保存入住信息到 CheckIn 表
+        saveGuestInfo(roomId, guests);
 
         // 更新房间状态为已入住
         roomService.updateRoomStatus(roomId, RoomService.STATE_OCCUPIED);
     }
 
-    private void saveGuestInfo(List<CheckInRequest.Guest> guests) {
-        // 保存每位客人的信息到数据库（根据需求实现）
+    private void saveGuestInfo(Integer roomId, List<CheckInRequest.Guest> guests) {
+        // 获取当前时间作为入住时间
+        LocalDateTime now = LocalDateTime.now();
+
         for (CheckInRequest.Guest guest : guests) {
-            // 实现保存逻辑
+            // 创建 CheckIn 实例
+            CheckIn checkIn = new CheckIn();
+            checkIn.setRoomId(roomId);
+            checkIn.setIntime(now);
+            checkIn.setGuestName(guest.getName());
+            checkIn.setGender(guest.getGender());
+            checkIn.setGuestId(guest.getIdCard());
+            checkIn.setGuestPhone(guest.getPhone());
+
+            // 保存到数据库
+            checkInMapper.insert(checkIn);
         }
     }
 }
