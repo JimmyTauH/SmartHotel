@@ -32,7 +32,14 @@ public class ServiceBookService {
         //还需要加入酒店信息
         serviceBookMapper.insert(notice);
     }
-
+    /**
+     * 批量新增
+     */
+    public void batchAdd(List<ServiceBook> serviceBooks) {
+        for (ServiceBook serviceBook : serviceBooks) {
+            add(serviceBook);
+        }
+    }
     /**
      * 删除
      */

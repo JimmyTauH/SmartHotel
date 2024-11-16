@@ -14,9 +14,11 @@
 						<el-menu-item index="/front/home" style="margin-left: 100px">首页</el-menu-item>
 						<el-menu-item index="/front/activity">热门房型</el-menu-item>
 						<el-menu-item index="/front/person">个人中心</el-menu-item>
+            <el-menu-item index="/front/im">在线咨询</el-menu-item>
 <!--						<el-menu-item index="/front/signIn">签到</el-menu-item>-->
 						<el-menu-item index="/front/Certification">会员认证</el-menu-item>
             <el-menu-item index = "/front/ServiceBooking">服务预约</el-menu-item>
+            <el-menu-item index = "/front/Repair">设备报修</el-menu-item>
 						<el-menu-item index="/front/Circulars">
               系统通知
               <div class="notification-bell">

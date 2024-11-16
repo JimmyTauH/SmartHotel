@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.RepairMapper">
+
+    <sql id="Base_Column_List">
+        id,title,content,time,user,hotel,room,state
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.Repair">
+        select
+        <include refid="Base_Column_List" />
+        from repair
+        <!--        <where>-->
+        <!--            <if test="id != null"> and id = #{id}</if>-->
+        <!--            <if test="title != null"> and title like concat('%', #{title}, '%')</if>-->
+        <!--            <if test="content != null"> and content = #{content}</if>-->
+        <!--            <if test="time != null"> and time = #{time}</if>-->
+        <!--            <if test="user != null"> and user = #{user}</if>-->
+        <!--            <if test="hotel != null"> and hotel = #{hotel}</if>-->
+        <!--            <if test="room != null"> and room = #{room}</if>-->
+        <!--            <if test="state != null"> and state = #{state}</if>-->
+        <!--        </where>-->
+        order by id desc
+    </select>
+
+    <select id="selectByUser" resultType="com.example.entity.Repair">
+        select
+        <include refid="Base_Column_List" />
+        from repair
+        where user = #{user}
+        order by time desc
+    </select>
+
+    <select id="selectByHotel" resultType="com.example.entity.Repair">
+        select
+        <include refid="Base_Column_List" />
+        from repair
+        where hotel = #{hotel}
+        order by time desc
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.Repair">
+        select
+        <include refid="Base_Column_List" />
+        from repair
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from repair
+        where id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.Repair" useGeneratedKeys="true">
+        insert into repair
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="title != null">title,</if>
+            <if test="content != null">content,</if>
+            <if test="time != null">time,</if>
+            <if test="user != null">user,</if>
+            <if test="hotel != null">hotel,</if>
+            <if test="room != null">room,</if>
+            <if test="state != null">state,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="title != null">#{title},</if>
+            <if test="content != null">#{content},</if>
+            <if test="time != null">#{time},</if>
+            <if test="user != null">#{user},</if>
+            <if test="hotel != null">#{hotel},</if>
+            <if test="room != null">#{room},</if>
+            <if test="state != null">#{state},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Repair">
+        update repair
+        <set>
+            <trim suffixOverrides=",">
+                <if test="title != null">title = #{title},</if>
+                <if test="content != null">content = #{content},</if>
+                <if test="time != null">time = #{time},</if>
+                <if test="user != null">user = #{user},</if>
+                <if test="hotel != null">hotel = #{hotel},</if> <!-- 修正这里 -->
+                <if test="room != null">room = #{room},</if> <!-- 修正这里 -->
+                <if test="state != null">state = #{state},</if> <!-- 修正这里 -->
+            </trim>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

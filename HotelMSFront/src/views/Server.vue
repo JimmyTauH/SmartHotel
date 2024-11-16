@@ -44,7 +44,7 @@
               <i class="el-icon-menu"></i><span>后勤信息管理</span>
             </template>
             <el-menu-item index="/server/work">顾客预约服务</el-menu-item>
-            <el-menu-item index="/server/report">报告设施状况</el-menu-item>
+            <el-menu-item index="/server/repair">设备报修状况</el-menu-item>
             <el-menu-item index="/server/logging">客房打扫日志</el-menu-item>
           </el-submenu>
         </el-menu>

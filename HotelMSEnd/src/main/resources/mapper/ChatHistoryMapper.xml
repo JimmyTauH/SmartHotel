@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ChatHistoryMapper">
+
+    <insert id="insertChatHistory">
+        INSERT INTO chat_history (`from`, `to`, message, timestamp)
+        VALUES (#{from}, #{to}, #{message}, #{timestamp})
+    </insert>
+
+    <select id="loadChatHistory" resultType="com.example.entity.ChatHistory">
+        SELECT `from`, `to`, message, timestamp
+        FROM chat_history
+        WHERE (`from` = #{user1} AND `to` = #{user2})
+           OR (`from` = #{user2} AND `to` = #{user1})
+        ORDER BY timestamp ASC
+    </select>
+
+    <select id="getChatParticipants" resultType="java.lang.String">
+        SELECT DISTINCT
+            CASE
+                WHEN `from` = #{username} THEN `to`
+                WHEN `to` = #{username} THEN `from`
+                END AS participant
+        FROM chat_history
+        WHERE `from` = #{username} OR `to` = #{username}
+    </select>
+
+
+</mapper>

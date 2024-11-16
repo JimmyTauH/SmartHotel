@@ -10,12 +10,13 @@
       </div>
       <el-table :data="filteredServices_noncompleted" style="width: 100%" class="service-table">
         <el-table-column prop="title" label="服务类型"></el-table-column>
+        <el-table-column prop="room" label="房间号"></el-table-column>
         <el-table-column prop="time" label="预约时间"></el-table-column>
         <el-table-column prop="content" label="备注"></el-table-column>
           <!-- 操作列 -->
           <el-table-column label="操作" width="180" align="center">
           <template v-slot="scope">
-            <el-button plain type="danger" size="mini" @click=updateService(scope.row.id)>服务状态更新</el-button>
+            <el-button plain type="danger" size="mini" @click=updateService(scope.row.id)>更新为已完成</el-button>
           </template>
         </el-table-column>
 
@@ -26,8 +27,15 @@
       </div>
       <el-table :data="filteredServices_completed" style="width: 100%" class="service-table">
         <el-table-column prop="title" label="服务类型"></el-table-column>
+        <el-table-column prop="hotel" label="酒店"></el-table-column>
+        <el-table-column prop="room" label="房间号"></el-table-column>
         <el-table-column prop="time" label="预约时间"></el-table-column>
         <el-table-column prop="content" label="备注"></el-table-column>
+        <el-table-column label="操作" width="180" align="center">
+          <template v-slot="scope">
+            <el-button plain type="danger" size="mini" @click=updateService0(scope.row.id)>更新为未完成</el-button>
+          </template>
+        </el-table-column>
       </el-table>
 
 
@@ -49,10 +57,10 @@ export default {
   },
   computed: {
     filteredServices_noncompleted() {
-      return this.services.filter(item => item.state == 0);
+      return this.services.filter(item => item.state == 0 && item.title !== "房间清洁");
     },
     filteredServices_completed() {
-      return this.services.filter(item => item.state == 1);
+      return this.services.filter(item => item.state == 1 && item.title !== "房间清洁");
     },
   },
   methods: {
@@ -85,7 +93,23 @@ export default {
     .catch(err => {
       console.error("更新服务状态出错:", err);
     });
-  }
+  },
+    updateService0(id) {
+      console.log(id);
+      // 更新 state 为 0 表示未完成
+      this.$request.put(`/serviceBook/updateState0/`+id)
+          .then(res => {
+            if (res.code === '200') {
+              this.$message.success('服务状态更新为未完成');
+              this.loadServices(); // 刷新服务列表
+            } else {
+              this.$message.error(res.msg);
+            }
+          })
+          .catch(err => {
+            console.error("更新服务状态出错:", err);
+          });
+    }
 
   }
 }

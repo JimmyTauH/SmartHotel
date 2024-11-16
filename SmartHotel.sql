@@ -752,3 +752,31 @@ CREATE TABLE `user_server`  (
 INSERT INTO `user_server` VALUES (1, 'server1', '123456', 'server1', NULL, 'SERVER', NULL, NULL, NULL, NULL, 1, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+-- ----------------------------
+-- Records of chat_history
+-- ----------------------------
+CREATE TABLE chat_history (
+                              id INT AUTO_INCREMENT PRIMARY KEY,
+                              `from` VARCHAR(255) NOT NULL,
+                              `to` VARCHAR(255) NOT NULL,
+                              message TEXT NOT NULL,
+                              timestamp DATETIME NOT NULL
+);
+
+-- ----------------------------
+-- Table structure for repair
+-- ----------------------------
+DROP TABLE IF EXISTS `repair`;
+CREATE TABLE `repair`  (
+                            `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID',
+                            `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '标题',
+                            `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '内容',
+                            `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '创建时间',
+                            `user` int NULL DEFAULT NULL COMMENT '创建人',
+                            `hotel` int NULL DEFAULT NULL COMMENT '酒店',
+                            `room` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+                            `state` int NULL DEFAULT NULL,
+                            PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '' ROW_FORMAT = DYNAMIC;

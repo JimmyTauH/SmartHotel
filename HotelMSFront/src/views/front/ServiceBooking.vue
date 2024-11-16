@@ -8,7 +8,7 @@
         申请服务
       </div>
       <el-form :model="form" ref="formRef" label-width="150px" label-align="right" :rules="rules" class="service-form">
-        <el-form-item label="预约服务类型" prop="title" required>
+        <el-form-item label="预约服务类型" prop="title">
           <el-select v-model="form.title" placeholder="选择服务类型">
             <el-option
               v-for="option in serviceOptions"
@@ -18,8 +18,11 @@
             ></el-option>
           </el-select>
         </el-form-item>
-
-        <el-form-item label="预约服务时间" prop="time" required>
+        <!-- TODO: get到房间号 -->
+        <el-form-item label="房间号" prop="room">
+          <el-input type="textarea" v-model="form.room" rows=1 placeholder="请输入房间号"></el-input>
+        </el-form-item>
+        <el-form-item label="预约服务时间" prop="time">
           <el-date-picker v-model="form.time" type="datetime" placeholder="选择预约时间"></el-date-picker>
         </el-form-item>
         <el-form-item label="备注" prop="content">
@@ -35,6 +38,17 @@
           </el-button>
         </div>
       </el-form>
+
+      <el-dialog :visible.sync="showDialog" title="确认申请">
+        <p>服务类型：{{ formPreview.title }}</p>
+        <p>预约时间：{{ formPreview.time }}</p>
+        <p>房间号：{{ formPreview.room }}</p>
+        <p>备注：{{ formPreview.content }}</p>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="showDialog = false">取消</el-button>
+          <el-button type="primary" @click="confirmSubmit">确认</el-button>
+        </span>
+      </el-dialog>
 
       <div class="section-title">
         待完成服务
@@ -81,10 +95,19 @@ export default {
         { label: '早餐服务', value: "早餐服务" },
         { label: '接送服务', value: "接送服务" },
       ],
+      roomOptions: [
+        { number: '101' },
+        { number: '102' },
+        { number: '103' },
+        { number: '104' },
+      ],
       rules: {
         title: [{ required: true, message: '请选择服务类型', trigger: 'change' }],
+        room: [{ required: true, message: '请选择房间号', trigger: 'change' }],
         time: [{ required: true, message: '请选择预约时间', trigger: 'change' }],
-      }
+      },
+      showDialog: false, // 对话框的显示状态
+      formPreview: {} // 用于预览的表单内容
     }
   },
   mounted() {
@@ -132,24 +155,31 @@ export default {
     },
     submitRequest() {
       this.$refs.formRef.validate().then(() => {
-        this.form.state = 0;
-        this.form.user = this.user.id;
-        this.$request.post('/serviceBook/add/', this.form)
+        this.formPreview = { ...this.form }; // 复制表单内容用于预览
+        this.showDialog = true; // 显示对话框
+      }).catch(err => {
+        console.log('验证失败:', err);
+      });
+    },
+    confirmSubmit() {
+      this.form.state = 0;
+      this.form.userId = this.user.id;
+      this.$request.post('/serviceBook/add/', this.form)
           .then(res => {
             if (res.code === '200') {
               this.$message.success('申请成功');
               this.loadServices();
-              this.form = { title: '', time: '', content: '' };
+              this.form = {title: '', time: '', roomNumber: '', content: ''}; // 重置表单
             } else {
               this.$message.error(res.msg);
             }
           })
           .catch(err => {
             console.error("申请服务出错:", err);
+          })
+          .finally(() => {
+            this.showDialog = false; // 关闭对话框
           });
-      }).catch(err => {
-        console.log('验证失败:', err);
-      });
     }
   }
 }
