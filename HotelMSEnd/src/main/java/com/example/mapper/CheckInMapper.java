@@ -16,7 +16,14 @@ public interface CheckInMapper {
             "VALUES (#{roomId}, #{intime}, #{guestName}, #{gender}, #{guestId}, #{guestPhone})")
     void insert(CheckIn checkIn);
 
-    @Select("SELECT * FROM check_in WHERE room_id = #{roomId}")
+    @Select("SELECT ci.* " +
+            "FROM check_in ci " +
+            "LEFT JOIN check_out co " +
+            "ON ci.id = co.guest_id " +
+            "AND ci.room_id = co.room_id " +
+            "AND co.outtime >= ci.intime " +
+            "WHERE ci.room_id = #{roomId} " +
+            "AND (co.id IS NULL OR co.outtime < ci.intime);")
     List<CheckIn> findGuestsByRoomId(@Param("roomId") Integer roomId);
 
     @Delete("DELETE FROM check_in WHERE room_id = #{roomId}")
