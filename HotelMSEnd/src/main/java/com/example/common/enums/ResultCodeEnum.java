@@ -19,6 +19,9 @@ public enum ResultCodeEnum {
     CERTIFICATION_EXIST_ERROR("5008","用户已提交认证"),
     INTEGRAL_NOT_ENOUGH("5009","积分不足"),
     CHECKIN_FAILURE("5010","办理入住失败"),
+    CHECKOUT_FAILURE("5011","办理退房失败"),
+    ROOMGUESTS_FAILURE("5012","获取房间客人失败"),
+    ROOMFIND_FAILURE("5013","获取房间信息失败"),
     ;
 
     public String code;

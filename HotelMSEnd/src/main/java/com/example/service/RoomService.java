@@ -25,6 +25,10 @@ public class RoomService {
         return roomMapper.findRoomsByState(STATE_AVAILABLE); // 使用状态值查询可用房间
     }
 
+    public List<Room> getOccupiedRooms() {
+        return roomMapper.findRoomsByState(RoomService.STATE_OCCUPIED);
+    }
+
     /**
      * 更新房间状态
      */

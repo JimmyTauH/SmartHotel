@@ -3,8 +3,10 @@ package com.example.controller;
 import com.example.common.Result;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.dto.CheckInRequest;
+import com.example.entity.CheckIn;
 import com.example.entity.Recep;
 import com.example.entity.Room;
+import com.example.service.CheckInService;
 import com.example.service.RecepService;
 import com.example.service.RoomService;
 import com.github.pagehelper.PageInfo;
@@ -27,6 +29,9 @@ public class RecepController {
 
     @Resource
     private RoomService roomService; // 处理房间操作的服务
+
+    @Resource
+    private CheckInService checkInService; // 处理入住操作的服务
 
     /**
      * 新增
@@ -138,4 +143,62 @@ public class RecepController {
             return Result.error(ResultCodeEnum.CHECKIN_FAILURE);
         }
     }
+
+    @GetMapping("/occupied-room")
+    public Result getOccupiedRooms() {
+        try {
+            List<Room> occupiedRooms = roomService.getOccupiedRooms();
+            return Result.success(occupiedRooms);
+        } catch (Exception e) {
+            return Result.error(ResultCodeEnum.ROOMFIND_FAILURE);
+        }
+    }
+
+    @GetMapping("/room-guests")
+    public Result getRoomGuests(@RequestParam String room) {
+        try {
+            Integer roomId = Integer.parseInt(room);
+            List<CheckIn> guests = checkInService.getGuestsByRoomId(roomId);
+            return Result.success(guests);
+        } catch (NumberFormatException e) {
+            return Result.error(ResultCodeEnum.PARAM_ERROR);
+        } catch (Exception e) {
+            return Result.error(ResultCodeEnum.ROOMGUESTS_FAILURE);
+        }
+    }
+
+    @PostMapping("/checkout")
+    public Result handleCheckout(@RequestBody Map<String, Object> request) {
+        System.out.println("Received check-out request: " + request);
+        try {
+            Object roomObj = request.get("room");
+            Integer roomId = (roomObj instanceof String)
+                    ? Integer.parseInt((String) roomObj)
+                    : (Integer) roomObj;
+            System.out.println("Parsed Room ID: " + roomId);
+
+            Object guestIdObj = request.get("guestId");
+            System.out.println("Guest ID Object: " + guestIdObj);
+
+            if (guestIdObj == null) {
+                System.out.println("Executing clearRoomGuests for Room ID: " + roomId);
+                checkInService.clearRoomGuests(roomId); // 清空房间
+            } else {
+                Integer guestId = Integer.parseInt(guestIdObj.toString());
+                System.out.println("Executing checkoutGuest for Guest ID: " + guestId + ", Room ID: " + roomId);
+                checkInService.checkoutGuest(roomId, guestId); // 单个客人退房
+            }
+            System.out.println("Check-out completed successfully.");
+            return Result.success("退房成功！");
+        } catch (NumberFormatException e) {
+            System.err.println("Error parsing Room ID or Guest ID: " + e.getMessage());
+            return Result.error(ResultCodeEnum.PARAM_ERROR);
+        } catch (Exception e) {
+            System.err.println("Error during check-out process: " + e.getMessage());
+            e.printStackTrace();
+            return Result.error(ResultCodeEnum.CHECKOUT_FAILURE);
+        }
+    }
+
+
 }
