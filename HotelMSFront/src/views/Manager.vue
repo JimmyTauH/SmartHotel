@@ -51,6 +51,7 @@
             <el-menu-item index="/comment">评论管理</el-menu-item>
             <el-menu-item index="/certification">会员认证</el-menu-item>
             <el-menu-item index="/circulars">系统通知</el-menu-item>
+            <el-menu-item index="/dealreport">故障报修</el-menu-item>
           </el-submenu>
 
           <el-submenu index="user" >

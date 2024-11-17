@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.FaultReportMapper">
+
+    <!-- 插入故障报备记录 -->
+    <insert id="insert" parameterType="com.example.entity.FaultReport">
+        insert into fault_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deviceName != null">device_name,</if>
+            <if test="description != null">description,</if>
+            <if test="logisticsId != null">logistics_id,</if>
+            <if test="reportTime != null">report_time,</if>
+            <if test="image != null">image,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deviceName != null">#{deviceName},</if>
+            <if test="description != null">#{description},</if>
+            <if test="logisticsId != null">#{logisticsId},</if>
+            <if test="reportTime != null">#{reportTime},</if>
+            <if test="image != null">#{image},</if>
+        </trim>
+    </insert>
+
+    <!-- 删除故障报备记录 -->
+    <delete id="deleteById">
+        delete
+        from fault_report
+        where id = #{id}
+    </delete>
+
+    <select id="selectById" resultType="com.example.entity.FaultReport">
+        select
+        fault_report.*
+        from fault_report
+        where fault_report.device_name = #{deviceName}
+        and fault_report.logistics_id = #{logisticsId}
+    </select>
+
+    <select id="selectAll" resultType="com.example.entity.FaultReport">
+        select
+        fault_report.*
+        from fault_report
+        <where>
+            <if test="deviceName != null">and device_name like concat('%', #{deviceName}, '%')</if>
+            <if test="logisticsId != null">and logistics_id = #{logisticsId}</if>
+        </where>
+        order by fault_report.id desc
+    </select>
+
+</mapper>

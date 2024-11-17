@@ -32,6 +32,7 @@ const routes = [
       { path: 'activitySign', name: 'ActivitySign', meta: { name: '酒店入住' }, component: () => import('../views/manager/ActivitySign') },
       { path: 'certification', name: 'Certification', meta: { name: '会员认证' }, component: () => import('../views/manager/Certification.vue') },
       { path: 'circulars', name: 'Circulars', meta: { name: '系统通知' }, component: () => import('../views/manager/Circulars.vue') },
+      { path: 'dealreport', name: 'DealReport', meta: { name: '故障报修' }, component: () => import('../views/manager/DealReport.vue') },
       { path: 'dailyreport', name: 'DailyReport', meta: { name: '日报表' }, component: () => import('../views/manager/DailyReport.vue') },
       { path: 'weeklyreport', name: 'WeeklyReport', meta: { name: '周报表' }, component: () => import('../views/manager/WeeklyReport.vue') },
       { path: 'monthlyreport', name: 'MonthlyReport', meta: { name: '月报表' }, component: () => import('../views/manager/MonthlyReport.vue') },
@@ -82,7 +83,7 @@ const routes = [
         { path: 'home', name: 'Home', meta: { name: '后勤首页' }, component: () => import('../views/server/Home.vue') },
         { path: 'serverPerson', name: 'ServerPerson', meta: { name: '个人信息' }, component: () => import('../views/server/ServerPerson.vue') },
         { path: 'work', name: 'work', meta: { name: '顾客预约服务' }, component: () => import('../views/server/ServiceChecking.vue') },
-        { path: 'repair', name: 'repair', meta: { name: '设备报修' }, component: () => import('../views/server/Repair.vue') },
+        { path: 'faultReport', name: 'FaultReport', meta: { name: '故障报修' }, component: () => import('../views/server/FaultReport.vue') },
         { path: 'logging', name: 'logging', meta: { name: '打扫日志' }, component: () => import('../views/server/Logging.vue') },
         { path: 'serverPerson', name: 'serverPerson', meta: { name: '主页' }, component: () => import('../views/server/ServerPerson.vue') },
   
