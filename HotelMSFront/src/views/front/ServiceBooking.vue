@@ -163,7 +163,7 @@ export default {
     },
     confirmSubmit() {
       this.form.state = 0;
-      this.form.userId = this.user.id;
+      this.form.user = this.user.id;
       this.$request.post('/serviceBook/add/', this.form)
           .then(res => {
             if (res.code === '200') {
