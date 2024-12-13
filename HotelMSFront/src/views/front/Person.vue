@@ -12,7 +12,7 @@
         <div style="margin-top: 10px">
           <el-form>
             <el-form-item label="酒店类型" prop="preference">
-              <el-select v-model="user.preference" multiple filterable default-first-option style="width: 100%">
+              <el-select v-model="user.preferenceArray" multiple filterable default-first-option style="width: 100%">
                 <el-option value="标准酒店" label="标准酒店"></el-option>
                 <el-option value="温馨公寓" label="温馨公寓"></el-option>
                 <el-option value="美居民宿" label="美居民宿"></el-option>
@@ -109,13 +109,13 @@ export default {
     MyWelfare
   },
   created() {
-
+    this.user.preferenceArray = JSON.parse(this.user.preference);
   },
   methods: {
     savePreferences() {
       // 保存用户偏好到数据库
-      console.log(this.user.preference);
-      const preferenceString = JSON.stringify(this.user.preference);
+      console.log(this.user.preferenceArray);
+      const preferenceString = JSON.stringify(this.user.preferenceArray);
       // 更新 user 对象中的 preference 字段为字符串形式
       this.user.preference = preferenceString;
       console.log(this.user.preference);
