@@ -210,7 +210,7 @@ export default {
     handleEdit(row) {   // 编辑数据
       this.form = JSON.parse(JSON.stringify(row))  // 给form对象赋值  注意要深拷贝数据
       this.tagsArr = JSON.parse(row.tags || '[]') // 将tags对象转成数组
-      this.servicesArr = JSON.parse(row.services || '[]'); // 服务标签转数组
+      this.servicesArr = JSON.parse(row.servicesProvided || '[]'); // 服务标签转数组
       this.fromVisible = true   // 打开弹窗
       this.setRichText()  // 初始化富文本编辑器
       setTimeout(() => {
