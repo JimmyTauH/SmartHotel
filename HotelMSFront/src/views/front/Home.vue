@@ -90,7 +90,7 @@ export default {
   },
   data() {
     return {
-      current: '全部房型',  //当前选择的分类名称，默认为全部
+      current: '全部酒店',  //当前选择的分类名称，默认为全部
       categoryList: [],
       topList: [],  //排行榜数据
       showList: [],   //展示的topList
@@ -136,7 +136,7 @@ export default {
       //请求分类数据
       this.$request.get('/category/selectAll').then(res => {
         this.categoryList = res.data || []
-        this.categoryList.unshift({name: '全部房型'})
+        this.categoryList.unshift({name: '全部酒店'})
       })
     },
     goToApply() {

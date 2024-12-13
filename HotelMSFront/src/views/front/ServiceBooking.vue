@@ -8,6 +8,22 @@
         申请服务
       </div>
       <el-form :model="form" ref="formRef" label-width="150px" label-align="right" :rules="rules" class="service-form">
+        <el-form-item label="订单选择" prop="order">
+          <el-select v-model="form.order" placeholder="选择需要服务的订单">
+            <el-option
+              v-for="item in orderList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+
+        <!-- TODO: get到房间号 -->
+        <el-form-item label="房间号" prop="room">
+          <el-input type="textarea" v-model="form.room" rows=1 placeholder="请输入房间号"></el-input>
+        </el-form-item>
         <el-form-item label="预约服务类型" prop="title">
           <el-select v-model="form.title" placeholder="选择服务类型">
             <el-option
@@ -18,10 +34,7 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        <!-- TODO: get到房间号 -->
-        <el-form-item label="房间号" prop="room">
-          <el-input type="textarea" v-model="form.room" rows=1 placeholder="请输入房间号"></el-input>
-        </el-form-item>
+        
         <el-form-item label="预约服务时间" prop="time">
           <el-date-picker v-model="form.time" type="datetime" placeholder="选择预约时间"></el-date-picker>
         </el-form-item>
@@ -89,6 +102,7 @@ export default {
         time: '',
         content: ''
       },
+      orderList: [],
       services: [],
       serviceOptions: [
         { label: '房间清洁', value: "房间清洁" },
@@ -107,10 +121,13 @@ export default {
         time: [{ required: true, message: '请选择预约时间', trigger: 'change' }],
       },
       showDialog: false, // 对话框的显示状态
-      formPreview: {} // 用于预览的表单内容
+      formPreview: {}, // 用于预览的表单内容
+      today: new Date(),
     }
   },
   mounted() {
+    this.loadHotels();
+    this.calculateDateRanges();
     this.loadServices();
   },
   computed: {
@@ -125,6 +142,44 @@ export default {
     },
   },
   methods: {
+    calculateDateRanges() {
+      let startDate = new Date(this.today); // 从今天开始
+      this.orderList = this.orderList.map((hotel) => {
+        const endDate = new Date(startDate);
+        endDate.setDate(startDate.getDate() + 2); // 停留两天
+
+        const dateRange = `${this.formatDate(startDate)}-${this.formatDate(endDate)}`;
+        startDate = new Date(endDate); // 下一家酒店的开始日期
+        return { ...hotel, dateRange }; // 添加日期范围到酒店对象
+      });
+    },
+    formatDate(date) {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      return `${month}.${day}`;
+    },
+    loadHotels() {
+      this.$request.get('/blog/selectPage', {
+        params: {
+          pageNum: this.pageNum,
+          pageSize: this.pageSize,
+          categoryName: this.categoryName === '全部酒店' ? null : this.categoryName,
+          title: this.title,
+          userId: this.userId
+        }
+      }).then(res => {
+        // 将酒店名称映射为订单选项
+        this.orderList = (res.data?.list || []).map(hotel => {
+          return {
+            value: hotel.id, // 使用酒店 ID 作为值
+            label: hotel.title // 使用酒店名称作为显示内容
+          };
+        });
+        this.total = res.data?.total; // 总记录数（如果需要分页）
+        console.log(this.orderList);
+      });
+    },
     loadServices() {
       if (!this.user.id) {
         console.error("用户ID无效!无法加载服务!");

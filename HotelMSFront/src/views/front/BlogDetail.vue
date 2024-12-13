@@ -57,8 +57,18 @@
                   <el-tag v-for="item in tagsArr" :key="item.id" type="primary" style="margin-right: 5px" size="small">
                     {{ item }}
                   </el-tag>
-                  <i class="el-icon-edit-outline" style="margin-right: 5px;margin-left: 25px;"></i>
+                </div>
 
+                <div style="margin-top: 20px">
+                  <i class="el-icon-postcard" style="margin-right: 5px"></i>
+                  <span style="margin-right: 5px">提供服务:</span>
+                  <el-tag v-for="item in servicesArr" :key="item.id" type="primary" style="margin-right: 5px" size="small">
+                    {{ item }}
+                  </el-tag>
+                </div>
+
+                <div style="margin-top: 20px">
+                  <i class="el-icon-edit-outline" style="margin-right: 5px"></i>
                   <span style="font-size: 14px;color: #666666">酒店简介:</span>
                   <div style="letter-spacing: 3px;font-size: 13px;margin-top: 10px" v-html="blog.content"></div>
                 </div>
@@ -218,6 +228,7 @@ export default {
       blog: {},
       contest: {},
       tagsArr: [],
+      servicesArr: [],
       recommendList: [],
       module: '帖子',
       map: null,
@@ -475,6 +486,7 @@ export default {
       this.$request.get("/blog/select/" + this.blogId).then(res => {
         this.blog = res.data || {}
         this.tagsArr = JSON.parse(this.blog.tags || '[]')
+        this.servicesArr = JSON.parse(this.blog.servicesProvided || '[]')
         if (this.blog.contestId) {
           this.loadContest(this.blog.contestId);
         }

@@ -138,7 +138,7 @@ export default {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          categoryName: this.categoryName === '全部房型' ? null : this.categoryName,
+          categoryName: this.categoryName === '全部酒店' ? null : this.categoryName,
           title: this.title,
           userId: this.userId
         }
