@@ -8,6 +8,24 @@
       <el-tab-pane label="已预订酒店" name="已预订酒店">
         <ActivityList type="user" :span="12"/>
       </el-tab-pane>
+      <el-tab-pane label="个人偏好" name="个人偏好">
+        <div style="margin-top: 10px">
+          <el-form>
+            <el-form-item label="酒店类型" prop="hotelTypes">
+              <el-select v-model="user.hotelTypes" multiple filterable default-first-option style="width: 100%">
+                <el-option value="标准酒店" label="标准酒店"></el-option>
+                <el-option value="温馨公寓" label="温馨公寓"></el-option>
+                <el-option value="美居民宿" label="美居民宿"></el-option>
+                <el-option value="独栋别墅" label="独栋别墅"></el-option>
+                <el-option value="会议酒店" label="会议酒店"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="savePreferences">保存</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+      </el-tab-pane>
       <el-tab-pane label="我的足迹" name="我的足迹">
         <div style="margin-top: 10px">
           <BlogList type="user" :showOpt="true"/>
