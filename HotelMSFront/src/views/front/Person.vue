@@ -11,8 +11,8 @@
       <el-tab-pane label="个人偏好" name="个人偏好">
         <div style="margin-top: 10px">
           <el-form>
-            <el-form-item label="酒店类型" prop="hotelTypes">
-              <el-select v-model="user.hotelTypes" multiple filterable default-first-option style="width: 100%">
+            <el-form-item label="酒店类型" prop="preference">
+              <el-select v-model="user.preference" multiple filterable default-first-option style="width: 100%">
                 <el-option value="标准酒店" label="标准酒店"></el-option>
                 <el-option value="温馨公寓" label="温馨公寓"></el-option>
                 <el-option value="美居民宿" label="美居民宿"></el-option>
@@ -112,6 +112,31 @@ export default {
 
   },
   methods: {
+    savePreferences() {
+      // 保存用户偏好到数据库
+      console.log(this.user.preference);
+      const preferenceString = JSON.stringify(this.user.preference);
+      // 更新 user 对象中的 preference 字段为字符串形式
+      this.user.preference = preferenceString;
+      console.log(this.user.preference);
+      this.$request.put('/user/update', this.user).then(res => {
+        if (res.code === '200') {
+          // 成功更新
+          this.$message.success('保存成功');
+          // 更新浏览器缓存里的用户信息
+          localStorage.setItem('xm-user', JSON.stringify(this.user));
+          // 触发父级的数据更新
+          this.$emit('update:user');
+        } else {
+          // 显示错误信息
+          this.$message.error(res.msg);
+        }
+      }).catch(error => {
+        // 处理请求错误
+        console.error('更新用户偏好失败:', error);
+        this.$message.error('更新失败');
+      });
+    },
     updateUser() {
       // 触发父级的数据更新
       this.$emit('update:user')
