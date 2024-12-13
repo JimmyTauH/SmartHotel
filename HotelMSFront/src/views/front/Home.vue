@@ -90,13 +90,14 @@ export default {
   },
   data() {
     return {
-      current: '全部酒店',  //当前选择的分类名称，默认为全部
+      current: '个性推荐',  //当前选择的分类名称，默认为推荐
       categoryList: [],
       topList: [],  //排行榜数据
       showList: [],   //展示的topList
       lastNum: 0,
       tableData: [],
-      user: JSON.parse(localStorage.getItem('xm-user') || '{}')
+      user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
+      preferenceArray: [],
     }
   },
   mounted() {
@@ -104,7 +105,26 @@ export default {
     this.refreshTop()
     this.loadActivity()
   },
+  created() {
+    this.initPreferenceArray();
+  },
   methods: {
+    initPreferenceArray() {
+      // 检查 this.user.preference 是否存在且为字符串
+      if (this.user.preference && typeof this.user.preference === 'string') {
+        try {
+          // 尝试将字符串解析为数组
+          this.preferenceArray = JSON.parse(this.user.preference);
+        } catch (error) {
+          console.error('解析 preference 时出错:', error);
+          // 如果解析失败，可以设置默认值或者进行错误处理
+          this.preferenceArray = [];
+        }
+      } else {
+        // 如果 this.user.preference 不是字符串，也设置默认值或进行错误处理
+        this.preferenceArray = [];
+      }
+    },
     loadActivity() {
       this.$request.get("/activity/selectActivityTop").then(res => {
         this.tableData = res.data || []
@@ -137,6 +157,7 @@ export default {
       this.$request.get('/category/selectAll').then(res => {
         this.categoryList = res.data || []
         this.categoryList.unshift({name: '全部酒店'})
+        this.categoryList.unshift({name: '个性推荐'})
       })
     },
     goToApply() {
