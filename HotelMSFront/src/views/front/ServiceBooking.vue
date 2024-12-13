@@ -142,23 +142,6 @@ export default {
     },
   },
   methods: {
-    calculateDateRanges() {
-      let startDate = new Date(this.today); // 从今天开始
-      this.orderList = this.orderList.map((hotel) => {
-        const endDate = new Date(startDate);
-        endDate.setDate(startDate.getDate() + 2); // 停留两天
-
-        const dateRange = `${this.formatDate(startDate)}-${this.formatDate(endDate)}`;
-        startDate = new Date(endDate); // 下一家酒店的开始日期
-        return { ...hotel, dateRange }; // 添加日期范围到酒店对象
-      });
-    },
-    formatDate(date) {
-      const year = date.getFullYear();
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      return `${month}.${day}`;
-    },
     loadHotels() {
       this.$request.get('/blog/selectPage', {
         params: {
@@ -169,16 +152,35 @@ export default {
           userId: this.userId
         }
       }).then(res => {
-        // 将酒店名称映射为订单选项
-        this.orderList = (res.data?.list || []).map(hotel => {
+        // 将酒店名称映射为订单选项，并添加入住日期
+        this.orderList = (res.data?.list || []).map((hotel, index) => {
+          // 计算入住日期，每个酒店停留两天
+          const startDate = new Date(); // 今天
+          startDate.setDate(startDate.getDate() + index * 2); // 根据酒店索引计算入住日期
+          const endDate = new Date(startDate);
+          endDate.setDate(endDate.getDate() + 2); // 计算离店日期
+
+          // 格式化日期
+          const formatedStartDate = this.formatDate(startDate);
+          const formatedEndDate = this.formatDate(endDate);
+
+          // 构建新的label
           return {
             value: hotel.id, // 使用酒店 ID 作为值
-            label: hotel.title // 使用酒店名称作为显示内容
+            label: `${hotel.title}${formatedStartDate}-${formatedEndDate}` // 使用酒店名称和日期作为显示内容
           };
         });
         this.total = res.data?.total; // 总记录数（如果需要分页）
         console.log(this.orderList);
       });
+    },
+
+    // 辅助函数：格式化日期
+    formatDate(date) {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      return `${year}.${month}.${day}`;
     },
     loadServices() {
       if (!this.user.id) {
