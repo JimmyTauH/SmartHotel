@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.UserMapper">
     <sql id="Base_Column_List">
-        id,username,password,name,phone,email,avatar,role,sex,info,birth,integral
+        id,username,password,name,phone,email,avatar,role,sex,info,birth,integral,preference
     </sql>
     <insert id="insert">
         insert into user
@@ -21,6 +21,7 @@
             <if test="info != null">info,</if>
             <if test="birth != null">birth,</if>
             <if test="integral != null">integral,</if>
+            <if test="preference != null">preference,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -35,6 +36,7 @@
             <if test="info != null">#{info},</if>
             <if test="birth != null">#{birth},</if>
             <if test="integral != null">#{integral},</if>
+            <if test="preference != null">#{preference},</if>
         </trim>
     </insert>
     <update id="update">
@@ -52,17 +54,8 @@
             <if test="info != null">info = #{info},</if>
             <if test="birth != null">birth = #{birth},</if>
             <if test="integral != null">integral = #{integral},</if>
+            <if test="preference != null">preference = #{preference},</if>
         </set>
-        where id = #{id}
-    </update>
-    <update id="updateIntegral">
-        update user
-        set integral = #{integral}
-        where id = #{id}
-    </update>
-    <update id="updateIntegralByWelfare">
-        update user
-        set integral = #{integral}
         where id = #{id}
     </update>
 
