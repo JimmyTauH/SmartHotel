@@ -68,6 +68,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: "BlogList",
@@ -77,8 +78,12 @@ export default {
     showOpt: false
   },
   watch: {
-    categoryName() {
-      this.loadBlog(1);
+    categoryName(newVal) {
+      if (newVal === '个性推荐') {
+        this.loadRecommendedBlogs();
+      } else {
+        this.loadBlog(1);
+      }
     }
   },
   data() {
@@ -88,13 +93,54 @@ export default {
       tableData: [],
       total: 0,
       title: this.$route.query.title,
-      userId: this.$route.query.userId
+      userId: this.$route.query.userId,
+      preferenceArray: [], // 初始化 preferenceArray
+      user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
     }
   },
   mounted() {
-    this.loadBlog(1)
+    this.initPreferenceArray();
+    this.loadBlog(1);
   },
   methods: {
+    initPreferenceArray() {
+      // 解包 user.preference 获得 preferenceArray
+      if (this.user.preference && typeof this.user.preference === 'string') {
+        try {
+          this.preferenceArray = JSON.parse(this.user.preference);
+        } catch (error) {
+          console.error('解析 preference 时出错:', error);
+          this.preferenceArray = [];
+        }
+      } else {
+        this.preferenceArray = this.user.preference || [];
+      }
+    },
+    loadRecommendedBlogs() {
+      // 加载个性推荐的博客条目
+      // 这里需要根据 preferenceArray 中的类别多次调用 loadBlog 方法
+      this.preferenceArray.forEach((pref, index) => {
+        this.loadBlogByCategory(pref).then(blogList => {
+          if (index === 0) {
+            this.tableData = blogList;
+          } else {
+            this.tableData = [...this.tableData, ...blogList];
+          }
+        });
+      });
+    },
+    loadBlogByCategory(category) {
+      // 根据类别加载博客条目
+      return this.$request.get('/blog/selectPage', {
+        params: {
+          pageNum: this.pageNum,
+          pageSize: this.pageSize,
+          categoryName: category,
+        }
+      }).then(res => {
+        return res.data?.list || [];
+      });
+    },
     editBlog(blogId) {
       window.open('/front/newBlog?blogId=' + blogId)
     },
