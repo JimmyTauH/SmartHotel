@@ -5,13 +5,13 @@
       <el-tab-pane label="个人信息" name="个人信息">
         <PersonPage @update:user="updateUser"/>
       </el-tab-pane>
-      <el-tab-pane label="我的帖子" name="我的帖子">
+      <el-tab-pane label="已预订酒店" name="已预订酒店">
+        <ActivityList type="user" :span="12"/>
+      </el-tab-pane>
+      <el-tab-pane label="我的足迹" name="我的足迹">
         <div style="margin-top: 10px">
           <BlogList type="user" :showOpt="true"/>
         </div>
-      </el-tab-pane>
-      <el-tab-pane label="已预订酒店" name="已预订酒店">
-        <ActivityList type="user" :span="12"/>
       </el-tab-pane>
       <el-tab-pane label="我的点赞" name="我的点赞">
         <div class="card" style="display: flex;padding: 5px">
