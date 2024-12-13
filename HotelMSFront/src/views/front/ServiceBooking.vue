@@ -100,15 +100,12 @@ export default {
       form: {
         title: '',
         time: '',
-        content: ''
+        content: '',
+        order:'',
       },
       orderList: [],
       services: [],
-      serviceOptions: [
-        { label: '房间清洁', value: "房间清洁" },
-        { label: '早餐服务', value: "早餐服务" },
-        { label: '接送服务', value: "接送服务" },
-      ],
+      serviceOptions: [], //改为根据酒店获取
       roomOptions: [
         { number: '101' },
         { number: '102' },
@@ -141,6 +138,11 @@ export default {
       return this.services.length >= 20; // 限制最多申请5个服务
     },
   },
+  watch: {
+    'form.order'(newVal) {
+      this.loadServiceTypes(newVal);
+    }
+  },
   methods: {
     loadHotels() {
       this.$request.get('/blog/selectPage', {
@@ -167,20 +169,43 @@ export default {
           // 构建新的label
           return {
             value: hotel.id, // 使用酒店 ID 作为值
-            label: `${hotel.title}${formatedStartDate}-${formatedEndDate}` // 使用酒店名称和日期作为显示内容
+            label: `${hotel.title}${formatedStartDate}-${formatedEndDate}`, // 使用酒店名称和日期作为显示内容
+            servicesProvided: hotel.servicesProvided,
           };
         });
         this.total = res.data?.total; // 总记录数（如果需要分页）
         console.log(this.orderList);
       });
     },
-
     // 辅助函数：格式化日期
     formatDate(date) {
       const year = date.getFullYear();
       const month = (date.getMonth() + 1).toString().padStart(2, '0');
       const day = date.getDate().toString().padStart(2, '0');
       return `${year}.${month}.${day}`;
+    },
+    loadServiceTypes(hotelId) {
+      const selectedHotel = this.orderList.find(hotel => hotel.value === hotelId);
+      if (selectedHotel && selectedHotel.servicesProvided) {
+        try {
+          // 使用 JSON.parse() 将字符串解析为数组
+          const servicesArray = JSON.parse(selectedHotel.servicesProvided);
+          // 确保 servicesArray 是一个数组
+          if (Array.isArray(servicesArray)) {
+            this.serviceOptions = servicesArray.map(service => ({
+              label: service, // 使用服务名称作为 label
+              value: service  // 使用服务名称作为 value
+            }));
+          } else {
+            this.serviceOptions = [];
+          }
+        } catch (error) {
+          console.error("解析服务类型出错:", error);
+          this.serviceOptions = []; // 解析失败时清空服务选项
+        }
+      } else {
+        this.serviceOptions = [];
+      }
     },
     loadServices() {
       if (!this.user.id) {
