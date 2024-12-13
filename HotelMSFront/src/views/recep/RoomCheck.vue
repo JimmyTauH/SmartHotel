@@ -4,7 +4,6 @@
       <h3>房间号：{{ room.roomnumber || "未分配" }}</h3>
       <p><strong>房间类型：</strong>{{ room.activityName }}</p>
       <p><strong>预订人：</strong>{{ room.userName }}</p>
-      <p><strong>预订平台：</strong>{{ room.form }}</p>
       <p><strong>入住日期：</strong>{{ room.applystart }} - {{ room.applyend }}</p>
       <p><strong>预订时间：</strong>{{ new Date(room.time).toLocaleString("zh-CN") }}</p>
     </div>
