@@ -19,6 +19,7 @@ public class User extends Account {
     private String email;
     private String info;
     private String birth;
+    private String preference;
     private BigDecimal integral;
 
     private Boolean isCreator;
@@ -137,5 +138,13 @@ public class User extends Account {
 
     public void setBirth(String birth) {
         this.birth = birth;
+    }
+
+    public String getPreference(){
+        return preference;
+    }
+
+    public void setPreference(String preference){
+        this.preference = preference;
     }
 }
