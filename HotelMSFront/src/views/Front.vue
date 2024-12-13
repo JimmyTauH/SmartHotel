@@ -123,6 +123,7 @@ export default {
     },
     logout() {
       localStorage.removeItem("xm-user");
+      this.user = JSON.parse(localStorage.getItem("xm-user") || "{}"); // 重新获取下用户的最新信息
       this.$router.push("/front/home");
     },
   },

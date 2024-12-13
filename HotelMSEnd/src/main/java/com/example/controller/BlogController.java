@@ -24,6 +24,7 @@ public class BlogController {
     //添加
     @PostMapping("/add")
     public Result add(@RequestBody Blog blog) {
+        System.out.println(blog);
         blogService.add(blog);
         return Result.success();
     }

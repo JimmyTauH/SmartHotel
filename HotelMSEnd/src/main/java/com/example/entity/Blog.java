@@ -37,6 +37,10 @@ public class Blog {
      */
     private String tags;
     /**
+     * 特色服务
+     */
+    private String servicesProvided; //特色服务
+    /**
      * 发布人ID
      */
     private Integer userId;
@@ -219,6 +223,14 @@ public class Blog {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public String getServicesProvided() {
+        return servicesProvided;
+    }
+
+    public void setServicesProvided(String servicesProvided) {
+        this.servicesProvided = servicesProvided;
     }
 
     public Integer getUserId() {

@@ -103,20 +103,11 @@
           />
         </el-form-item> -->
 
-        <!-- <el-form-item label="订房渠道" prop="form">
-          <el-select style="width: 100%" v-model="form.form">
-            <el-option value="美团"></el-option>
-            <el-option value="携程"></el-option>
-            <el-option value="抖音"></el-option>
-            <el-option value="去哪儿旅行"></el-option>
-            <el-option value="其他"></el-option>
-          </el-select>
-        </el-form-item> -->
         <el-form-item prop="host" label="今日房价">
           <el-input v-model="form.host" placeholder="今日房价"></el-input>
         </el-form-item>
-        <el-form-item prop="number" label="剩余房量">
-          <el-input v-model="form.number" placeholder="剩余房量"></el-input>
+        <el-form-item prop="number" label="总房量">
+          <el-input v-model="form.number" placeholder="总房量"></el-input>
         </el-form-item>
 
         <el-form-item prop="content" label="房型相关信息">

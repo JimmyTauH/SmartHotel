@@ -5,7 +5,7 @@
 <mapper namespace="com.example.mapper.BlogMapper">
 
     <sql id="Base_Column_List">
-        id,title,content,descr,address,cover,tags,user_id,date,read_count,category_id,contest_id
+        id,title,content,descr,address,cover,tags,services_provided,user_id,date,read_count,category_id,contest_id
     </sql>
     <insert id="insert">
         insert into blog
@@ -17,6 +17,7 @@
             <if test="address != null">address,</if>
             <if test="cover != null">cover,</if>
             <if test="tags != null">tags,</if>
+            <if test="servicesProvided != null">services_provided,</if>
             <if test="userId != null">user_id,</if>
             <if test="date != null">date,</if>
             <if test="readCount != null">read_count,</if>
@@ -31,6 +32,7 @@
             <if test="address != null">#{address},</if>
             <if test="cover != null">#{cover},</if>
             <if test="tags != null">#{tags},</if>
+            <if test="servicesProvided != null">#{servicesProvided},</if>
             <if test="userId != null">#{userId},</if>
             <if test="date != null">#{date},</if>
             <if test="readCount != null">#{readCount},</if>
@@ -47,6 +49,7 @@
             <if test="address != null">address = #{address},</if>
             <if test="cover != null">cover = #{cover},</if>
             <if test="tags != null">tags = #{tags},</if>
+            <if test="servicesProvided != null">services_provided = #{servicesProvided},</if>
             <if test="userId != null">user_id = #{userId},</if>
             <if test="date != null">date = #{date},</if>
             <if test="readCount != null">read_count = #{readCount},</if>
@@ -78,6 +81,7 @@
             <if test="title != null">and title like concat('%', #{title}, '%')</if>
             <if test="content != null">and content like concat('%', #{content}, '%')</if>
             <if test="tags != null">and tags like concat('%', #{tags}, '%')</if>
+            <if test="servicesProvided != null">and services_provided like concat('%', #{servicesProvided}, '%')</if>
             <if test="categoryName != null">and category.name like concat('%', #{categoryName}, '%')</if>
             <if test="userName != null">and user.name like concat('%', #{userName}, '%')</if>
             <if test="userId != null">and user.id = #{userId}</if>

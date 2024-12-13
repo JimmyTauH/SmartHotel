@@ -41,6 +41,13 @@
             </el-tag>
           </template>
         </el-table-column>
+        <el-table-column prop="servicesProvided" label="酒店服务" width="200">
+          <template v-slot="scope">
+            <el-tag v-for="service in JSON.parse(scope.row.servicesProvided || '[]')" :key="service" style="margin: 5px">
+              {{ service }}
+            </el-tag>
+          </template>
+        </el-table-column>
         <el-table-column prop="date" label="发布日期"></el-table-column>
         <el-table-column prop="readCount" label="浏览量" width="70"></el-table-column>
         <el-table-column label="酒店简介">
@@ -113,6 +120,14 @@
             <el-option value="温馨亲子房"></el-option>
           </el-select>
         </el-form-item>
+
+        <el-form-item label="酒店服务" prop="servicesProvided">
+          <el-select v-model="servicesArr" multiple filterable allow-create default-first-option style="width: 100%">
+            <el-option value="房间清洁"></el-option>
+            <el-option value="早餐服务"></el-option>
+            <el-option value="接送服务"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="内容" prop="content">
           <div id="editor"></div>
         </el-form-item>
@@ -165,6 +180,7 @@ export default {
       ids: [],
       categoryList: [],
       tagsArr: [],
+      servicesArr: [], //新增酒店服务标签的数组
       categoryName: null,
       userName: null,
       content: '',
@@ -187,12 +203,14 @@ export default {
     handleAdd() {   // 新增数据
       this.form = {}  // 新增数据的时候清空数据
       this.tagsArr = [] // 清空标签数组
+      this.servicesArr = ['房间清洁', '早餐服务', '接送服务']; // 初始化默认服务
       this.setRichText()  // 初始化富文本编辑器
       this.fromVisible = true   // 打开弹窗
     },
     handleEdit(row) {   // 编辑数据
       this.form = JSON.parse(JSON.stringify(row))  // 给form对象赋值  注意要深拷贝数据
       this.tagsArr = JSON.parse(row.tags || '[]') // 将tags对象转成数组
+      this.servicesArr = JSON.parse(row.services || '[]'); // 服务标签转数组
       this.fromVisible = true   // 打开弹窗
       this.setRichText()  // 初始化富文本编辑器
       setTimeout(() => {
@@ -203,6 +221,7 @@ export default {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
           this.form.tags = JSON.stringify(this.tagsArr) // 将tags对象转成字符串
+          this.form.servicesProvided = JSON.stringify(this.servicesArr); // 转换酒店服务标签
           this.form.content = this.editor.txt.html()
           this.$request({
             url: this.form.id ? '/blog/update' : '/blog/add',
