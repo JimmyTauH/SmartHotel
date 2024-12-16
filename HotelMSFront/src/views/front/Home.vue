@@ -90,7 +90,7 @@ export default {
   },
   data() {
     return {
-      current: '个性推荐',  //当前选择的分类名称，默认为推荐
+      current: '全部酒店',  //当前选择的分类名称，默认为推荐
       categoryList: [],
       topList: [],  //排行榜数据
       showList: [],   //展示的topList
